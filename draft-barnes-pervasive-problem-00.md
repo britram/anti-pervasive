@@ -10,17 +10,16 @@ author:
  -
     ins: R. Barnes
     name: Richard Barnes
-    organization: BBN
     email: rlb@ipv.sx
  - 
-   ins: C. Jennings
-   name: Cullen Jennings
-   org: Cisco
-   email: fluffy@cisco.com
-   street: 400 3rd Avenue SW
-   city: Calgary
-   code: T2P 4H2
-   country: Canada
+    ins: C. Jennings
+    name: Cullen Jennings
+    email: fluffy@cisco.com
+ -  
+    ins: T. Hardie
+    name: Ted Hardie
+    email: ted.ietf@gmail.com
+
 
 normative:
   RFC2119:
@@ -146,7 +145,7 @@ informative:
 
 --- abstract
 
-Leaks of classified documents in 2013 have revealed several classes of "pervasive" attack on Internet communications.  In this document, we review the main attacks that have been published, and develop a threat model that describes these pervasive attacks.  Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to increase the protocols robustness to pervasive attacks.
+Documents published in 2013 have revealed several classes of "pervasive" attack on Internet communications.  In this document, we review the main attacks that have been published, and develop a threat model that describes these pervasive attacks.  Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to increase the protocols robustness to pervasive attacks.
 
 {::comment}
 CJ: Overall I think we need to be careful to separate what we know to be true from what has been reported in the press. 
@@ -157,7 +156,7 @@ RLB: Yes.  Think this is under control for now, but something to keep an eye on.
 
 # Introduction
 
-Starting in the June 2013, documents leaked to the press by Edward Snowden have revealed several operations undertaken by intelligence agencies to exploit Internet communications for intelligence purposes.  These attacks were largely based on protocol vulnerabilities that were already known to exist.  The attacks were nonetheless striking in their pervasive nature, both in terms of the amount of Internet communications targeted, and in terms of the diversity of attack techniques employed.
+Starting in the June 2013, documents released to the press by Edward Snowden have revealed several operations undertaken by intelligence agencies to exploit Internet communications for intelligence purposes.  These attacks were largely based on protocol vulnerabilities that were already known to exist.  The attacks were nonetheless striking in their pervasive nature, both in terms of the amount of Internet communications targeted, and in terms of the diversity of attack techniques employed.
 
 To ensure the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
 
@@ -197,7 +196,7 @@ Through recent revelations of sensitive documents in several media outlets, the 
 
 * Use of implants (covert modifications or malware) to undermine security and anonymity features {{dec2}}{{TOR1}}{{TOR2}}.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.
 
-We use the term "pervasive attack" to collectively describe these operations.  The term "pervasive" applies in a few ways.  The attacks are physically pervasive; they affect a large number of Internet communications.  They are pervasive in content, consuming and exploiting any information revealed by the protocol.  And they are pervasive in technology, exploiting many different vulnerabilities in many different protocols.
+We use the term "pervasive attack" to collectively describe these operations.  The term "pervasive" is used because the attacks are designed to gather as much data as possible and to apply selective analysis on targets after the fact.  This means that all, or nearly all, Internet communications are targets for these attacks.  To achieve this scale, the attacks are physically pervasive; they affect a large number of Internet communications. They are pervasive in content, consuming and exploiting any information revealed by the protocol. And they are pervasive in technology, exploiting many different vulnerabilities in many different protocols.
 
 
 # Classes of Pervasive Attack {#model}
