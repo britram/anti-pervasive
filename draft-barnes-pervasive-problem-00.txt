@@ -124,12 +124,13 @@ Internet-Draft              Pervasive Attack               December 2013
    amount of Internet communications targeted, and in terms of the
    diversity of attack techniques employed.
 
-   To ensure the Internet can be trusted by users, it is necessary for
-   the Internet technical community to address the vulnerabilities
-   exploited in these attacks.  The goal of this document is to describe
-   more precisely the threats posed by these pervasive attacks, and
-   based on those threats, lay out the problems that need to be solved
-   in order to secure the Internet in the face of those threats.
+   To ensure that the Internet can be trusted by users, it is necessary
+   for the Internet technical community to address the vulnerabilities
+   exploited in these attacks [I-D.farrell-perpass-attack].  The goal of
+   this document is to describe more precisely the threats posed by
+   these pervasive attacks, and based on those threats, lay out the
+   problems that need to be solved in order to secure the Internet in
+   the face of those threats.
 
    The remainder of this document is structured as follows.  In
    Section 3, we provide a brief summary of the attacks that have been
@@ -138,7 +139,6 @@ Internet-Draft              Pervasive Attack               December 2013
    Internet engineering to date.  Section 5 provides some high-level
    guidance on how Internet protocols can defend against the threats
    described here.
-
 
 
 
@@ -238,7 +238,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
    o  Large scale passive collection of Internet traffic
       [pass1][pass2][pass3][pass4].  For example, the NSA XKEYSCORE
-      system gathers data from multiple access points and searches for
+      system accesses data from multiple access points and searches for
       "selectors" such as email addresses, at the scale of tens of
       terabytes of data per day.  The GCHQ Tempora system appears to
       have access to around 1,500 major cables passing through the UK.
@@ -264,15 +264,15 @@ Internet-Draft              Pervasive Attack               December 2013
       users to a FOXACID server, which delivers an implant that makes
       the TOR anonymity service less effective.  The BULLRUN program
       mentioned above includes the addition of covert modifications to
-      software as one means to undermine encryption.
+      software as one means to undermine encryption.  There is also some
+      suspicion that NSA modifications to the DUAL_EC_DRBG random number
+      generator were made to ensure that keys generated using that
+      generator could be predicted by NSA.
 
    We use the term "pervasive attack" to collectively describe these
    operations.  The term "pervasive" is used because the attacks are
    designed to gather as much data as possible and to apply selective
    analysis on targets after the fact.  This means that all, or nearly
-   all, Internet communications are targets for these attacks.  To
-   achieve this scale, the attacks are physically pervasive; they affect
-   a large number of Internet communications.  They are pervasive in
 
 
 
@@ -281,12 +281,12 @@ Barnes, et al.            Expires June 12, 2014                 [Page 5]
 Internet-Draft              Pervasive Attack               December 2013
 
 
+   all, Internet communications are targets for these attacks.  To
+   achieve this scale, the attacks are physically pervasive; they affect
+   a large number of Internet communications.  They are pervasive in
    content, consuming and exploiting any information revealed by the
    protocol.  And they are pervasive in technology, exploiting many
    different vulnerabilities in many different protocols.
-
-
-
 
 
 
@@ -378,13 +378,13 @@ Internet-Draft              Pervasive Attack               December 2013
    them.
 
    In the context of pervasive attack, these attacks take on an even
-   greater significance.  A passive attacker with access to a large
-   portion of the Internet can analyze collected traffic to create a
-   much more detailed view of user behavior than an attacker that
-   collects at a single point.  Even the usual claim that encryption
-   defeats passive attackers is weakened, since a pervasive passive
-   attacker can examine correlations over large numbers of sessions,
-   e.g., pairing encrypted sessions with unencrypted sessions from the
+   greater significance.  In the past, these attackers are often assumed
+   to operate near the edge of the network, where attacks can be
+   simpler.  For exmaple, in some LANs, it is simple for any node to
+   engage in passive listening to other nodes' traffic or inject packets
+   to accomplish active attacks.  In the pervasive attack case, however,
+   both passive and active attacks are undertaken closer to the core of
+   the network, greatly expanding the scope and capability of the
 
 
 
@@ -393,8 +393,16 @@ Barnes, et al.            Expires June 12, 2014                 [Page 7]
 Internet-Draft              Pervasive Attack               December 2013
 
 
-   same host.  The reports on the NSA XKEYSCORE system would make it an
-   example of such an attacker.
+   attacker.
+
+   A passive attacker with access to a large portion of the Internet can
+   analyze collected traffic to create a much more detailed view of user
+   behavior than an attacker that collects at a single point.  Even the
+   usual claim that encryption defeats passive attackers is weakened,
+   since a pervasive passive attacker can examine correlations over
+   large numbers of sessions, e.g., pairing encrypted sessions with
+   unencrypted sessions from the same host.  The reports on the NSA
+   XKEYSCORE system would make it an example of such an attacker.
 
    A pervasive active attacker likewise has capabilities beyond those of
    a localized active attacker.  Active attacks are often limited by
@@ -434,20 +442,19 @@ Internet-Draft              Pervasive Attack               December 2013
    have not traditionally been considered in security analyses of
    protocols, since they happen outside of the protocol.
 
-   The term "key exfiltration" refers to the transfer of keying material
-   for an encrypted communication from the collaborator to the attacker.
-   By "static", we mean that the transfer of keys happens once, or
-   rarely, typically of a long-lived key.  For example, this case would
-   cover a web site operator that provides the private key corresponding
-   to its HTTPS certificate to an intelligence agency.
-
-
 
 
 Barnes, et al.            Expires June 12, 2014                 [Page 8]
 
 Internet-Draft              Pervasive Attack               December 2013
 
+
+   The term "key exfiltration" refers to the transfer of keying material
+   for an encrypted communication from the collaborator to the attacker.
+   By "static", we mean that the transfer of keys happens once, or
+   rarely, typically of a long-lived key.  For example, this case would
+   cover a web site operator that provides the private key corresponding
+   to its HTTPS certificate to an intelligence agency.
 
    "Dynamic" key exfiltration, by contrast, refers to attacks in which
    the collaborator delivers keying material to the attacker frequently,
@@ -490,13 +497,6 @@ Internet-Draft              Pervasive Attack               December 2013
      | Content exfiltration     | Ongoing, bulk interaction         |
      +--------------------------+-----------------------------------+
 
-   In order to realize an attack of each of the types discussed above,
-   the attacker has to incur certain costs and undertake certain risks.
-   These costs differ by attack, and can be helpful in guiding response
-   to pervasive attack.
-
-   Depending on the attack, the attacker may be exposed to several types
-   of risk, ranging from simply losing access to arrest or prosecution.
 
 
 
@@ -505,6 +505,13 @@ Barnes, et al.            Expires June 12, 2014                 [Page 9]
 Internet-Draft              Pervasive Attack               December 2013
 
 
+   In order to realize an attack of each of the types discussed above,
+   the attacker has to incur certain costs and undertake certain risks.
+   These costs differ by attack, and can be helpful in guiding response
+   to pervasive attack.
+
+   Depending on the attack, the attacker may be exposed to several types
+   of risk, ranging from simply losing access to arrest or prosecution.
    In order for any of these negative consequences to happen, however,
    the attacker must first be discovered and identified.  So the primary
    risk we focus on here is the risk of discovery and attribution.
@@ -546,13 +553,6 @@ Internet-Draft              Pervasive Attack               December 2013
    Key exfiltration attacks rely on passive attack for access to
    encrypted data, with the collaborator providing keys to decrypt the
    data.  So the attacker undertakes the cost and risk of a passive
-   attack, as well as additional risk of discovery via the interactions
-   that the attacker has with the collaborator.
-
-   In this sense, static exfiltration has a lower risk profile than
-   dynamic.  In the static case, the attacker need only interact with
-   the collaborator a small number of times, possibly only once, say to
-   exchange a private key.  In the dynamic case, the attacker must have
 
 
 
@@ -561,6 +561,13 @@ Barnes, et al.            Expires June 12, 2014                [Page 10]
 Internet-Draft              Pervasive Attack               December 2013
 
 
+   attack, as well as additional risk of discovery via the interactions
+   that the attacker has with the collaborator.
+
+   In this sense, static exfiltration has a lower risk profile than
+   dynamic.  In the static case, the attacker need only interact with
+   the collaborator a small number of times, possibly only once, say to
+   exchange a private key.  In the dynamic case, the attacker must have
    continuing interactions with the collaborator.  As noted above these
    interactions may real, such as in-person meetings, or virtual, such
    as software modifications that render keys available to the attacker.
@@ -599,13 +606,6 @@ Internet-Draft              Pervasive Attack               December 2013
    systems.  The main difference is that the risk in this case is of
    automated discovery (e.g., by intrusion detection systems) rather
    than discovery by humans.
-
-
-
-
-
-
-
 
 
 
@@ -897,14 +897,70 @@ Barnes, et al.            Expires June 12, 2014                [Page 16]
 Internet-Draft              Pervasive Attack               December 2013
 
 
-7.  References
+7.  TODO
 
-7.1.  Normative References
+   o  More thorough review of problem statement documents to ensure all
+      bases are covered
+
+   o  Look at better alignment with draft-farrell-perpass-attack
+
+   o  Better coverage of traffic analysis and mitigations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 17]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
+8.  References
+
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
 
-7.2.  Informative References
+8.2.  Informative References
 
    [pass1]    The Guardian, "How the NSA is still harvesting your online
               data", 2013, <http://www.theguardian.com/world/2013/jun/
@@ -948,7 +1004,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 17]
+Barnes, et al.            Expires June 12, 2014                [Page 18]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1004,7 +1060,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 18]
+Barnes, et al.            Expires June 12, 2014                [Page 19]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1022,6 +1078,10 @@ Internet-Draft              Pervasive Attack               December 2013
    [RFC2015]  Elkins, M., "MIME Security with Pretty Good Privacy
               (PGP)", RFC 2015, October 1996.
 
+   [I-D.farrell-perpass-attack]
+              Farrell, S. and H. Tschofenig, "Pervasive Monitoring is an
+              Attack", draft-farrell-perpass-attack-00 (work in
+              progress), November 2013.
 
 
 
@@ -1056,11 +1116,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-
-
-
-
-Barnes, et al.            Expires June 12, 2014                [Page 19]
+Barnes, et al.            Expires June 12, 2014                [Page 20]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1116,5 +1172,5 @@ Authors' Addresses
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 20]
+Barnes, et al.            Expires June 12, 2014                [Page 21]
 

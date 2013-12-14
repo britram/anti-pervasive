@@ -141,6 +141,7 @@ informative:
   RFC4306:
   RFC5750:
   RFC2015:
+  I-D.farrell-perpass-attack:
 
 
 --- abstract
@@ -158,7 +159,7 @@ RLB: Yes.  Think this is under control for now, but something to keep an eye on.
 
 Starting in the June 2013, documents released to the press by Edward Snowden have revealed several operations undertaken by intelligence agencies to exploit Internet communications for intelligence purposes.  These attacks were largely based on protocol vulnerabilities that were already known to exist.  The attacks were nonetheless striking in their pervasive nature, both in terms of the amount of Internet communications targeted, and in terms of the diversity of attack techniques employed.
 
-To ensure the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
+To ensure that the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks {{I-D.farrell-perpass-attack}}.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
 
 The remainder of this document is structured as follows.  In {{reported}}, we provide a brief summary of the attacks that have been disclosed.  {{model}} describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.  {{response}} provides some high-level guidance on how Internet protocols can defend against the threats described here.
 
@@ -186,7 +187,7 @@ Unwitting Collaborator:
 
 Through recent revelations of sensitive documents in several media outlets, the Internet community has been made aware of several intelligence activites conducted by US and UK national intelligence agencies, particularly the US National Security Agency (NSA) and the UK Government Communications Headquarters (GCHQ).  These documents have revealed the methods that these agencies use to attack Internet applications and obtain sensitive user information. Theses documents sugest the following types of attacks have occurred:
 
-* Large scale passive collection of Internet traffic {{pass1}}{{pass2}}{{pass3}}{{pass4}}.  For example, the NSA XKEYSCORE system gathers data from multiple access points and searches for "selectors" such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.
+* Large scale passive collection of Internet traffic {{pass1}}{{pass2}}{{pass3}}{{pass4}}.  For example, the NSA XKEYSCORE system accesses data from multiple access points and searches for "selectors" such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.
 
 * Decryption of TLS-protected Internet sessions {{dec1}}{{dec2}}{{dec3}}.  For example, the NSA BULLRUN project appears to have had a budget of around $250M per year to undermine encryption through multiple approaches. 
 
@@ -194,7 +195,7 @@ Through recent revelations of sensitive documents in several media outlets, the 
 
 * Direct acquisition of bulk data and metadata from service providers {{dir1}}{{dir2}}.  For example, the NSA PRISM program provides the agency with access to many types of user data (e.g., email, chat, VoIP).
 
-* Use of implants (covert modifications or malware) to undermine security and anonymity features {{dec2}}{{TOR1}}{{TOR2}}.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.
+* Use of implants (covert modifications or malware) to undermine security and anonymity features {{dec2}}{{TOR1}}{{TOR2}}.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  There is also some suspicion that NSA modifications to the DUAL\_EC\_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.
 
 We use the term "pervasive attack" to collectively describe these operations.  The term "pervasive" is used because the attacks are designed to gather as much data as possible and to apply selective analysis on targets after the fact.  This means that all, or nearly all, Internet communications are targets for these attacks.  To achieve this scale, the attacks are physically pervasive; they affect a large number of Internet communications. They are pervasive in content, consuming and exploiting any information revealed by the protocol. And they are pervasive in technology, exploiting many different vulnerabilities in many different protocols.
 
@@ -217,7 +218,9 @@ In order to succeed in this goal, an attacker needs two main things.  First, the
 
 Security analyses of Internet protocols commonly consider two classes of attacker: Passive attackers, who can simply listen in on communications as they transit the network, and "active attackers", who can modify or delete packets in addition to simply collecting them.  
 
-In the context of pervasive attack, these attacks take on an even greater significance.  A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.  The reports on the NSA XKEYSCORE system would make it an example of such an attacker.
+In the context of pervasive attack, these attacks take on an even greater significance.  In the past, these attackers are often assumed to operate near the edge of the network, where attacks can be simpler.  For exmaple, in some LANs, it is simple for any node to engage in passive listening to other nodes' traffic or inject packets to accomplish active attacks.  In the pervasive attack case, however, both passive and active attacks are undertaken closer to the core of the network, greatly expanding the scope and capability of the attacker.
+
+A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.  The reports on the NSA XKEYSCORE system would make it an example of such an attacker.
 
 A pervasive active attacker likewise has capabilities beyond those of a localized active attacker.  Active attacks are often limited by network topology, for example by a requirement that the attacker be able to see a targeted session as well as inject packets into it.  A pervasive active attacker with multiple accesses at core points of the Internet is able to overcome these topological limitations and apply attacks over a much broader scope.  Being positioned in the core of the network rather than the edge can also enable a pervasive active attacker to reroute targeted traffic.  Pervasive active attackers can also benefit from pervasive passive collection to identify vulnerable hosts.
 
@@ -312,7 +315,7 @@ Dynamic key exfiltration cannot be prevent by protocol means.  By definition, an
 
 The best defense against becoming an unwitting collaborator is thus to end systems are well-vetted and secure.  Transparency is a major tool in this process {{secure}}.  Open source software is easier to evaluate for potential flaws than proprietary software.  Products that conform to standards for cryptography and security protocols are limited in the ways they can misbehave.  And standards processes that are open and transparent help ensure that the standards themselves do not provide avenues for attack.
 
-Standards can also define protocols that provide greater or lesser opportunity for dynamic key exfiltration.  Collaborators engaging in key exfiltration through a standard protocol will need to use covert channels in the protocol to leak information that can be used by the attacker to recover the key.  Such use of covert channels has been demonstrated for SSL, TLS, and SSH [key-recovery].  Any protocol bits that can be freely set by the collaborator can be used as a covert channel, including, for example, TCP options or unencrypted traffic sent before a STARTTLS message in SMTP or XMPP.  Protocol designers should consider what covert channels their protocols expose, and how those channels can be exploited to exfiltrate key information.
+Standards can also define protocols that provide greater or lesser opportunity for dynamic key exfiltration.  Collaborators engaging in key exfiltration through a standard protocol will need to use covert channels in the protocol to leak information that can be used by the attacker to recover the key.  Such use of covert channels has been demonstrated for SSL, TLS, and SSH {{key-recovery}}.  Any protocol bits that can be freely set by the collaborator can be used as a covert channel, including, for example, TCP options or unencrypted traffic sent before a STARTTLS message in SMTP or XMPP.  Protocol designers should consider what covert channels their protocols expose, and how those channels can be exploited to exfiltrate key information.
 
 {::comment}
 CJ: I think another thing we can recommend is minimizing the "free bits" that are unencrypted and can be used by the attacker to exfiltrate dynamic keys. For example, if the TLS handshake had 128 "random" bits that the client could set any way they wanted and were sent unencrypted in the handshake, this would be a prime place to have the client put bits that revealed keys used for the encryption. TCP options can be used this way. Stuff before a STARTTLS, etc.
@@ -340,4 +343,8 @@ In summary, many of the basic tools for mitigating pervasive attack already exis
 * Security ADs for starting and managing the perpass discussion
 
 
+# TODO
 
+* More thorough review of problem statement documents to ensure all bases are covered
+* Look at better alignment with draft-farrell-perpass-attack
+* Better coverage of traffic analysis and mitigations

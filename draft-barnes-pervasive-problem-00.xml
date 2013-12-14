@@ -11,6 +11,7 @@
 <!ENTITY RFC4306 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4306.xml">
 <!ENTITY RFC5750 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
 <!ENTITY RFC2015 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2015.xml">
+<!ENTITY I-D.farrell-perpass-attack SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.farrell-perpass-attack.xml">
 ]>
 
 <rfc ipr="trust200902" docName="draft-barnes-pervasive-problem-00" category="info">
@@ -73,7 +74,7 @@
 
 <t>Starting in the June 2013, documents released to the press by Edward Snowden have revealed several operations undertaken by intelligence agencies to exploit Internet communications for intelligence purposes.  These attacks were largely based on protocol vulnerabilities that were already known to exist.  The attacks were nonetheless striking in their pervasive nature, both in terms of the amount of Internet communications targeted, and in terms of the diversity of attack techniques employed.</t>
 
-<t>To ensure the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.</t>
+<t>To ensure that the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks <xref target="I-D.farrell-perpass-attack"/>.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.</t>
 
 <t>The remainder of this document is structured as follows.  In <xref target="reported"/>, we provide a brief summary of the attacks that have been disclosed.  <xref target="model"/> describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.  <xref target="response"/> provides some high-level guidance on how Internet protocols can defend against the threats described here.</t>
 
@@ -101,11 +102,11 @@
 <t>Through recent revelations of sensitive documents in several media outlets, the Internet community has been made aware of several intelligence activites conducted by US and UK national intelligence agencies, particularly the US National Security Agency (NSA) and the UK Government Communications Headquarters (GCHQ).  These documents have revealed the methods that these agencies use to attack Internet applications and obtain sensitive user information. Theses documents sugest the following types of attacks have occurred:</t>
 
 <t><list style='symbols'>
-  <t>Large scale passive collection of Internet traffic <xref target="pass1"/><xref target="pass2"/><xref target="pass3"/><xref target="pass4"/>.  For example, the NSA XKEYSCORE system gathers data from multiple access points and searches for “selectors” such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.</t>
+  <t>Large scale passive collection of Internet traffic <xref target="pass1"/><xref target="pass2"/><xref target="pass3"/><xref target="pass4"/>.  For example, the NSA XKEYSCORE system accesses data from multiple access points and searches for “selectors” such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.</t>
   <t>Decryption of TLS-protected Internet sessions <xref target="dec1"/><xref target="dec2"/><xref target="dec3"/>.  For example, the NSA BULLRUN project appears to have had a budget of around $250M per year to undermine encryption through multiple approaches. </t>
   <t>Insertion of NSA devices as a man in the middle of Internet transactions <xref target="TOR1"/><xref target="TOR2"/>.  For example, the NSA QUANTUM system appears to be able to hijack HTTP connections via “fast packet injection”.</t>
   <t>Direct acquisition of bulk data and metadata from service providers <xref target="dir1"/><xref target="dir2"/>.  For example, the NSA PRISM program provides the agency with access to many types of user data (e.g., email, chat, VoIP).</t>
-  <t>Use of implants (covert modifications or malware) to undermine security and anonymity features <xref target="dec2"/><xref target="TOR1"/><xref target="TOR2"/>.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.</t>
+  <t>Use of implants (covert modifications or malware) to undermine security and anonymity features <xref target="dec2"/><xref target="TOR1"/><xref target="TOR2"/>.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  There is also some suspicion that NSA modifications to the DUAL_EC_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.</t>
 </list></t>
 
 <t>We use the term “pervasive attack” to collectively describe these operations.  The term “pervasive” is used because the attacks are designed to gather as much data as possible and to apply selective analysis on targets after the fact.  This means that all, or nearly all, Internet communications are targets for these attacks.  To achieve this scale, the attacks are physically pervasive; they affect a large number of Internet communications. They are pervasive in content, consuming and exploiting any information revealed by the protocol. And they are pervasive in technology, exploiting many different vulnerabilities in many different protocols.</t>
@@ -136,7 +137,9 @@
 
 <t>Security analyses of Internet protocols commonly consider two classes of attacker: Passive attackers, who can simply listen in on communications as they transit the network, and “active attackers”, who can modify or delete packets in addition to simply collecting them.  </t>
 
-<t>In the context of pervasive attack, these attacks take on an even greater significance.  A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.  The reports on the NSA XKEYSCORE system would make it an example of such an attacker.</t>
+<t>In the context of pervasive attack, these attacks take on an even greater significance.  In the past, these attackers are often assumed to operate near the edge of the network, where attacks can be simpler.  For exmaple, in some LANs, it is simple for any node to engage in passive listening to other nodes’ traffic or inject packets to accomplish active attacks.  In the pervasive attack case, however, both passive and active attacks are undertaken closer to the core of the network, greatly expanding the scope and capability of the attacker.</t>
+
+<t>A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.  The reports on the NSA XKEYSCORE system would make it an example of such an attacker.</t>
 
 <t>A pervasive active attacker likewise has capabilities beyond those of a localized active attacker.  Active attacks are often limited by network topology, for example by a requirement that the attacker be able to see a targeted session as well as inject packets into it.  A pervasive active attacker with multiple accesses at core points of the Internet is able to overcome these topological limitations and apply attacks over a much broader scope.  Being positioned in the core of the network rather than the edge can also enable a pervasive active attacker to reroute targeted traffic.  Pervasive active attackers can also benefit from pervasive passive collection to identify vulnerable hosts.</t>
 
@@ -240,7 +243,7 @@
 
 <t>The best defense against becoming an unwitting collaborator is thus to end systems are well-vetted and secure.  Transparency is a major tool in this process <xref target="secure"/>.  Open source software is easier to evaluate for potential flaws than proprietary software.  Products that conform to standards for cryptography and security protocols are limited in the ways they can misbehave.  And standards processes that are open and transparent help ensure that the standards themselves do not provide avenues for attack.</t>
 
-<t>Standards can also define protocols that provide greater or lesser opportunity for dynamic key exfiltration.  Collaborators engaging in key exfiltration through a standard protocol will need to use covert channels in the protocol to leak information that can be used by the attacker to recover the key.  Such use of covert channels has been demonstrated for SSL, TLS, and SSH [key-recovery].  Any protocol bits that can be freely set by the collaborator can be used as a covert channel, including, for example, TCP options or unencrypted traffic sent before a STARTTLS message in SMTP or XMPP.  Protocol designers should consider what covert channels their protocols expose, and how those channels can be exploited to exfiltrate key information.</t>
+<t>Standards can also define protocols that provide greater or lesser opportunity for dynamic key exfiltration.  Collaborators engaging in key exfiltration through a standard protocol will need to use covert channels in the protocol to leak information that can be used by the attacker to recover the key.  Such use of covert channels has been demonstrated for SSL, TLS, and SSH <xref target="key-recovery"/>.  Any protocol bits that can be freely set by the collaborator can be used as a covert channel, including, for example, TCP options or unencrypted traffic sent before a STARTTLS message in SMTP or XMPP.  Protocol designers should consider what covert channels their protocols expose, and how those channels can be exploited to exfiltrate key information.</t>
 
 
 <t>Content exfiltration has some similarity to the dynamic exfiltration case, in that nothing can prevent a collaborator from revealing what they know, and the mitigations against becoming an unwitting collaborator apply.  In this case, however, applications can limit what the collaborator is able to reveal.  For example, the S/MIME and PGP systems for secure email both deny intermediate servers access to certain parts of the message <xref target="RFC5750"/><xref target="RFC2015"/>.  Even if a server were to provide an attacker with full access, the attacker would still not be able to read the protected parts of the message.  </t>
@@ -264,6 +267,15 @@
   <t>Thaler for list of attacks and taxonomy</t>
   <t>Schneier for suggestions on endpoint security</t>
   <t>Security ADs for starting and managing the perpass discussion</t>
+</list></t>
+
+</section>
+<section anchor="todo" title="TODO">
+
+<t><list style='symbols'>
+  <t>More thorough review of problem statement documents to ensure all bases are covered</t>
+  <t>Look at better alignment with draft-farrell-perpass-attack</t>
+  <t>Better coverage of traffic analysis and mitigations</t>
 </list></t>
 
 </section>
@@ -433,6 +445,7 @@
 &RFC4306;
 &RFC5750;
 &RFC2015;
+&I-D.farrell-perpass-attack;
 
 
     </references>

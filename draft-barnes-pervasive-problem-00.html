@@ -189,7 +189,7 @@ Introduction</h3>
 
 <p>Starting in the June 2013, documents released to the press by Edward Snowden have revealed several operations undertaken by intelligence agencies to exploit Internet communications for intelligence purposes.  These attacks were largely based on protocol vulnerabilities that were already known to exist.  The attacks were nonetheless striking in their pervasive nature, both in terms of the amount of Internet communications targeted, and in terms of the diversity of attack techniques employed.
 </p>
-<p>To ensure the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
+<p>To ensure that the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks <a class='info' href='#I-D.farrell-perpass-attack'>[I&#8209;D.farrell&#8209;perpass&#8209;attack]<span> (</span><span class='info'>Farrell, S. and H. Tschofenig, &ldquo;Pervasive Monitoring is an Attack,&rdquo; November&nbsp;2013.</span><span>)</span></a>.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
 </p>
 <p>The remainder of this document is structured as follows.  In <a class='info' href='#reported'>Section&nbsp;3<span> (</span><span class='info'>Reported Instances of Large-Scale Attacks</span><span>)</span></a>, we provide a brief summary of the attacks that have been disclosed.  <a class='info' href='#model'>Section&nbsp;4<span> (</span><span class='info'>Classes of Pervasive Attack</span><span>)</span></a> describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.  <a class='info' href='#response'>Section&nbsp;5<span> (</span><span class='info'>Responding to Pervasive Attack</span><span>)</span></a> provides some high-level guidance on how Internet protocols can defend against the threats described here.
 </p>
@@ -231,7 +231,7 @@ Reported Instances of Large-Scale Attacks</h3>
 </p>
 <p></p>
 <ul class="text">
-<li>Large scale passive collection of Internet traffic <a class='info' href='#pass1'>[pass1]<span> (</span><span class='info'>The Guardian, &ldquo;How the NSA is still harvesting your online data,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass2'>[pass2]<span> (</span><span class='info'>The Guardian, &ldquo;NSA's Prism surveillance program: how it works and what it can do,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass3'>[pass3]<span> (</span><span class='info'>The Guardian, &ldquo;XKeyscore: NSA tool collects 'nearly everything a user does on the internet',&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass4'>[pass4]<span> (</span><span class='info'>The Guardian, &ldquo;How does GCHQ's internet surveillance work?,&rdquo; .</span><span>)</span></a>.  For example, the NSA XKEYSCORE system gathers data from multiple access points and searches for “selectors” such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.
+<li>Large scale passive collection of Internet traffic <a class='info' href='#pass1'>[pass1]<span> (</span><span class='info'>The Guardian, &ldquo;How the NSA is still harvesting your online data,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass2'>[pass2]<span> (</span><span class='info'>The Guardian, &ldquo;NSA's Prism surveillance program: how it works and what it can do,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass3'>[pass3]<span> (</span><span class='info'>The Guardian, &ldquo;XKeyscore: NSA tool collects 'nearly everything a user does on the internet',&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass4'>[pass4]<span> (</span><span class='info'>The Guardian, &ldquo;How does GCHQ's internet surveillance work?,&rdquo; .</span><span>)</span></a>.  For example, the NSA XKEYSCORE system accesses data from multiple access points and searches for “selectors” such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.
 </li>
 <li>Decryption of TLS-protected Internet sessions <a class='info' href='#dec1'>[dec1]<span> (</span><span class='info'>The New York Times, &ldquo;N.S.A. Able to Foil Basic Safeguards of Privacy on Web,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dec2'>[dec2]<span> (</span><span class='info'>The Guardian, &ldquo;Project Bullrun – classification guide to the NSA's decryption program,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dec3'>[dec3]<span> (</span><span class='info'>The Guardian, &ldquo;Revealed: how US and UK spy agencies defeat internet privacy and security,&rdquo; 2013.</span><span>)</span></a>.  For example, the NSA BULLRUN project appears to have had a budget of around $250M per year to undermine encryption through multiple approaches. 
 </li>
@@ -239,7 +239,7 @@ Reported Instances of Large-Scale Attacks</h3>
 </li>
 <li>Direct acquisition of bulk data and metadata from service providers <a class='info' href='#dir1'>[dir1]<span> (</span><span class='info'>The Guardian, &ldquo;NSA collecting phone records of millions of Verizon customers daily,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dir2'>[dir2]<span> (</span><span class='info'>The Guardian, &ldquo;NSA Prism program taps in to user data of Apple, Google and others,&rdquo; 2013.</span><span>)</span></a>.  For example, the NSA PRISM program provides the agency with access to many types of user data (e.g., email, chat, VoIP).
 </li>
-<li>Use of implants (covert modifications or malware) to undermine security and anonymity features <a class='info' href='#dec2'>[dec2]<span> (</span><span class='info'>The Guardian, &ldquo;Project Bullrun – classification guide to the NSA's decryption program,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR1'>[TOR1]<span> (</span><span class='info'>Schneier, B., &ldquo;How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR2'>[TOR2]<span> (</span><span class='info'>The Guardian, &ldquo;'Tor Stinks' presentation – read the full document,&rdquo; 2013.</span><span>)</span></a>.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.
+<li>Use of implants (covert modifications or malware) to undermine security and anonymity features <a class='info' href='#dec2'>[dec2]<span> (</span><span class='info'>The Guardian, &ldquo;Project Bullrun – classification guide to the NSA's decryption program,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR1'>[TOR1]<span> (</span><span class='info'>Schneier, B., &ldquo;How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR2'>[TOR2]<span> (</span><span class='info'>The Guardian, &ldquo;'Tor Stinks' presentation – read the full document,&rdquo; 2013.</span><span>)</span></a>.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  There is also some suspicion that NSA modifications to the DUAL_EC_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.
 </li>
 </ul>
 
@@ -284,7 +284,9 @@ Attacker Capabilities</h3>
 
 <p>Security analyses of Internet protocols commonly consider two classes of attacker: Passive attackers, who can simply listen in on communications as they transit the network, and “active attackers”, who can modify or delete packets in addition to simply collecting them.  
 </p>
-<p>In the context of pervasive attack, these attacks take on an even greater significance.  A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.  The reports on the NSA XKEYSCORE system would make it an example of such an attacker.
+<p>In the context of pervasive attack, these attacks take on an even greater significance.  In the past, these attackers are often assumed to operate near the edge of the network, where attacks can be simpler.  For exmaple, in some LANs, it is simple for any node to engage in passive listening to other nodes’ traffic or inject packets to accomplish active attacks.  In the pervasive attack case, however, both passive and active attacks are undertaken closer to the core of the network, greatly expanding the scope and capability of the attacker.
+</p>
+<p>A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.  The reports on the NSA XKEYSCORE system would make it an example of such an attacker.
 </p>
 <p>A pervasive active attacker likewise has capabilities beyond those of a localized active attacker.  Active attacks are often limited by network topology, for example by a requirement that the attacker be able to see a targeted session as well as inject packets into it.  A pervasive active attacker with multiple accesses at core points of the Internet is able to overcome these topological limitations and apply attacks over a much broader scope.  Being positioned in the core of the network rather than the edge can also enable a pervasive active attacker to reroute targeted traffic.  Pervasive active attackers can also benefit from pervasive passive collection to identify vulnerable hosts.
 </p>
@@ -412,7 +414,7 @@ Responding to Pervasive Attack</h3>
 </p>
 <p>The best defense against becoming an unwitting collaborator is thus to end systems are well-vetted and secure.  Transparency is a major tool in this process <a class='info' href='#secure'>[secure]<span> (</span><span class='info'>Schneier, B., &ldquo;NSA surveillance: A guide to staying secure,&rdquo; 2013.</span><span>)</span></a>.  Open source software is easier to evaluate for potential flaws than proprietary software.  Products that conform to standards for cryptography and security protocols are limited in the ways they can misbehave.  And standards processes that are open and transparent help ensure that the standards themselves do not provide avenues for attack.
 </p>
-<p>Standards can also define protocols that provide greater or lesser opportunity for dynamic key exfiltration.  Collaborators engaging in key exfiltration through a standard protocol will need to use covert channels in the protocol to leak information that can be used by the attacker to recover the key.  Such use of covert channels has been demonstrated for SSL, TLS, and SSH [key-recovery].  Any protocol bits that can be freely set by the collaborator can be used as a covert channel, including, for example, TCP options or unencrypted traffic sent before a STARTTLS message in SMTP or XMPP.  Protocol designers should consider what covert channels their protocols expose, and how those channels can be exploited to exfiltrate key information.
+<p>Standards can also define protocols that provide greater or lesser opportunity for dynamic key exfiltration.  Collaborators engaging in key exfiltration through a standard protocol will need to use covert channels in the protocol to leak information that can be used by the attacker to recover the key.  Such use of covert channels has been demonstrated for SSL, TLS, and SSH <a class='info' href='#key-recovery'>[key&#8209;recovery]<span> (</span><span class='info'>Golle, P., &ldquo;The Design and Implementation of Protocol-Based Hidden Key Recovery,&rdquo; 2003.</span><span>)</span></a>.  Any protocol bits that can be freely set by the collaborator can be used as a covert channel, including, for example, TCP options or unencrypted traffic sent before a STARTTLS message in SMTP or XMPP.  Protocol designers should consider what covert channels their protocols expose, and how those channels can be exploited to exfiltrate key information.
 </p>
 <p>Content exfiltration has some similarity to the dynamic exfiltration case, in that nothing can prevent a collaborator from revealing what they know, and the mitigations against becoming an unwitting collaborator apply.  In this case, however, applications can limit what the collaborator is able to reveal.  For example, the S/MIME and PGP systems for secure email both deny intermediate servers access to certain parts of the message <a class='info' href='#RFC5750'>[RFC5750]<span> (</span><span class='info'>Ramsdell, B. and S. Turner, &ldquo;Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Certificate Handling,&rdquo; January&nbsp;2010.</span><span>)</span></a><a class='info' href='#RFC2015'>[RFC2015]<span> (</span><span class='info'>Elkins, M., &ldquo;MIME Security with Pretty Good Privacy (PGP),&rdquo; October&nbsp;1996.</span><span>)</span></a>.  Even if a server were to provide an attacker with full access, the attacker would still not be able to read the protected parts of the message.  
 </p>
@@ -446,19 +448,33 @@ Acknowledgements</h3>
 </li>
 </ul>
 
-<a name="rfc.references"></a><br /><hr />
+<a name="todo"></a><br /><hr />
 <a name="rfc.section.7"></a><h3>7.&nbsp;
+TODO</h3>
+
+<p></p>
+<ul class="text">
+<li>More thorough review of problem statement documents to ensure all bases are covered
+</li>
+<li>Look at better alignment with draft-farrell-perpass-attack
+</li>
+<li>Better coverage of traffic analysis and mitigations
+</li>
+</ul>
+
+<a name="rfc.references"></a><br /><hr />
+<a name="rfc.section.8"></a><h3>8.&nbsp;
 References</h3>
 
 <a name="rfc.references1"></a><br /><hr />
-<h3>7.1.&nbsp;Normative References</h3>
+<h3>8.1.&nbsp;Normative References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
 <td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
 </table>
 
 <a name="rfc.references2"></a><br /><hr />
-<h3>7.2.&nbsp;Informative References</h3>
+<h3>8.2.&nbsp;Informative References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="pass1">[pass1]</a></td>
 <td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/world/2013/jun/27/nsa-online-metadata-collection">How the NSA is still harvesting your online data</a>,&rdquo; 2013.</td></tr>
@@ -508,6 +524,8 @@ References</h3>
 <td class="author-text">Ramsdell, B. and S. Turner, &ldquo;<a href="http://tools.ietf.org/html/rfc5750">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Certificate Handling</a>,&rdquo; RFC&nbsp;5750, January&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5750.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC2015">[RFC2015]</a></td>
 <td class="author-text">Elkins, M., &ldquo;<a href="http://tools.ietf.org/html/rfc2015">MIME Security with Pretty Good Privacy (PGP)</a>,&rdquo; RFC&nbsp;2015, October&nbsp;1996 (<a href="http://www.rfc-editor.org/rfc/rfc2015.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2015.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="I-D.farrell-perpass-attack">[I-D.farrell-perpass-attack]</a></td>
+<td class="author-text">Farrell, S. and H. Tschofenig, &ldquo;<a href="http://tools.ietf.org/html/draft-farrell-perpass-attack-00">Pervasive Monitoring is an Attack</a>,&rdquo; draft-farrell-perpass-attack-00 (work in progress), November&nbsp;2013 (<a href="http://www.ietf.org/internet-drafts/draft-farrell-perpass-attack-00.txt">TXT</a>).</td></tr>
 </table>
 
 <a name="rfc.authors"></a><br /><hr />
