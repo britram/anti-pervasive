@@ -132,7 +132,9 @@ informative:
 
 Leaks of classified documents in 2013 have revealed several classes of "pervasive" attack on Internet communications.  In this document, we review the main attacks that have been published, and develop a threat model that describes these pervasive attacks.  Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to increase the protocols robustness to pervasive attacks.
 
-CJ Note: Overall I think we need to be careful to separate what we know to be true from what has been reported in the press. 
+{::comment}
+CJ: Overall I think we need to be careful to separate what we know to be true from what has been reported in the press. 
+{:/comment}
 
 --- middle
 
@@ -272,7 +274,9 @@ In this section, we discuss a collection of high-level approaches to mitigating 
 | Content exfiltration      | Object encryption, distributed systems  |
 
 
-CJ Note: I think we are lacking some text on End to Middle encryption (such as two users chatting using Facebook using HTTPS) vs End to End encryptions (two users chatting over data channel in WebRTC). I think we need to make the point that E2E Encryption solves a different class of attack from E2M but that E2M is still useful. 
+{::comment}
+CJ: I think we are lacking some text on End to Middle encryption (such as two users chatting using Facebook using HTTPS) vs End to End encryptions (two users chatting over data channel in WebRTC). I think we need to make the point that E2E Encryption solves a different class of attack from E2M but that E2M is still useful. 
+{:/comment}
 
 
 The traditional mitigation to passive attack is to render content unintelligible to the attacker by applying encryption, for example, by using TLS or IPsec {{RFC5246}}{{RFC4301}}.  Even without authentication, encryption will prevent a passive attacker from being able to read the encrypted content.  Exploiting unauthenticated encryption requires an active attack (man in the middle); with authentication, a key exfiltration attack is required.
@@ -291,7 +295,9 @@ Dynamic key exfiltration cannot be prevent by protocol means.  By definition, an
 
 The best defense against becoming an unwitting collaborator is thus to end systems are well-vetted and secure.  Transparency is a major tool in this process {{secure}}.  Open source software is easier to evaluate for potential flaws than proprietary software.  Products that conform to standards for cryptography and security protocols are limited in the ways they can misbehave.  And standards processes that are open and transparent help ensure that the standards themselves do not provide avenues for attack.
 
-CJ Note: I think another thing we can recommend is minimizing the "free bits" that are unencrypted and can be used by the attacker to exfiltrate dynamic keys. For example, if the TLS handshake had 128 "random" bits that the client could set any way they wanted and were sent unencrypted in the handshake, this would be a prime place to have the client put bits that revealed keys used for the encryption. TCP options can be used this way. Stuff before a STARTTLS, etc.
+{::comment}
+CJ: I think another thing we can recommend is minimizing the "free bits" that are unencrypted and can be used by the attacker to exfiltrate dynamic keys. For example, if the TLS handshake had 128 "random" bits that the client could set any way they wanted and were sent unencrypted in the handshake, this would be a prime place to have the client put bits that revealed keys used for the encryption. TCP options can be used this way. Stuff before a STARTTLS, etc.
+{:/comment}
 
 Content exfiltration has some similarity to the dynamic exfiltration case, in that nothing can prevent a collaborator from revealing what they know, and the mitigations against becoming an unwitting collaborator apply.  In this case, however, applications can limit what the collaborator is able to reveal.  For example, the S/MIME and PGP systems for secure email both deny intermediate servers access to certain parts of the message {{RFC5750}}{{RFC2015}}.  Even if a server were to provide an attacker with full access, the attacker would still not be able to read the protected parts of the message.  
 
