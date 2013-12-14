@@ -12,7 +12,15 @@ author:
     name: Richard Barnes
     organization: BBN
     email: rlb@ipv.sx
-
+ - 
+   ins: C. Jennings
+   name: Cullen Jennings
+   org: Cisco
+   email: fluffy@cisco.com
+   street: 400 3rd Avenue SW
+   city: Calgary
+   code: T2P 4H2
+   country: Canada
 
 normative:
   RFC2119:
@@ -122,8 +130,9 @@ informative:
 
 --- abstract
 
-Leaks of classified documents in 2013 have revealed several classes of "pervasive" attack on Internet protocols.  In this document, we review the main attacks that have been published, and develop a threat model that describes these pervasive attacks.  Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to make protocols robust in the face of pervasive attack.
+Leaks of classified documents in 2013 have revealed several classes of "pervasive" attack on Internet communications.  In this document, we review the main attacks that have been published, and develop a threat model that describes these pervasive attacks.  Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to increase the protocols robustness to pervasive attacks.
 
+CJ Note: Overall I think we need to be careful to separate what we know to be true from what has been reported in the press. 
 
 --- middle
 
@@ -131,7 +140,7 @@ Leaks of classified documents in 2013 have revealed several classes of "pervasiv
 
 Starting in the June 2013, documents leaked to the press by Edward Snowden have revealed several operations undertaken by intelligence agencies to exploit Internet communications for intelligence purposes.  These attacks were largely based on protocol vulnerabilities that were already known to exist.  The attacks were nonetheless striking in their pervasive nature, both in terms of the amount of Internet communications targeted, and in terms of the diversity of attack techniques employed.
 
-In order to ensure the continued security of the Internet, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
+To ensure the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
 
 The remainder of this document is structured as follows.  In {{reported}}, we provide a brief summary of the attacks that have been disclosed.  {{model}} describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.  {{response}} provides some high-level guidance on how Internet protocols can defend against the threats described here.
 
@@ -157,7 +166,7 @@ Unwitting Collaborator:
 
 # Reported Instances of Large-Scale Attacks {#reported}
 
-Through recent revelations of sensitive documents in several media outlets, the Internet community has been made aware of several intelligence activites conducted by US and UK national intelligence agencies, particularly the US National Security Agency (NSA) and the UK Government Communications Headquarters (GCHQ).  These documents have revealed the methods that these agencies use to attack Internet applications and obtain sensitive user information. 
+Through recent revelations of sensitive documents in several media outlets, the Internet community has been made aware of several intelligence activites conducted by US and UK national intelligence agencies, particularly the US National Security Agency (NSA) and the UK Government Communications Headquarters (GCHQ).  These documents have revealed the methods that these agencies use to attack Internet applications and obtain sensitive user information. Theses documents sugest the following types of attacks have occurred:
 
 * Large scale passive collection of Internet traffic {{pass1}}{{pass2}}{{pass3}}{{pass4}}.  For example, the NSA XKEYSCORE system gathers data from multiple access points and searches for "selectors" such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.
 
@@ -176,7 +185,7 @@ We use the term "pervasive attack" to collectively describe these operations.  T
 
 The primary goal of pervasive attack is collection of information across a large number of Internet communications, including decryption of encrypted communications and deanonymization of anonymized communications.  The attacker can then analyze the collected communications to identify information of interest, or use data mining techniques to examine correlations among multiple communications.
 
-In order to succeed in this goal, an attacker needs two main things.  First, he needs access to the traffic he wishes to collect.  Second, if the traffic is encrypted, he needs access to key material that can be used to decrypt the traffic.  The attacks listed above highlight new avenues for attack on both of these questions, which have not been a focus of security analysis in the past.
+In order to succeed in this goal, an attacker needs two main things.  First, the attacker needs access to the traffic they wishes to collect.  Second, if the traffic is encrypted, the attacker needs access to key material that can be used to decrypt the traffic.  The attacks listed above highlight new avenues for attack on both of these questions, which have not been a focus of security analysis in the past.
 
 ## Attacker Capabilities
 
@@ -190,14 +199,13 @@ In order to succeed in this goal, an attacker needs two main things.  First, he 
 
 Security analyses of Internet protocols commonly consider two classes of attacker: Passive attackers, who can simply listen in on communications as they transit the network, and "active attackers", who can modify or delete packets in addition to simply collecting them.  
 
-In the context of pervasive attack, these attacks take on an even greater significance.  A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.
-The NSA XKEYSCORE system would be an example of such an attacker.
+In the context of pervasive attack, these attacks take on an even greater significance.  A passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of user behavior than an attacker that collects at a single point.  Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can examine correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host.  The reports on the NSA XKEYSCORE system would make it an example of such an attacker.
 
 A pervasive active attacker likewise has capabilities beyond those of a localized active attacker.  Active attacks are often limited by network topology, for example by a requirement that the attacker be able to see a targeted session as well as inject packets into it.  A pervasive active attacker with multiple accesses at core points of the Internet is able to overcome these topological limitations and apply attacks over a much broader scope.  Being positioned in the core of the network rather than the edge can also enable a pervasive active attacker to reroute targeted traffic.  Pervasive active attackers can also benefit from pervasive passive collection to identify vulnerable hosts.
 
 While not directly related to pervasiveness, attackers that are in a position to mount a pervasive active attack are also often in a position to subvert authentication, the traditional response to active attack.  Authentication in the Internet is often achieved via trusted third party authorities such as the Certificate Authorities (CAs) that provide web sites with authentication credentials.  An attacker with sufficient resources for pervasive attack may also be able to force an authority to grant credentials for an identity of the attacker's choosing, allowing the active attack to succeed where a weaker attacker would fail.
 
-Beyond these two classes, the BULLRUN effort to defeat encryption and the PRISM effort to obtain data from service providers suggest three more classes of attack:
+Beyond these two classes, reports on the BULLRUN effort to defeat encryption and the PRISM effort to obtain data from service providers suggest three more classes of attack:
 
 * Static key exfiltration
 * Dynamic key exfiltration
@@ -209,9 +217,9 @@ The term "key exfiltration" refers to the transfer of keying material for an enc
 
 "Dynamic" key exfiltration, by contrast, refers to attacks in which the collaborator delivers keying material to the attacker frequently, e.g., on a per-session basis.  This does not necessarily imply frequent communications with the attacker; the transfer of keying material may be virtual.  For example, if an endpoint were modified in such a way that the attacker could predict the state of its psuedorandom number generator, then the attacker would be able to derive per-session keys even without per-session communications.
 
-Finally, content exfiltration is the attack in which the collaborator simply provides the attacker with the desired data or metadata.   Unlike the key exfiltration cases, this attack does not require the attacker to capture the desired data as it flows through the network.  The risk is to data at rest as opposed to data in transit.  This increases the scope of data that the attacker can obtain, since the attacker can access historical data -- he does not have to be listening at the time the communication happens.
+Finally, content exfiltration is the attack in which the collaborator simply provides the attacker with the desired data or metadata.   Unlike the key exfiltration cases, this attack does not require the attacker to capture the desired data as it flows through the network.  The risk is to data at rest as opposed to data in transit.  This increases the scope of data that the attacker can obtain, since the attacker can access historical data -- the attacker does not have to be listening at the time the communication happens.
 
-Exfiltration attacks can be accomplished via attack against the collaborator, i.e., by the attacker stealing the keys or content rather than the collaborator providing them willingly.  In these cases, the collaborator may not be aware that he is collaborating, at least at a human level; the subverted technical assets are doing the collaboration on his behalf.
+Exfiltration attacks can be accomplished via attack against the collaborator, i.e., by the attacker stealing the keys or content rather than the collaborator providing them willingly.  In these cases, the collaborator may not be aware that they are collaborating, at least at a human level; the subverted technical assets are doing the collaboration on their behalf.
 
 
 ## Attacker Costs
@@ -231,7 +239,7 @@ Depending on the attack, the attacker may be exposed to several types of risk, r
 
 A passive attack is the simplest attack to mount in some ways.  The base requirement is that the attacker obtain physical access to a communications medium and extract communications from it.  For example, the attacker might tap a fiber-optic cable, acquire a mirror port on a switch, or listen to a wireless signal.  The need for these taps to have physical access to a link exposes the attacker to the risk that the taps will be discovered.  For example, a fiber tap or mirror port might be discovered by network operators noticing increased attenuation in the fiber or a change in switch configuration.  Of course, passive attacks may be accomplished with the cooperation of the network operator, in which case there is a risk that the attacker's interactions with the network operator will be exposed.
 
-In many ways, the costs and risks for an active attack are similar to those for a passive attack, with a few additions.  An active attacker requires more robust network access than a passive attacker, since for example he will often need to transmit data as well as receiving it.  In the wireless example above, the attacker would need to act as an transmitter as well as receiver, greatly increasing the probability he will be discovered (e.g., using direction-finding technology).  Active attacks are also much more observable at higher layers of the network.  For example, an active attacker that attempts to use a mis-issued certificate could be detected via Certificate Transparency {{RFC6962}}.  
+In many ways, the costs and risks for an active attack are similar to those for a passive attack, with a few additions.  An active attacker requires more robust network access than a passive attacker, since for example they will often need to transmit data as well as receiving it.  In the wireless example above, the attacker would need to act as an transmitter as well as receiver, greatly increasing the probability the attacker will be discovered (e.g., using direction-finding technology).  Active attacks are also much more observable at higher layers of the network.  For example, an active attacker that attempts to use a mis-issued certificate could be detected via Certificate Transparency {{RFC6962}}.  
 
 In terms of raw implementation complexity, passive attacks require only enough processing to extract information from the network and store it.  Active attacks, by contrast, often depend on winning race conditions to inject pakets into active connections.  So active attacks in the core of the network require processing hardware to that can operate at line speed to identify opportunities for attack and insert attack traffic in a high-volume traffic.
 
@@ -264,15 +272,18 @@ In this section, we discuss a collection of high-level approaches to mitigating 
 | Content exfiltration      | Object encryption, distributed systems  |
 
 
+CJ Note: I think we are lacking some text on End to Middle encryption (such as two users chatting using Facebook using HTTPS) vs End to End encryptions (two users chatting over data channel in WebRTC). I think we need to make the point that E2E Encryption solves a different class of attack from E2M but that E2M is still useful. 
+
+
 The traditional mitigation to passive attack is to render content unintelligible to the attacker by applying encryption, for example, by using TLS or IPsec {{RFC5246}}{{RFC4301}}.  Even without authentication, encryption will prevent a passive attacker from being able to read the encrypted content.  Exploiting unauthenticated encryption requires an active attack (man in the middle); with authentication, a key exfiltration attack is required.
 
-The additional capabilities of a pervasive passive attacker, however, require some changes in how protocol designers evaluate what information is encrypted.  In addition to directly collecting unencrypted data, a pervasive passive attacker can also make inferences about the content of encrypted messages based on what is observable.  For example, if a user typically visits a particular set of web sites, then a pervasive passive attacker observing all of the user's behavior can track the user based on the hosts he communicates with, even if he changes IP addresses, and even if all of the connections are encrypted.  
+The additional capabilities of a pervasive passive attacker, however, require some changes in how protocol designers evaluate what information is encrypted.  In addition to directly collecting unencrypted data, a pervasive passive attacker can also make inferences about the content of encrypted messages based on what is observable.  For example, if a user typically visits a particular set of web sites, then a pervasive passive attacker observing all of the user's behavior can track the user based on the hosts the user communicates with, even if the user changes IP addresses, and even if all of the connections are encrypted.  
 
 Thus, in designing protocols to be resistant to pervasive passive attacks, protocol designers should consider what information is left unencrypted in the protocol, and how that information might be correlated with other traffic.  Information that cannot be encrypted should be anonymized, i.e., it should be randomized so that it cannot be correlated with other information.  For example, the TOR overlay routing network anonymizes IP addresses by using multi-hop onion routing {{TOR}}.
 
 As with traditional, limited active attacks, the basic mitigation to pervasive active attack is to enable the endpoints of a communication to authenticate each other.  However, as noted above, attackers that can mount pervasive active attacks can often subvert the authorities on which authentication systems rely.  Thus, in order to make authentication systems more resilient to pervasive attack, it is beneficial to monitor these authorities to detect misbehavior that could enable active attack.  For example, DANE and Certificate Transparency both provide mechanisms for detecting when a CA has issued a certificate for a domain name without the authorization of the holder of that domain name {{RFC6962}}{{RFC6698}}.
 
-An encrypted, authenticated session is safe from attacks in which neither end collaborates with the attacker, but can still be subverted by the endpoints.  The most common ciphersuites used for HTTPS today, for example, are based on using RSA encryption in such a way that if an attacker has the private key, he can derive the session keys from passive observation of a session.  These ciphersuites are thus vulnerable to a static key exfiltration attack -- if the attacker obtains the server's private key once, then he can decrypt all past and future sessions for that server.
+An encrypted, authenticated session is safe from attacks in which neither end collaborates with the attacker, but can still be subverted by the endpoints.  The most common ciphersuites used for HTTPS today, for example, are based on using RSA encryption in such a way that if an attacker has the private key, the attacker can derive the session keys from passive observation of a session.  These ciphersuites are thus vulnerable to a static key exfiltration attack -- if the attacker obtains the server's private key once, then they can decrypt all past and future sessions for that server.
 
 Static key exfiltration attacks are prevented by including ephemeral, per-session secret information in the keys used for a session.  Most IETF security protocols include modes of operation that have this property.  These modes are known in the literature under the heading "perfect forward secrecy" (PFS) because even if an adversary has all of the secrets for one session, the next session will use new, different secrets and the attacker will not be able to decrypt it.  The Internet Key Exchange (IKE) protocol used by IPsec supports PFS by default {{RFC4306}}, and TLS supports PFS via the use of specific ciphersuites {{RFC5246}}.
 
@@ -280,7 +291,9 @@ Dynamic key exfiltration cannot be prevent by protocol means.  By definition, an
 
 The best defense against becoming an unwitting collaborator is thus to end systems are well-vetted and secure.  Transparency is a major tool in this process {{secure}}.  Open source software is easier to evaluate for potential flaws than proprietary software.  Products that conform to standards for cryptography and security protocols are limited in the ways they can misbehave.  And standards processes that are open and transparent help ensure that the standards themselves do not provide avenues for attack.
 
-Content exfiltration has some similarity to the dynamic exfiltration case, in that nothing can prevent a collaborator from revealing what he knows, and the mitigations against becoming an unwitting collaborator apply.  In this case, however, applications can limit what the collaborator is able to reveal.  For example, the S/MIME and PGP systems for secure email both deny intermediate servers access to certain parts of the message {{RFC5750}}{{RFC2015}}.  Even if a server were to provide an attacker with full access, the attacker would still not be able to read the protected parts of the message.  
+CJ Note: I think another thing we can recommend is minimizing the "free bits" that are unencrypted and can be used by the attacker to exfiltrate dynamic keys. For example, if the TLS handshake had 128 "random" bits that the client could set any way they wanted and were sent unencrypted in the handshake, this would be a prime place to have the client put bits that revealed keys used for the encryption. TCP options can be used this way. Stuff before a STARTTLS, etc.
+
+Content exfiltration has some similarity to the dynamic exfiltration case, in that nothing can prevent a collaborator from revealing what they know, and the mitigations against becoming an unwitting collaborator apply.  In this case, however, applications can limit what the collaborator is able to reveal.  For example, the S/MIME and PGP systems for secure email both deny intermediate servers access to certain parts of the message {{RFC5750}}{{RFC2015}}.  Even if a server were to provide an attacker with full access, the attacker would still not be able to read the protected parts of the message.  
 
 The mitigations to the content exfiltration case are thus to regard participants in the protocol as potential passive attackers themselves, and apply the mitigations discussed above with regard to passive attack.  Information that is not necessary for these participants to fulfill their role in the protocol can be encrypted, and other information can be anonymized.
 
