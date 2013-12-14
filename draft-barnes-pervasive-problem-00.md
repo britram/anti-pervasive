@@ -118,6 +118,22 @@ informative:
     author:
       organization: Technology Review
     date: 2013
+  key-recovery:
+    target: http://crypto.stanford.edu/~pgolle/papers/escrow.pdf
+    title: The Design and Implementation of Protocol-Based Hidden Key Recovery
+    author:
+      ins: E.-J. Goh
+      name: Eu-Jin Goh
+    author: 
+      ins: D. Boneh
+      name: Dan Boneh
+    author:
+      ins: B. Pinkas
+      name: Benny Pinkas
+    author:
+      ins: P. Golle
+      name: Phillippe Golle
+    date: 2003
   RFC4949:
   RFC6962:
   RFC6698:
@@ -134,6 +150,7 @@ Leaks of classified documents in 2013 have revealed several classes of "pervasiv
 
 {::comment}
 CJ: Overall I think we need to be careful to separate what we know to be true from what has been reported in the press. 
+RLB: Yes.  Think this is under control for now, but something to keep an eye on.
 {:/comment}
 
 --- middle
@@ -276,6 +293,7 @@ In this section, we discuss a collection of high-level approaches to mitigating 
 
 {::comment}
 CJ: I think we are lacking some text on End to Middle encryption (such as two users chatting using Facebook using HTTPS) vs End to End encryptions (two users chatting over data channel in WebRTC). I think we need to make the point that E2E Encryption solves a different class of attack from E2M but that E2M is still useful. 
+RB: Added a note below "content exfiltration" text below, since that's where the difference shows up.
 {:/comment}
 
 
@@ -295,11 +313,20 @@ Dynamic key exfiltration cannot be prevent by protocol means.  By definition, an
 
 The best defense against becoming an unwitting collaborator is thus to end systems are well-vetted and secure.  Transparency is a major tool in this process {{secure}}.  Open source software is easier to evaluate for potential flaws than proprietary software.  Products that conform to standards for cryptography and security protocols are limited in the ways they can misbehave.  And standards processes that are open and transparent help ensure that the standards themselves do not provide avenues for attack.
 
+Standards can also define protocols that provide greater or lesser opportunity for dynamic key exfiltration.  Collaborators engaging in key exfiltration through a standard protocol will need to use covert channels in the protocol to leak information that can be used by the attacker to recover the key.  Such use of covert channels has been demonstrated for SSL, TLS, and SSH [key-recovery].  Any protocol bits that can be freely set by the collaborator can be used as a covert channel, including, for example, TCP options or unencrypted traffic sent before a STARTTLS message in SMTP or XMPP.  Protocol designers should consider what covert channels their protocols expose, and how those channels can be exploited to exfiltrate key information.
+
 {::comment}
 CJ: I think another thing we can recommend is minimizing the "free bits" that are unencrypted and can be used by the attacker to exfiltrate dynamic keys. For example, if the TLS handshake had 128 "random" bits that the client could set any way they wanted and were sent unencrypted in the handshake, this would be a prime place to have the client put bits that revealed keys used for the encryption. TCP options can be used this way. Stuff before a STARTTLS, etc.
+RLB: See above.
 {:/comment}
 
 Content exfiltration has some similarity to the dynamic exfiltration case, in that nothing can prevent a collaborator from revealing what they know, and the mitigations against becoming an unwitting collaborator apply.  In this case, however, applications can limit what the collaborator is able to reveal.  For example, the S/MIME and PGP systems for secure email both deny intermediate servers access to certain parts of the message {{RFC5750}}{{RFC2015}}.  Even if a server were to provide an attacker with full access, the attacker would still not be able to read the protected parts of the message.  
+
+Mechanisms like S/MIME and PGP are often referred to as "end-to-end" security mechanisms, as opposed to "hop-by-hop" or "end-to-middle" mechanisms like the use of SMTP over TLS.  These two different mechanisms address different types of attackers: Hop-by-hop mechanisms protect from attackers on the wire (passive or active), while end-to-end mechansims protect against attackers within intermediate nodes.  Thus, neither of these mechanisms provides complete protection by itself.  For example:
+
+* Two users messaging via Facebook over HTTPS are protected against passive and active attackers in the network between the users and Facebook.  However, if Facebook is a collaborator in an exfiltration attack, their communications can still be monitored.  They would need to encrypt their messages end-to-end in order to protect themselves against this risk.
+
+* Two users exchanging PGP-protected email have protected the content of their exchange from network attackers and intermediate servers, but the header information (e.g., To and From addresses) is unnecessarily exposed to passive and active attackers that can see communications among the mail agents handling the email messages.  These mail agents need to use hop-by-hop encryption to address this risk.
 
 The mitigations to the content exfiltration case are thus to regard participants in the protocol as potential passive attackers themselves, and apply the mitigations discussed above with regard to passive attack.  Information that is not necessary for these participants to fulfill their role in the protocol can be encrypted, and other information can be anonymized.
 
