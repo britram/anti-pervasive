@@ -249,6 +249,8 @@ Finally, content exfiltration is the attack in which the collaborator simply pro
 
 Exfiltration attacks can be accomplished via attack against the collaborator, i.e., by the attacker stealing the keys or content rather than the collaborator providing them willingly.  In these cases, the collaborator may not be aware that they are collaborating, at least at a human level; the subverted technical assets are doing the collaboration on their behalf.
 
+Any party that has access to encryption keys or unencrypted data can be a collaborator.  While collaborators are typically the endpoints of a communication (with encryption securing the links), intermediaries in an unencrypted communication can also facilitate content exfiltration attacks as collaborators by providing the attacker access to those communications.  For example, in the NSA PRISM program, Google and other service providers were collaborators by providing their users' data to NSA.  In the NSA MUSCULAR program, however, the ISPs providing inter-data center rconnectivity to Goole, Yahoo!, and others were collaborators by enabling attackers to access cables carrying unencrypted traffic.
+
 
 ## Attacker Costs
 

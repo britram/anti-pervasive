@@ -481,6 +481,30 @@ Internet-Draft              Pervasive Attack               December 2013
    at least at a human level; the subverted technical assets are doing
    the collaboration on their behalf.
 
+   Any party that has access to encryption keys or unencrypted data can
+   be a collaborator.  While collaborators are typically the endpoints
+   of a communication (with encryption securing the links),
+   intermediaries in an unencrypted communication can also facilitate
+   content exfiltration attacks as collaborators by providing the
+   attacker access to those communications.  For example, in the NSA
+   PRISM program, Google and other service providers were collaborators
+   by providing their users' data to NSA.  In the NSA MUSCULAR program,
+   however, the ISPs providing inter-data center rconnectivity to Goole,
+   Yahoo!, and others were collaborators by enabling attackers to access
+   cables carrying unencrypted traffic.
+
+
+
+
+
+
+
+
+Barnes, et al.            Expires June 12, 2014                 [Page 9]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
 4.2.  Attacker Costs
 
      +--------------------------+-----------------------------------+
@@ -496,14 +520,6 @@ Internet-Draft              Pervasive Attack               December 2013
      |                          |                                   |
      | Content exfiltration     | Ongoing, bulk interaction         |
      +--------------------------+-----------------------------------+
-
-
-
-
-Barnes, et al.            Expires June 12, 2014                 [Page 9]
-
-Internet-Draft              Pervasive Attack               December 2013
-
 
    In order to realize an attack of each of the types discussed above,
    the attacker has to incur certain costs and undertake certain risks.
@@ -537,6 +553,14 @@ Internet-Draft              Pervasive Attack               December 2013
    receiving it.  In the wireless example above, the attacker would need
    to act as an transmitter as well as receiver, greatly increasing the
    probability the attacker will be discovered (e.g., using direction-
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 10]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
    finding technology).  Active attacks are also much more observable at
    higher layers of the network.  For example, an active attacker that
    attempts to use a mis-issued certificate could be detected via
@@ -553,14 +577,6 @@ Internet-Draft              Pervasive Attack               December 2013
    Key exfiltration attacks rely on passive attack for access to
    encrypted data, with the collaborator providing keys to decrypt the
    data.  So the attacker undertakes the cost and risk of a passive
-
-
-
-Barnes, et al.            Expires June 12, 2014                [Page 10]
-
-Internet-Draft              Pervasive Attack               December 2013
-
-
    attack, as well as additional risk of discovery via the interactions
    that the attacker has with the collaborator.
 
@@ -593,6 +609,14 @@ Internet-Draft              Pervasive Attack               December 2013
    incur additional cost in order to convince the collaborator to
    participate in the attack.  Likewise, the scope of these attacks is
    limited to case where the attacker can convince a collaborator to
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 11]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
    participate.  If the attacker is a national government, for example,
    it may be able to compel participation within its borders, but have a
    much more difficult time recruiting foreign collaborators.
@@ -612,7 +636,39 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 11]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 12]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -668,7 +724,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 12]
+Barnes, et al.            Expires June 12, 2014                [Page 13]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -724,7 +780,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 13]
+Barnes, et al.            Expires June 12, 2014                [Page 14]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -780,7 +836,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 14]
+Barnes, et al.            Expires June 12, 2014                [Page 15]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -836,7 +892,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 15]
+Barnes, et al.            Expires June 12, 2014                [Page 16]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -892,7 +948,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 16]
+Barnes, et al.            Expires June 12, 2014                [Page 17]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -948,7 +1004,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 17]
+Barnes, et al.            Expires June 12, 2014                [Page 18]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1004,7 +1060,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 18]
+Barnes, et al.            Expires June 12, 2014                [Page 19]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1060,7 +1116,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 19]
+Barnes, et al.            Expires June 12, 2014                [Page 20]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1116,7 +1172,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 20]
+Barnes, et al.            Expires June 12, 2014                [Page 21]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1172,5 +1228,5 @@ Authors' Addresses
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 21]
+Barnes, et al.            Expires June 12, 2014                [Page 22]
 
