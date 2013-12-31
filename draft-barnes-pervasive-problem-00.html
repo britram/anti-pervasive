@@ -141,9 +141,10 @@
 <body>
 <table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
 <tr><td class="header">Network Working Group</td><td class="header">R. Barnes</td></tr>
-<tr><td class="header">Internet-Draft</td><td class="header">C. Jennings</td></tr>
-<tr><td class="header">Intended status: Informational</td><td class="header">T. Hardie</td></tr>
-<tr><td class="header">Expires: June 12, 2014</td><td class="header">December 09, 2013</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">B. Schneier</td></tr>
+<tr><td class="header">Intended status: Informational</td><td class="header">C. Jennings</td></tr>
+<tr><td class="header">Expires: June 12, 2014</td><td class="header">T. Hardie</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">December 09, 2013</td></tr>
 </table></td></tr></table>
 <h1><br />Pervasive Attack: A Threat Model and Problem Statement<br />draft-barnes-pervasive-problem-00</h1>
 
@@ -231,19 +232,41 @@ Reported Instances of Large-Scale Attacks</h3>
 </p>
 <p></p>
 <ul class="text">
-<li>Large scale passive collection of Internet traffic <a class='info' href='#pass1'>[pass1]<span> (</span><span class='info'>The Guardian, &ldquo;How the NSA is still harvesting your online data,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass2'>[pass2]<span> (</span><span class='info'>The Guardian, &ldquo;NSA's Prism surveillance program: how it works and what it can do,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass3'>[pass3]<span> (</span><span class='info'>The Guardian, &ldquo;XKeyscore: NSA tool collects 'nearly everything a user does on the internet',&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass4'>[pass4]<span> (</span><span class='info'>The Guardian, &ldquo;How does GCHQ's internet surveillance work?,&rdquo; .</span><span>)</span></a>.  For example, the NSA XKEYSCORE system accesses data from multiple access points and searches for “selectors” such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.
+<li>Large scale passive collection of Internet traffic <a class='info' href='#pass1'>[pass1]<span> (</span><span class='info'>The Guardian, &ldquo;How the NSA is still harvesting your online data,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass2'>[pass2]<span> (</span><span class='info'>The Guardian, &ldquo;NSA's Prism surveillance program: how it works and what it can do,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass3'>[pass3]<span> (</span><span class='info'>The Guardian, &ldquo;XKeyscore: NSA tool collects 'nearly everything a user does on the internet',&rdquo; 2013.</span><span>)</span></a><a class='info' href='#pass4'>[pass4]<span> (</span><span class='info'>The Guardian, &ldquo;How does GCHQ's internet surveillance work?,&rdquo; n.d..</span><span>)</span></a>.  For example:
+  
+<ul class="text">
+<li>The NSA XKEYSCORE system accesses data from multiple access points and searches for “selectors” such as email addresses, at the scale of tens of terabytes of data per day.  
+</li>
+<li>The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK. 
+</li>
+<li>The NSA MUSCULAR program tapped cables between data centers belonging to major service providers.
+</li>
+<li>Several programs appear perform wide-scale collection of cookies in web traffic and location data from location-aware portable devices such as smartphones.
+</li>
+</ul>
 </li>
 <li>Decryption of TLS-protected Internet sessions <a class='info' href='#dec1'>[dec1]<span> (</span><span class='info'>The New York Times, &ldquo;N.S.A. Able to Foil Basic Safeguards of Privacy on Web,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dec2'>[dec2]<span> (</span><span class='info'>The Guardian, &ldquo;Project Bullrun – classification guide to the NSA's decryption program,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dec3'>[dec3]<span> (</span><span class='info'>The Guardian, &ldquo;Revealed: how US and UK spy agencies defeat internet privacy and security,&rdquo; 2013.</span><span>)</span></a>.  For example, the NSA BULLRUN project appears to have had a budget of around $250M per year to undermine encryption through multiple approaches. 
 </li>
-<li>Insertion of NSA devices as a man in the middle of Internet transactions <a class='info' href='#TOR1'>[TOR1]<span> (</span><span class='info'>Schneier, B., &ldquo;How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR2'>[TOR2]<span> (</span><span class='info'>The Guardian, &ldquo;'Tor Stinks' presentation – read the full document,&rdquo; 2013.</span><span>)</span></a>.  For example, the NSA QUANTUM system appears to be able to hijack HTTP connections via “fast packet injection”.
+<li>Insertion of NSA devices as a man in the middle of Internet transactions <a class='info' href='#TOR1'>[TOR1]<span> (</span><span class='info'>Schneier, B., &ldquo;How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR2'>[TOR2]<span> (</span><span class='info'>The Guardian, &ldquo;'Tor Stinks' presentation – read the full document,&rdquo; 2013.</span><span>)</span></a>.  For example, the NSA QUANTUM system appears to use several different techniques to hijack HTTP connections, ranging from DNS response injection to HTTP 302 redirects.
 </li>
-<li>Direct acquisition of bulk data and metadata from service providers <a class='info' href='#dir1'>[dir1]<span> (</span><span class='info'>The Guardian, &ldquo;NSA collecting phone records of millions of Verizon customers daily,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dir2'>[dir2]<span> (</span><span class='info'>The Guardian, &ldquo;NSA Prism program taps in to user data of Apple, Google and others,&rdquo; 2013.</span><span>)</span></a>.  For example, the NSA PRISM program provides the agency with access to many types of user data (e.g., email, chat, VoIP).
+<li>Direct acquisition of bulk data and metadata from service providers <a class='info' href='#dir1'>[dir1]<span> (</span><span class='info'>The Guardian, &ldquo;NSA collecting phone records of millions of Verizon customers daily,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dir2'>[dir2]<span> (</span><span class='info'>The Guardian, &ldquo;NSA Prism program taps in to user data of Apple, Google and others,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#dir3'>[dir3]<span> (</span><span class='info'>The Guardian, &ldquo;Sigint – how the NSA collaborates with technology companies,&rdquo; 2013.</span><span>)</span></a>.  For example, the NSA PRISM program provides the agency with access to many types of user data (e.g., email, chat, VoIP).
 </li>
-<li>Use of implants (covert modifications or malware) to undermine security and anonymity features <a class='info' href='#dec2'>[dec2]<span> (</span><span class='info'>The Guardian, &ldquo;Project Bullrun – classification guide to the NSA's decryption program,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR1'>[TOR1]<span> (</span><span class='info'>Schneier, B., &ldquo;How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR2'>[TOR2]<span> (</span><span class='info'>The Guardian, &ldquo;'Tor Stinks' presentation – read the full document,&rdquo; 2013.</span><span>)</span></a>.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  There is also some suspicion that NSA modifications to the DUAL_EC_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.
+<li>Use of implants (covert modifications or malware) to undermine security and anonymity features <a class='info' href='#dec2'>[dec2]<span> (</span><span class='info'>The Guardian, &ldquo;Project Bullrun – classification guide to the NSA's decryption program,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR1'>[TOR1]<span> (</span><span class='info'>Schneier, B., &ldquo;How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID,&rdquo; 2013.</span><span>)</span></a><a class='info' href='#TOR2'>[TOR2]<span> (</span><span class='info'>The Guardian, &ldquo;'Tor Stinks' presentation – read the full document,&rdquo; 2013.</span><span>)</span></a>.  For example:
+  
+<ul class="text">
+<li>NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  
+</li>
+<li>The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  
+</li>
+<li>There is also some suspicion that NSA modifications to the DUAL_EC_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.  These suspicions have been reinforced by reports that RSA Security was paid roughly $10M to make DUAL_EC_DRBG the default in their products.
+</li>
+</ul>
 </li>
 </ul>
 
 <p>We use the term “pervasive attack” to collectively describe these operations.  The term “pervasive” is used because the attacks are designed to gather as much data as possible and to apply selective analysis on targets after the fact.  This means that all, or nearly all, Internet communications are targets for these attacks.  To achieve this scale, the attacks are physically pervasive; they affect a large number of Internet communications. They are pervasive in content, consuming and exploiting any information revealed by the protocol. And they are pervasive in technology, exploiting many different vulnerabilities in many different protocols.
+</p>
+<p>It’s important to note that although the attacks mentioned above were executed by NSA and GCHQ, there are many other organizations that can mount pervasive attacks.  Because of the resources required to achieve pervasive scale, pervasive attacks are most commonly undertaken by nation-state actors.  For example, the Chinese Internet filtering system known as the “Great Firewall of China” uses several techniques that are similar to the QUANTUM program, and which have a high degree of pervasiveness with regard to the Internet in China. 
 </p>
 <a name="model"></a><br /><hr />
 <a name="rfc.section.4"></a><h3>4.&nbsp;
@@ -462,19 +485,8 @@ TODO</h3>
 </li>
 </ul>
 
-<a name="rfc.references"></a><br /><hr />
-<a name="rfc.section.8"></a><h3>8.&nbsp;
-References</h3>
-
 <a name="rfc.references1"></a><br /><hr />
-<h3>8.1.&nbsp;Normative References</h3>
-<table width="99%" border="0">
-<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
-<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
-</table>
-
-<a name="rfc.references2"></a><br /><hr />
-<h3>8.2.&nbsp;Informative References</h3>
+<h3>8.&nbsp;Informative References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="pass1">[pass1]</a></td>
 <td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/world/2013/jun/27/nsa-online-metadata-collection">How the NSA is still harvesting your online data</a>,&rdquo; 2013.</td></tr>
@@ -483,7 +495,7 @@ References</h3>
 <tr><td class="author-text" valign="top"><a name="pass3">[pass3]</a></td>
 <td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/world/2013/jul/31/nsa-top-secret-program-online-data">XKeyscore: NSA tool collects 'nearly everything a user does on the internet'</a>,&rdquo; 2013.</td></tr>
 <tr><td class="author-text" valign="top"><a name="pass4">[pass4]</a></td>
-<td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/uk/2013/jun/21/how-does-gchq-internet-surveillance-work">How does GCHQ's internet surveillance work?</a>.&rdquo;</td></tr>
+<td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/uk/2013/jun/21/how-does-gchq-internet-surveillance-work">How does GCHQ's internet surveillance work?</a>,&rdquo; n.d..</td></tr>
 <tr><td class="author-text" valign="top"><a name="dec1">[dec1]</a></td>
 <td class="author-text">The New York Times, &ldquo;<a href="http://www.nytimes.com/2013/09/06/us/nsa-foils-much-internet-encryption.html">N.S.A. Able to Foil Basic Safeguards of Privacy on Web</a>,&rdquo; 2013.</td></tr>
 <tr><td class="author-text" valign="top"><a name="dec2">[dec2]</a></td>
@@ -500,7 +512,7 @@ References</h3>
 <td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order">NSA collecting phone records of millions of Verizon customers daily</a>,&rdquo; 2013.</td></tr>
 <tr><td class="author-text" valign="top"><a name="dir2">[dir2]</a></td>
 <td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/world/2013/jun/06/us-tech-giants-nsa-data">NSA Prism program taps in to user data of Apple, Google and others</a>,&rdquo; 2013.</td></tr>
-<tr><td class="author-text" valign="top"><a name="std">[std]</a></td>
+<tr><td class="author-text" valign="top"><a name="dir3">[dir3]</a></td>
 <td class="author-text">The Guardian, &ldquo;<a href="http://www.theguardian.com/world/interactive/2013/sep/05/sigint-nsa-collaborates-technology-companies">Sigint – how the NSA collaborates with technology companies</a>,&rdquo; 2013.</td></tr>
 <tr><td class="author-text" valign="top"><a name="secure">[secure]</a></td>
 <td class="author-text">Schneier, B., &ldquo;<a href="http://www.theguardian.com/world/2013/sep/05/nsa-how-to-remain-secure-surveillance">NSA surveillance: A guide to staying secure</a>,&rdquo; 2013.</td></tr>
@@ -535,6 +547,11 @@ References</h3>
 <td class="author-text">Richard Barnes</td></tr>
 <tr><td class="author" align="right">Email:&nbsp;</td>
 <td class="author-text"><a href="mailto:rlb@ipv.sx">rlb@ipv.sx</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Bruce Schneier</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:schneier@schneier.com">schneier@schneier.com</a></td></tr>
 <tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">Cullen Jennings</td></tr>

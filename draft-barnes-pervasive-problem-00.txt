@@ -2,9 +2,10 @@
 
 
 Network Working Group                                          R. Barnes
-Internet-Draft                                               C. Jennings
-Intended status: Informational                                 T. Hardie
-Expires: June 12, 2014                                 December 09, 2013
+Internet-Draft                                               B. Schneier
+Intended status: Informational                               C. Jennings
+Expires: June 12, 2014                                         T. Hardie
+                                                       December 09, 2013
 
 
          Pervasive Attack: A Threat Model and Problem Statement
@@ -48,7 +49,6 @@ Copyright Notice
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
 
 
 
@@ -57,9 +57,9 @@ Barnes, et al.            Expires June 12, 2014                 [Page 1]
 Internet-Draft              Pervasive Attack               December 2013
 
 
+   include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
-
 
 
 
@@ -237,11 +237,21 @@ Internet-Draft              Pervasive Attack               December 2013
    suggest the following types of attacks have occurred:
 
    o  Large scale passive collection of Internet traffic
-      [pass1][pass2][pass3][pass4].  For example, the NSA XKEYSCORE
-      system accesses data from multiple access points and searches for
-      "selectors" such as email addresses, at the scale of tens of
-      terabytes of data per day.  The GCHQ Tempora system appears to
-      have access to around 1,500 major cables passing through the UK.
+      [pass1][pass2][pass3][pass4].  For example:
+
+      *  The NSA XKEYSCORE system accesses data from multiple access
+         points and searches for "selectors" such as email addresses, at
+         the scale of tens of terabytes of data per day.
+
+      *  The GCHQ Tempora system appears to have access to around 1,500
+         major cables passing through the UK.
+
+      *  The NSA MUSCULAR program tapped cables between data centers
+         belonging to major service providers.
+
+      *  Several programs appear perform wide-scale collection of
+         cookies in web traffic and location data from location-aware
+         portable devices such as smartphones.
 
    o  Decryption of TLS-protected Internet sessions [dec1][dec2][dec3].
       For example, the NSA BULLRUN project appears to have had a budget
@@ -250,29 +260,19 @@ Internet-Draft              Pervasive Attack               December 2013
 
    o  Insertion of NSA devices as a man in the middle of Internet
       transactions [TOR1][TOR2].  For example, the NSA QUANTUM system
-      appears to be able to hijack HTTP connections via "fast packet
-      injection".
+      appears to use several different techniques to hijack HTTP
+      connections, ranging from DNS response injection to HTTP 302
+      redirects.
 
    o  Direct acquisition of bulk data and metadata from service
-      providers [dir1][dir2].  For example, the NSA PRISM program
+      providers [dir1][dir2][dir3].  For example, the NSA PRISM program
       provides the agency with access to many types of user data (e.g.,
       email, chat, VoIP).
 
    o  Use of implants (covert modifications or malware) to undermine
-      security and anonymity features [dec2][TOR1][TOR2].  For example,
-      NSA appears to use the QUANTUM man-in-the-middle system to direct
-      users to a FOXACID server, which delivers an implant that makes
-      the TOR anonymity service less effective.  The BULLRUN program
-      mentioned above includes the addition of covert modifications to
-      software as one means to undermine encryption.  There is also some
-      suspicion that NSA modifications to the DUAL_EC_DRBG random number
-      generator were made to ensure that keys generated using that
-      generator could be predicted by NSA.
+      security and anonymity features [dec2][TOR1][TOR2].  For example:
 
-   We use the term "pervasive attack" to collectively describe these
-   operations.  The term "pervasive" is used because the attacks are
-   designed to gather as much data as possible and to apply selective
-   analysis on targets after the fact.  This means that all, or nearly
+
 
 
 
@@ -281,6 +281,25 @@ Barnes, et al.            Expires June 12, 2014                 [Page 5]
 Internet-Draft              Pervasive Attack               December 2013
 
 
+      *  NSA appears to use the QUANTUM man-in-the-middle system to
+         direct users to a FOXACID server, which delivers an implant
+         that makes the TOR anonymity service less effective.
+
+      *  The BULLRUN program mentioned above includes the addition of
+         covert modifications to software as one means to undermine
+         encryption.
+
+      *  There is also some suspicion that NSA modifications to the
+         DUAL_EC_DRBG random number generator were made to ensure that
+         keys generated using that generator could be predicted by NSA.
+         These suspicions have been reinforced by reports that RSA
+         Security was paid roughly $10M to make DUAL_EC_DRBG the default
+         in their products.
+
+   We use the term "pervasive attack" to collectively describe these
+   operations.  The term "pervasive" is used because the attacks are
+   designed to gather as much data as possible and to apply selective
+   analysis on targets after the fact.  This means that all, or nearly
    all, Internet communications are targets for these attacks.  To
    achieve this scale, the attacks are physically pervasive; they affect
    a large number of Internet communications.  They are pervasive in
@@ -288,33 +307,14 @@ Internet-Draft              Pervasive Attack               December 2013
    protocol.  And they are pervasive in technology, exploiting many
    different vulnerabilities in many different protocols.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   It's important to note that although the attacks mentioned above were
+   executed by NSA and GCHQ, there are many other organizations that can
+   mount pervasive attacks.  Because of the resources required to
+   achieve pervasive scale, pervasive attacks are most commonly
+   undertaken by nation-state actors.  For example, the Chinese Internet
+   filtering system known as the "Great Firewall of China" uses several
+   techniques that are similar to the QUANTUM program, and which have a
+   high degree of pervasiveness with regard to the Internet in China.
 
 
 
@@ -953,14 +953,7 @@ Barnes, et al.            Expires June 12, 2014                [Page 17]
 Internet-Draft              Pervasive Attack               December 2013
 
 
-8.  References
-
-8.1.  Normative References
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, March 1997.
-
-8.2.  Informative References
+8.  Informative References
 
    [pass1]    The Guardian, "How the NSA is still harvesting your online
               data", 2013, <http://www.theguardian.com/world/2013/jun/
@@ -977,7 +970,7 @@ Internet-Draft              Pervasive Attack               December 2013
               nsa-top-secret-program-online-data>.
 
    [pass4]    The Guardian, "How does GCHQ's internet surveillance
-              work?", <http://www.theguardian.com/uk/2013/jun/21/
+              work?", n.d., <http://www.theguardian.com/uk/2013/jun/21/
               how-does-gchq-internet-surveillance-work>.
 
    [dec1]     The New York Times, "N.S.A. Able to Foil Basic Safeguards
@@ -1001,6 +994,13 @@ Internet-Draft              Pervasive Attack               December 2013
               QUANTUM and FOXACID", 2013, <https://www.schneier.com/
               blog/archives/2013/10/how_the_nsa_att.html>.
 
+   [TOR2]     The Guardian, "'Tor Stinks' presentation - read the full
+              document", 2013, <http://www.theguardian.com/world/
+              interactive/2013/oct/04/
+              tor-stinks-nsa-presentation-document>.
+
+   [dir1]     The Guardian, "NSA collecting phone records of millions of
+              Verizon customers daily", 2013, <http://
 
 
 
@@ -1009,13 +1009,6 @@ Barnes, et al.            Expires June 12, 2014                [Page 18]
 Internet-Draft              Pervasive Attack               December 2013
 
 
-   [TOR2]     The Guardian, "'Tor Stinks' presentation - read the full
-              document", 2013, <http://www.theguardian.com/world/
-              interactive/2013/oct/04/
-              tor-stinks-nsa-presentation-document>.
-
-   [dir1]     The Guardian, "NSA collecting phone records of millions of
-              Verizon customers daily", 2013, <http://
               www.theguardian.com/world/2013/jun/06/
               nsa-phone-records-verizon-court-order>.
 
@@ -1024,7 +1017,7 @@ Internet-Draft              Pervasive Attack               December 2013
               www.theguardian.com/world/2013/jun/06/
               us-tech-giants-nsa-data>.
 
-   [std]      The Guardian, "Sigint - how the NSA collaborates with
+   [dir3]     The Guardian, "Sigint - how the NSA collaborates with
               technology companies", 2013, <http://www.theguardian.com/
               world/interactive/2013/sep/05/
               sigint-nsa-collaborates-technology-companies>.
@@ -1057,6 +1050,13 @@ Internet-Draft              Pervasive Attack               December 2013
    [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", RFC 5246, August 2008.
 
+   [RFC4301]  Kent, S. and K. Seo, "Security Architecture for the
+              Internet Protocol", RFC 4301, December 2005.
+
+   [RFC4306]  Kaufman, C., "Internet Key Exchange (IKEv2) Protocol",
+              RFC 4306, December 2005.
+
+   [RFC5750]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
 
 
 
@@ -1065,13 +1065,6 @@ Barnes, et al.            Expires June 12, 2014                [Page 19]
 Internet-Draft              Pervasive Attack               December 2013
 
 
-   [RFC4301]  Kent, S. and K. Seo, "Security Architecture for the
-              Internet Protocol", RFC 4301, December 2005.
-
-   [RFC4306]  Kaufman, C., "Internet Key Exchange (IKEv2) Protocol",
-              RFC 4306, December 2005.
-
-   [RFC5750]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
               Mail Extensions (S/MIME) Version 3.2 Certificate
               Handling", RFC 5750, January 2010.
 
@@ -1082,6 +1075,13 @@ Internet-Draft              Pervasive Attack               December 2013
               Farrell, S. and H. Tschofenig, "Pervasive Monitoring is an
               Attack", draft-farrell-perpass-attack-00 (work in
               progress), November 2013.
+
+
+
+
+
+
+
 
 
 
@@ -1128,6 +1128,11 @@ Authors' Addresses
    Email: rlb@ipv.sx
 
 
+   Bruce Schneier
+
+   Email: schneier@schneier.com
+
+
    Cullen Jennings
 
    Email: fluffy@cisco.com
@@ -1136,11 +1141,6 @@ Authors' Addresses
    Ted Hardie
 
    Email: ted.ietf@gmail.com
-
-
-
-
-
 
 
 

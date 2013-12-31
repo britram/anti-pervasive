@@ -12,6 +12,10 @@ author:
     name: Richard Barnes
     email: rlb@ipv.sx
  - 
+    ins: B. Schneier
+    name: Bruce Schneier
+    email: schneier@schneier.com
+ - 
     ins: C. Jennings
     name: Cullen Jennings
     email: fluffy@cisco.com
@@ -22,7 +26,6 @@ author:
 
 
 normative:
-  RFC2119:
 
 informative:
   pass1:     
@@ -97,7 +100,7 @@ informative:
     author:
       organization: The Guardian
     date: 2013
-  std:      
+  dir3:      
     target: http://www.theguardian.com/world/interactive/2013/sep/05/sigint-nsa-collaborates-technology-companies
     title:  "Sigint – how the NSA collaborates with technology companies"
     author:
@@ -182,17 +185,26 @@ Unwitting Collaborator:
 
 Through recent revelations of sensitive documents in several media outlets, the Internet community has been made aware of several intelligence activities conducted by US and UK national intelligence agencies, particularly the US National Security Agency (NSA) and the UK Government Communications Headquarters (GCHQ).  These documents have revealed the methods that these agencies use to attack Internet applications and obtain sensitive user information. Theses documents suggest the following types of attacks have occurred:
 
-* Large scale passive collection of Internet traffic {{pass1}}{{pass2}}{{pass3}}{{pass4}}.  For example, the NSA XKEYSCORE system accesses data from multiple access points and searches for "selectors" such as email addresses, at the scale of tens of terabytes of data per day.  The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK.
+* Large scale passive collection of Internet traffic {{pass1}}{{pass2}}{{pass3}}{{pass4}}.  For example:
+    * The NSA XKEYSCORE system accesses data from multiple access points and searches for "selectors" such as email addresses, at the scale of tens of terabytes of data per day.  
+    * The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK. 
+    * The NSA MUSCULAR program tapped cables between data centers belonging to major service providers.
+    * Several programs appear perform wide-scale collection of cookies in web traffic and location data from location-aware portable devices such as smartphones.
 
 * Decryption of TLS-protected Internet sessions {{dec1}}{{dec2}}{{dec3}}.  For example, the NSA BULLRUN project appears to have had a budget of around $250M per year to undermine encryption through multiple approaches. 
 
-* Insertion of NSA devices as a man in the middle of Internet transactions {{TOR1}}{{TOR2}}.  For example, the NSA QUANTUM system appears to be able to hijack HTTP connections via "fast packet injection".
+* Insertion of NSA devices as a man in the middle of Internet transactions {{TOR1}}{{TOR2}}.  For example, the NSA QUANTUM system appears to use several different techniques to hijack HTTP connections, ranging from DNS response injection to HTTP 302 redirects.
 
-* Direct acquisition of bulk data and metadata from service providers {{dir1}}{{dir2}}.  For example, the NSA PRISM program provides the agency with access to many types of user data (e.g., email, chat, VoIP).
+* Direct acquisition of bulk data and metadata from service providers {{dir1}}{{dir2}}{{dir3}}.  For example, the NSA PRISM program provides the agency with access to many types of user data (e.g., email, chat, VoIP).
 
-* Use of implants (covert modifications or malware) to undermine security and anonymity features {{dec2}}{{TOR1}}{{TOR2}}.  For example, NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  There is also some suspicion that NSA modifications to the DUAL\_EC\_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.
+* Use of implants (covert modifications or malware) to undermine security and anonymity features {{dec2}}{{TOR1}}{{TOR2}}.  For example:
+    * NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant that makes the TOR anonymity service less effective.  
+    * The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  
+    * There is also some suspicion that NSA modifications to the DUAL\_EC\_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.  These suspicions have been reinforced by reports that RSA Security was paid roughly $10M to make DUAL\_EC\_DRBG the default in their products.
 
 We use the term "pervasive attack" to collectively describe these operations.  The term "pervasive" is used because the attacks are designed to gather as much data as possible and to apply selective analysis on targets after the fact.  This means that all, or nearly all, Internet communications are targets for these attacks.  To achieve this scale, the attacks are physically pervasive; they affect a large number of Internet communications. They are pervasive in content, consuming and exploiting any information revealed by the protocol. And they are pervasive in technology, exploiting many different vulnerabilities in many different protocols.
+
+It's important to note that although the attacks mentioned above were executed by NSA and GCHQ, there are many other organizations that can mount pervasive attacks.  Because of the resources required to achieve pervasive scale, pervasive attacks are most commonly undertaken by nation-state actors.  For example, the Chinese Internet filtering system known as the "Great Firewall of China" uses several techniques that are similar to the QUANTUM program, and which have a high degree of pervasiveness with regard to the Internet in China. 
 
 
 # Classes of Pervasive Attack {#model}
