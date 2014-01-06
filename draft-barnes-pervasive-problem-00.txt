@@ -337,23 +337,26 @@ Barnes, et al.            Expires June 12, 2014                 [Page 6]
 Internet-Draft              Pervasive Attack               December 2013
 
 
-4.  Classes of Pervasive Attack
+4.  Threat Model
 
-   The primary goal of pervasive attack is collection of information
-   across a large number of Internet communications, including
-   decryption of encrypted communications and deanonymization of
-   anonymized communications.  The attacker can then analyze the
-   collected communications to identify information of interest, or use
-   data mining techniques to examine correlations among multiple
+   Pervasive surveillance aims to collect information across a large
+   number of Internet communications, analyzing the collected
+   communications to identify information of interest within individual
+   communications or implied by correlated communications.  This
+   analysis sometimes benefits from decryption of encrypted
+   communications and deanonymization of anonymized communications.  As
+   a result, these attackers desire both access to the bulk of Internet
+   traffic and to the keying material required to decrypt any traffic
+   which has been encrypted (though the presence of a communication and
+   the fact that it is encrypted may both be inputs to an analysis, even
+   if the attacker cannot decrypt the communication).
+
+   The attacks listed above highlight new avenues both for access to
+   traffic and for access to relevant encryption keys.  They further
+   indicate that the scale of surveillance is sufficient to provide a
+   general capability to cross-correlate communications, a threat not
+   previously thought to be relevant at the scale of all Internet
    communications.
-
-   In order to succeed in this goal, an attacker needs two main things.
-   First, the attacker needs access to the traffic they wishes to
-   collect.  Second, if the traffic is encrypted, the attacker needs
-   access to key material that can be used to decrypt the traffic.  The
-   attacks listed above highlight new avenues for attack on both of
-   these questions, which have not been a focus of security analysis in
-   the past.
 
 4.1.  Attacker Capabilities
 
@@ -382,9 +385,6 @@ Internet-Draft              Pervasive Attack               December 2013
    to operate near the edge of the network, where attacks can be
    simpler.  For exmaple, in some LANs, it is simple for any node to
    engage in passive listening to other nodes' traffic or inject packets
-   to accomplish active attacks.  In the pervasive attack case, however,
-   both passive and active attacks are undertaken closer to the core of
-   the network, greatly expanding the scope and capability of the
 
 
 
@@ -393,6 +393,9 @@ Barnes, et al.            Expires June 12, 2014                 [Page 7]
 Internet-Draft              Pervasive Attack               December 2013
 
 
+   to accomplish active attacks.  In the pervasive attack case, however,
+   both passive and active attacks are undertaken closer to the core of
+   the network, greatly expanding the scope and capability of the
    attacker.
 
    A passive attacker with access to a large portion of the Internet can
@@ -423,15 +426,28 @@ Internet-Draft              Pervasive Attack               December 2013
    trusted third party authorities such as the Certificate Authorities
    (CAs) that provide web sites with authentication credentials.  An
    attacker with sufficient resources for pervasive attack may also be
-   able to force an authority to grant credentials for an identity of
-   the attacker's choosing, allowing the active attack to succeed where
-   a weaker attacker would fail.
+   able to induce an authority to grant credentials for an identity of
+   the attacker's choosing.  If the parties to a communication will
+   trust multiple authorities to certify a specific identity, this
+   attack may be mounted by suborning any one of the authorities (the
+   proverbial "weakest link").  Subversion of authorities in this way
+   can allow an active attack to succeed in spite of an authentication
+   check.
 
-   Beyond these two classes, reports on the BULLRUN effort to defeat
-   encryption and the PRISM effort to obtain data from service providers
-   suggest three more classes of attack:
+   Beyond these two classes (active and passive), reports on the BULLRUN
+   effort to defeat encryption and the PRISM effort to obtain data from
+   service providers suggest three more classes of attack:
 
    o  Static key exfiltration
+
+
+
+
+
+Barnes, et al.            Expires June 12, 2014                 [Page 8]
+
+Internet-Draft              Pervasive Attack               December 2013
+
 
    o  Dynamic key exfiltration
 
@@ -441,13 +457,6 @@ Internet-Draft              Pervasive Attack               December 2013
    attacker with some information, either keys or data.  These attacks
    have not traditionally been considered in security analyses of
    protocols, since they happen outside of the protocol.
-
-
-
-Barnes, et al.            Expires June 12, 2014                 [Page 8]
-
-Internet-Draft              Pervasive Attack               December 2013
-
 
    The term "key exfiltration" refers to the transfer of keying material
    for an encrypted communication from the collaborator to the attacker.
@@ -474,29 +483,20 @@ Internet-Draft              Pervasive Attack               December 2013
    attacker can access historical data - the attacker does not have to
    be listening at the time the communication happens.
 
-   Exfiltration attacks can be accomplished via attack against the
-   collaborator, i.e., by the attacker stealing the keys or content
-   rather than the collaborator providing them willingly.  In these
-   cases, the collaborator may not be aware that they are collaborating,
-   at least at a human level; the subverted technical assets are doing
-   the collaboration on their behalf.
+   Exfiltration attacks can be accomplished via attacks against one of
+   the parties to a communication, i.e., by the attacker stealing the
+   keys or content rather than the party providing them willingly.  In
+   these cases, the party may not be aware that they are collaborating,
+   at least at a human level.  Rather, the subverted technical assets
+   are "collaborating" with the attacker (by providing keys/content)
+   without their owner's knowledge or consent.
 
    Any party that has access to encryption keys or unencrypted data can
    be a collaborator.  While collaborators are typically the endpoints
    of a communication (with encryption securing the links),
    intermediaries in an unencrypted communication can also facilitate
    content exfiltration attacks as collaborators by providing the
-   attacker access to those communications.  For example, in the NSA
-   PRISM program, Google and other service providers were collaborators
-   by providing their users' data to NSA.  In the NSA MUSCULAR program,
-   however, the ISPs providing inter-data center rconnectivity to Goole,
-   Yahoo!, and others were collaborators by enabling attackers to access
-   cables carrying unencrypted traffic.
-
-
-
-
-
+   attacker access to those communications.  For example, documents
 
 
 
@@ -504,6 +504,16 @@ Barnes, et al.            Expires June 12, 2014                 [Page 9]
 
 Internet-Draft              Pervasive Attack               December 2013
 
+
+   describing the NSA PRISM program claim that NSA is able to access
+   user data directly from servers, where it was stored unencrypted.  In
+   these cases, the operator of the server would be a collaborator
+   (wittingly or unwittingly).  By contrast, in the NSA MUSCULAR
+   program, a set of collaborators enabled attackers to access the
+   cables connecting data centers used by service providers such as
+   Google and Yahoo.  Because communications among these data centers
+   were not encrypted, the collaboration by an intermediate entity
+   allowed NSA to collect unencrypted user data.
 
 4.2.  Attacker Costs
 
@@ -543,6 +553,14 @@ Internet-Draft              Pervasive Attack               December 2013
    increased attenuation in the fiber or a change in switch
    configuration.  Of course, passive attacks may be accomplished with
    the cooperation of the network operator, in which case there is a
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 10]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
    risk that the attacker's interactions with the network operator will
    be exposed.
 
@@ -553,14 +571,6 @@ Internet-Draft              Pervasive Attack               December 2013
    receiving it.  In the wireless example above, the attacker would need
    to act as an transmitter as well as receiver, greatly increasing the
    probability the attacker will be discovered (e.g., using direction-
-
-
-
-Barnes, et al.            Expires June 12, 2014                [Page 10]
-
-Internet-Draft              Pervasive Attack               December 2013
-
-
    finding technology).  Active attacks are also much more observable at
    higher layers of the network.  For example, an active attacker that
    attempts to use a mis-issued certificate could be detected via
@@ -571,8 +581,9 @@ Internet-Draft              Pervasive Attack               December 2013
    store it.  Active attacks, by contrast, often depend on winning race
    conditions to inject pakets into active connections.  So active
    attacks in the core of the network require processing hardware to
-   that can operate at line speed to identify opportunities for attack
-   and insert attack traffic in a high-volume traffic.
+   that can operate at line speed (roughly 100Gbps to 1Tbps in the core)
+   to identify opportunities for attack and insert attack traffic in a
+   high-volume traffic.
 
    Key exfiltration attacks rely on passive attack for access to
    encrypted data, with the collaborator providing keys to decrypt the
@@ -598,6 +609,14 @@ Internet-Draft              Pervasive Attack               December 2013
    still present, and may be higher.  The content of a communication is
    obviously larger than the key used to encrypt it, often by several
    orders of magnitude.  So in the content exfiltration case, the
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 11]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
    interactions between the collaborator and the attacker need to be
    much higher-bandwidth than in the key exfiltration cases, with a
    corresponding increase in the risk that this high-bandwidth channel
@@ -609,14 +628,6 @@ Internet-Draft              Pervasive Attack               December 2013
    incur additional cost in order to convince the collaborator to
    participate in the attack.  Likewise, the scope of these attacks is
    limited to case where the attacker can convince a collaborator to
-
-
-
-Barnes, et al.            Expires June 12, 2014                [Page 11]
-
-Internet-Draft              Pervasive Attack               December 2013
-
-
    participate.  If the attacker is a national government, for example,
    it may be able to compel participation within its borders, but have a
    much more difficult time recruiting foreign collaborators.
@@ -630,17 +641,6 @@ Internet-Draft              Pervasive Attack               December 2013
    systems.  The main difference is that the risk in this case is of
    automated discovery (e.g., by intrusion detection systems) rather
    than discovery by humans.
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -753,6 +753,38 @@ Internet-Draft              Pervasive Attack               December 2013
    issued a certificate for a domain name without the authorization of
    the holder of that domain name [RFC6962][RFC6698].
 
+   While encryption and authentication protect the security of
+   individual sessions, these sessions may still leak information, such
+   as IP addresses or server names, that a pervasive attacker can use to
+   correlate sessions and derive additional information about the
+   target.  Thus, pervasive attack highlights the need for anonymization
+   technologies, which make correlation more difficult.  Typical
+   approaches to anonymization include:
+
+   o  Aggregation: Routing sessions for many endpoints through a common
+      mid-point (e.g., an HTTP proxy).  Since the midpoint appears as
+      the end of the communication, individual endpoints cannot be
+      distinguished.
+
+   o  Onion routing: Routing a session through several mid-points,
+      rather than directly end-to-end, with encryption that guarantees
+      that each node can only see the previous and next hops [TOR].
+      This ensures that the source and destination of a communication
+      are never revealed simultaneously.
+
+   o  Multi-path: Routing different sessions via different paths (even
+      if they originate from the same endpoint).  This reduces the
+      probability that the same attacker will be able to collect many
+      sessions.
+
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 14]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
    An encrypted, authenticated session is safe from attacks in which
    neither end collaborates with the attacker, but can still be
    subverted by the endpoints.  The most common ciphersuites used for
@@ -777,14 +809,6 @@ Internet-Draft              Pervasive Attack               December 2013
    Dynamic key exfiltration cannot be prevent by protocol means.  By
    definition, any secrets that are used in the protocol will be
    transmitted to the attacker and used to decrypt what the protocol
-
-
-
-Barnes, et al.            Expires June 12, 2014                [Page 14]
-
-Internet-Draft              Pervasive Attack               December 2013
-
-
    encrypts.  Likewise, no technical means will stop a willing
    collaborator from sharing keys with an attacker.  However, this
    attack model also covers "unwitting collaborators", whose technical
@@ -809,6 +833,14 @@ Internet-Draft              Pervasive Attack               December 2013
    demonstrated for SSL, TLS, and SSH [key-recovery].  Any protocol bits
    that can be freely set by the collaborator can be used as a covert
    channel, including, for example, TCP options or unencrypted traffic
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 15]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
    sent before a STARTTLS message in SMTP or XMPP.  Protocol designers
    should consider what covert channels their protocols expose, and how
    those channels can be exploited to exfiltrate key information.
@@ -832,15 +864,6 @@ Internet-Draft              Pervasive Attack               December 2013
    intermediate nodes.  Thus, neither of these mechanisms provides
    complete protection by itself.  For example:
 
-
-
-
-
-Barnes, et al.            Expires June 12, 2014                [Page 15]
-
-Internet-Draft              Pervasive Attack               December 2013
-
-
    o  Two users messaging via Facebook over HTTPS are protected against
       passive and active attackers in the network between the users and
       Facebook.  However, if Facebook is a collaborator in an
@@ -856,8 +879,24 @@ Internet-Draft              Pervasive Attack               December 2013
       messages.  These mail agents need to use hop-by-hop encryption to
       address this risk.
 
+   Mechanisms such as S/MIME and PGP are also known as "object-based"
+   security mechanisms (as opposed to "communications security"
+   mechanisms), since they operate at the level of objects, rather than
+   communications sessions.  Such secure object can be safely handled by
+   intermediaries in order to realize, for example, store and forward
+   messaging.  In the examples above, the encrypted instant messages or
+   email messages would be the secure objects.
+
    The mitigations to the content exfiltration case are thus to regard
    participants in the protocol as potential passive attackers
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 16]
+
+Internet-Draft              Pervasive Attack               December 2013
+
+
    themselves, and apply the mitigations discussed above with regard to
    passive attack.  Information that is not necessary for these
    participants to fulfill their role in the protocol can be encrypted,
@@ -892,7 +931,24 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 16]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Barnes, et al.            Expires June 12, 2014                [Page 17]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -948,7 +1004,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 17]
+Barnes, et al.            Expires June 12, 2014                [Page 18]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1004,7 +1060,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 18]
+Barnes, et al.            Expires June 12, 2014                [Page 19]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1060,7 +1116,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 19]
+Barnes, et al.            Expires June 12, 2014                [Page 20]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1116,7 +1172,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 20]
+Barnes, et al.            Expires June 12, 2014                [Page 21]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1172,7 +1228,7 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 21]
+Barnes, et al.            Expires June 12, 2014                [Page 22]
 
 Internet-Draft              Pervasive Attack               December 2013
 
@@ -1228,5 +1284,5 @@ Authors' Addresses
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 22]
+Barnes, et al.            Expires June 12, 2014                [Page 23]
 
