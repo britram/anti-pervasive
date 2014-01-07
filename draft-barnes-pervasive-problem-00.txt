@@ -4,8 +4,8 @@
 Network Working Group                                          R. Barnes
 Internet-Draft                                               B. Schneier
 Intended status: Informational                               C. Jennings
-Expires: June 12, 2014                                         T. Hardie
-                                                       December 09, 2013
+Expires: July 10, 2014                                         T. Hardie
+                                                        January 06, 2014
 
 
          Pervasive Attack: A Threat Model and Problem Statement
@@ -36,11 +36,11 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 12, 2014.
+   This Internet-Draft will expire on July 10, 2014.
 
 Copyright Notice
 
-   Copyright (c) 2013 IETF Trust and the persons identified as the
+   Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -52,9 +52,9 @@ Copyright Notice
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 1]
+Barnes, et al.            Expires July 10, 2014                 [Page 1]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    include Simplified BSD License text as described in Section 4.e of
@@ -108,9 +108,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 2]
+Barnes, et al.            Expires July 10, 2014                 [Page 2]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 1.  Introduction
@@ -164,9 +164,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 3]
+Barnes, et al.            Expires July 10, 2014                 [Page 3]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 2.  Terminology
@@ -220,9 +220,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 4]
+Barnes, et al.            Expires July 10, 2014                 [Page 4]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 3.  Reported Instances of Large-Scale Attacks
@@ -276,9 +276,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 5]
+Barnes, et al.            Expires July 10, 2014                 [Page 5]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
       *  NSA appears to use the QUANTUM man-in-the-middle system to
@@ -332,9 +332,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 6]
+Barnes, et al.            Expires July 10, 2014                 [Page 6]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 4.  Threat Model
@@ -388,9 +388,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 7]
+Barnes, et al.            Expires July 10, 2014                 [Page 7]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    to accomplish active attacks.  In the pervasive attack case, however,
@@ -444,9 +444,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 8]
+Barnes, et al.            Expires July 10, 2014                 [Page 8]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    o  Dynamic key exfiltration
@@ -500,9 +500,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                 [Page 9]
+Barnes, et al.            Expires July 10, 2014                 [Page 9]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    describing the NSA PRISM program claim that NSA is able to access
@@ -556,9 +556,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 10]
+Barnes, et al.            Expires July 10, 2014                [Page 10]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    risk that the attacker's interactions with the network operator will
@@ -612,9 +612,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 11]
+Barnes, et al.            Expires July 10, 2014                [Page 11]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    interactions between the collaborator and the attacker need to be
@@ -668,9 +668,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 12]
+Barnes, et al.            Expires July 10, 2014                [Page 12]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 5.  Responding to Pervasive Attack
@@ -724,9 +724,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 13]
+Barnes, et al.            Expires July 10, 2014                [Page 13]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    communicates with, even if the user changes IP addresses, and even if
@@ -780,9 +780,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 14]
+Barnes, et al.            Expires July 10, 2014                [Page 14]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    An encrypted, authenticated session is safe from attacks in which
@@ -836,9 +836,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 15]
+Barnes, et al.            Expires July 10, 2014                [Page 15]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    sent before a STARTTLS message in SMTP or XMPP.  Protocol designers
@@ -892,9 +892,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 16]
+Barnes, et al.            Expires July 10, 2014                [Page 16]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
    themselves, and apply the mitigations discussed above with regard to
@@ -948,9 +948,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 17]
+Barnes, et al.            Expires July 10, 2014                [Page 17]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 6.  Acknowledgements
@@ -958,8 +958,6 @@ Internet-Draft              Pervasive Attack               December 2013
    o  Trammel for ideas around pervasive passive attack and mitigation
 
    o  Thaler for list of attacks and taxonomy
-
-   o  Schneier for suggestions on endpoint security
 
    o  Security ADs for starting and managing the perpass discussion
 
@@ -1004,9 +1002,11 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 18]
+
+
+Barnes, et al.            Expires July 10, 2014                [Page 18]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 7.  TODO
@@ -1060,9 +1060,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 19]
+Barnes, et al.            Expires July 10, 2014                [Page 19]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 8.  Informative References
@@ -1116,9 +1116,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 20]
+Barnes, et al.            Expires July 10, 2014                [Page 20]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
               www.theguardian.com/world/2013/jun/06/
@@ -1172,9 +1172,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 21]
+Barnes, et al.            Expires July 10, 2014                [Page 21]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
               Mail Extensions (S/MIME) Version 3.2 Certificate
@@ -1228,9 +1228,9 @@ Internet-Draft              Pervasive Attack               December 2013
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 22]
+Barnes, et al.            Expires July 10, 2014                [Page 22]
 
-Internet-Draft              Pervasive Attack               December 2013
+Internet-Draft              Pervasive Attack                January 2014
 
 
 Authors' Addresses
@@ -1284,5 +1284,5 @@ Authors' Addresses
 
 
 
-Barnes, et al.            Expires June 12, 2014                [Page 23]
+Barnes, et al.            Expires July 10, 2014                [Page 23]
 

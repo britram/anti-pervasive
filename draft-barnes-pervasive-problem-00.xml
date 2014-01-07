@@ -56,7 +56,7 @@
       </address>
     </author>
 
-    <date year="2013" month="December" day="09"/>
+    <date year="2014" month="January" day="06"/>
 
     
     
@@ -295,7 +295,6 @@
 <t><list style='symbols'>
   <t>Trammel for ideas around pervasive passive attack and mitigation</t>
   <t>Thaler for list of attacks and taxonomy</t>
-  <t>Schneier for suggestions on endpoint security</t>
   <t>Security ADs for starting and managing the perpass discussion</t>
 </list></t>
 

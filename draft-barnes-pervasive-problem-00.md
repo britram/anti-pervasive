@@ -2,7 +2,7 @@
 title: "Pervasive Attack: A Threat Model and Problem Statement"
 abbrev: Pervasive Attack
 docname: draft-barnes-pervasive-problem-00
-date: 2013-12-09
+date: 2014-01-06
 category: info
 ipr: trust200902
 
@@ -346,7 +346,6 @@ In summary, many of the basic tools for mitigating pervasive attack already exis
 
 * Trammel for ideas around pervasive passive attack and mitigation
 * Thaler for list of attacks and taxonomy
-* Schneier for suggestions on endpoint security
 * Security ADs for starting and managing the perpass discussion
 
 
