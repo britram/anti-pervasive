@@ -1185,8 +1185,8 @@ Internet-Draft              Pervasive Attack                January 2014
 
    [I-D.farrell-perpass-attack]
               Farrell, S. and H. Tschofenig, "Pervasive Monitoring is an
-              Attack", draft-farrell-perpass-attack-00 (work in
-              progress), November 2013.
+              Attack", draft-farrell-perpass-attack-06 (work in
+              progress), February 2014.
 
 
 

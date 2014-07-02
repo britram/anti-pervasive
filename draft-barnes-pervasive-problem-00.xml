@@ -2,15 +2,15 @@
   <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
-<!ENTITY RFC4949 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4949.xml">
-<!ENTITY RFC6962 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6962.xml">
-<!ENTITY RFC6698 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6698.xml">
-<!ENTITY RFC5246 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml">
-<!ENTITY RFC4301 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4301.xml">
-<!ENTITY RFC4306 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4306.xml">
-<!ENTITY RFC5750 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
-<!ENTITY RFC2015 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2015.xml">
-<!ENTITY I-D.farrell-perpass-attack SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.farrell-perpass-attack.xml">
+<!ENTITY RFC4949 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4949.xml">
+<!ENTITY RFC6962 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6962.xml">
+<!ENTITY RFC6698 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6698.xml">
+<!ENTITY RFC5246 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
+<!ENTITY RFC4301 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4301.xml">
+<!ENTITY RFC4306 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4306.xml">
+<!ENTITY RFC5750 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5750.xml">
+<!ENTITY RFC2015 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2015.xml">
+<!ENTITY I-D.farrell-perpass-attack SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.farrell-perpass-attack.xml">
 ]>
 
 <rfc ipr="trust200902" docName="draft-barnes-pervasive-problem-00" category="info">

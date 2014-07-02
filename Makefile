@@ -23,4 +23,4 @@ $(NAME).html: $(NAME).xml
 	$(X2R) $(NAME).xml $(NAME).html
 
 $(NAME).xml: $(NAME).md
-	$(MD) <$(NAME).md >$(NAME).xml
+	$(MD) <$(NAME).md | sed -e 's/xml.resource.org/xml2rfc.ietf.org/g' >$(NAME).xml
