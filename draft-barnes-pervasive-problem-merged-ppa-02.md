@@ -461,7 +461,7 @@ In summary, many of the basic tools for mitigating pervasive attack already exis
 * Trammel for ideas around pervasive passive attack and mitigation
 * Thaler for list of attacks and taxonomy
 * Security ADs for starting and managing the perpass discussion
-
+* See PPA acks as well
 
 # TODO
 
