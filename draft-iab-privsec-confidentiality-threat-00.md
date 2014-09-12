@@ -1,8 +1,8 @@
 ---
-title: "Pervasive Attack: A Threat Model and Problem Statement"
-abbrev: Pervasive Attack
-docname: draft-barnes-pervasive-problem-01
-date: 2014-07-01
+title: "Confidentiality in the Face of Pervasive Surveillance: A Threat Model and Problem Statement"
+abbrev: Confidentiality Threat Model
+docname: draft-iab-privsec-confidentiality-threat-00
+date: 2014-09-11
 category: info
 ipr: trust200902
 
@@ -163,11 +163,13 @@ informative:
   RFC4306:
   RFC4949:
   RFC5246:
+  RFC5321:
   RFC5655:
   RFC5750:
   RFC6120:
   RFC6962:
   RFC6698:
+  RFC7011:
   RFC7258:
 
 --- abstract
@@ -458,14 +460,15 @@ In summary, many of the basic tools for mitigating pervasive attack already exis
 
 # Acknowledgements
 
-* Trammel for ideas around pervasive passive attack and mitigation
 * Thaler for list of attacks and taxonomy
 * Security ADs for starting and managing the perpass discussion
 * See PPA acks as well
 
 # TODO
 
-* More thorough review of problem statement documents to ensure all bases are covered
+* Ensure all bases are covered WRT threats to confidentiality
+* Consider moving mitigations to a separate document per program description
 * Look at better alignment with draft-farrell-perpass-attack
-* Better coverage of traffic analysis and mitigations
- 
+* Better coverage of traffic analysis -- PPA helped somewhat here but the problem is hard
+* Terminology alignment (after the program agrees the structure is good)
+
