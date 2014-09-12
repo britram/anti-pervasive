@@ -232,8 +232,8 @@ Internet-Draft              Pervasive Attack                   July 2014
    intelligence activities conducted by US and UK national intelligence
    agencies, particularly the US National Security Agency (NSA) and the
    UK Government Communications Headquarters (GCHQ).  These documents
-   have revealed the methods that these agencies use to attack Internet
-   applications and obtain sensitive user information.  Theses documents
+   have revealed methods that these agencies use to attack Internet
+   applications and obtain sensitive user information.  These documents
    suggest the following types of attacks have occurred:
 
    o  Large scale passive collection of Internet traffic
@@ -249,7 +249,7 @@ Internet-Draft              Pervasive Attack                   July 2014
       *  The NSA MUSCULAR program tapped cables between data centers
          belonging to major service providers.
 
-      *  Several programs appear perform wide-scale collection of
+      *  Several programs appear to perform wide-scale collection of
          cookies in web traffic and location data from location-aware
          portable devices such as smartphones.
 
@@ -258,7 +258,7 @@ Internet-Draft              Pervasive Attack                   July 2014
       of around $250M per year to undermine encryption through multiple
       approaches.
 
-   o  Insertion of NSA devices as a man in the middle of Internet
+   o  Insertion of NSA devices as a man-in-the-middle of Internet
       transactions [TOR1][TOR2].  For example, the NSA QUANTUM system
       appears to use several different techniques to hijack HTTP
       connections, ranging from DNS response injection to HTTP 302
@@ -283,7 +283,8 @@ Internet-Draft              Pervasive Attack                   July 2014
 
       *  NSA appears to use the QUANTUM man-in-the-middle system to
          direct users to a FOXACID server, which delivers an implant
-         that makes the TOR anonymity service less effective.
+         to compromise the browser of a user of the Tor anonymous  
+	 communications network. 
 
       *  The BULLRUN program mentioned above includes the addition of
          covert modifications to software as one means to undermine
@@ -347,7 +348,7 @@ Internet-Draft              Pervasive Attack                   July 2014
    communications and deanonymization of anonymized communications.  As
    a result, these attackers desire both access to the bulk of Internet
    traffic and to the keying material required to decrypt any traffic
-   which has been encrypted (though the presence of a communication and
+   that has been encrypted (though the presence of a communication and
    the fact that it is encrypted may both be inputs to an analysis, even
    if the attacker cannot decrypt the communication).
 
@@ -381,9 +382,9 @@ Internet-Draft              Pervasive Attack                   July 2014
    them.
 
    In the context of pervasive attack, these attacks take on an even
-   greater significance.  In the past, these attackers are often assumed
+   greater significance.  In the past, these attackers were often assumed
    to operate near the edge of the network, where attacks can be
-   simpler.  For exmaple, in some LANs, it is simple for any node to
+   simpler.  For example, in some LANs, it is simple for any node to
    engage in passive listening to other nodes' traffic or inject packets
 
 
@@ -404,8 +405,10 @@ Internet-Draft              Pervasive Attack                   July 2014
    usual claim that encryption defeats passive attackers is weakened,
    since a pervasive passive attacker can examine correlations over
    large numbers of sessions, e.g., pairing encrypted sessions with
-   unencrypted sessions from the same host.  The reports on the NSA
-   XKEYSCORE system would make it an example of such an attacker.
+   unencrypted sessions from the same host, or performing traffic 
+   fingerprinting between known and unknown encrypted sessions.  The 
+   reports on the NSA XKEYSCORE system would make it an example of such 
+   an attacker.
 
    A pervasive active attacker likewise has capabilities beyond those of
    a localized active attacker.  Active attacks are often limited by
@@ -547,7 +550,7 @@ Internet-Draft              Pervasive Attack                   July 2014
    communications medium and extract communications from it.  For
    example, the attacker might tap a fiber-optic cable, acquire a mirror
    port on a switch, or listen to a wireless signal.  The need for these
-   taps to have physical access to a link exposes the attacker to the
+   taps to have physical access or proximity to a link exposes the attacker to the
    risk that the taps will be discovered.  For example, a fiber tap or
    mirror port might be discovered by network operators noticing
    increased attenuation in the fiber or a change in switch
@@ -736,8 +739,8 @@ Internet-Draft              Pervasive Attack                   July 2014
    attacks, protocol designers should consider what information is left
    unencrypted in the protocol, and how that information might be
    correlated with other traffic.  Information that cannot be encrypted
-   should be anonymized, i.e., it should be randomized so that it cannot
-   be correlated with other information.  For example, the TOR overlay
+   should be anonymized, i.e., it should be dissociated from 
+   other information.  For example, the Tor overlay
    routing network anonymizes IP addresses by using multi-hop onion
    routing [TOR].
 
@@ -759,7 +762,7 @@ Internet-Draft              Pervasive Attack                   July 2014
    correlate sessions and derive additional information about the
    target.  Thus, pervasive attack highlights the need for anonymization
    technologies, which make correlation more difficult.  Typical
-   approaches to anonymization include:
+   approaches to anonymization against traffic analysis include:
 
    o  Aggregation: Routing sessions for many endpoints through a common
       mid-point (e.g., an HTTP proxy).  Since the midpoint appears as
@@ -785,7 +788,7 @@ Barnes, et al.           Expires January 2, 2015               [Page 14]
 Internet-Draft              Pervasive Attack                   July 2014
 
 
-   An encrypted, authenticated session is safe from attacks in which
+   An encrypted, authenticated session is safe from content-monitoring attacks in which
    neither end collaborates with the attacker, but can still be
    subverted by the endpoints.  The most common ciphersuites used for
    HTTPS today, for example, are based on using RSA encryption in such a
@@ -812,14 +815,14 @@ Internet-Draft              Pervasive Attack                   July 2014
    encrypts.  Likewise, no technical means will stop a willing
    collaborator from sharing keys with an attacker.  However, this
    attack model also covers "unwitting collaborators", whose technical
-   resources are collaborating with the attacker without their owners
-   knowledge.  This could happen, for example, if flaws are built in
+   resources are collaborating with the attacker without their owners'
+   knowledge.  This could happen, for example, if flaws are built into
    products or if malware is injected later on.
 
    The best defense against becoming an unwitting collaborator is thus
-   to end systems are well-vetted and secure.  Transparency is a major
+   to assure that end systems are well-vetted and secure.  Transparency is a major
    tool in this process [secure].  Open source software is easier to
-   evaluate for potential flaws than proprietary software.  Products
+   evaluate for potential flaws than proprietary software, by a wider array of independent analysts.  Products
    that conform to standards for cryptography and security protocols are
    limited in the ways they can misbehave.  And standards processes that
    are open and transparent help ensure that the standards themselves do
@@ -876,8 +879,8 @@ Internet-Draft              Pervasive Attack                   July 2014
       servers, but the header information (e.g., To and From addresses)
       is unnecessarily exposed to passive and active attackers that can
       see communications among the mail agents handling the email
-      messages.  These mail agents need to use hop-by-hop encryption to
-      address this risk.
+      messages.  These mail agents need to use hop-by-hop encryption and 
+      traffic analysis mitigation to address this risk.
 
    Mechanisms such as S/MIME and PGP are also known as "object-based"
    security mechanisms (as opposed to "communications security"
@@ -1059,7 +1062,6 @@ Internet-Draft              Pervasive Attack                   July 2014
 
 
 
-
 Barnes, et al.           Expires January 2, 2015               [Page 19]
 
 Internet-Draft              Pervasive Attack                   July 2014
@@ -1099,7 +1101,7 @@ Internet-Draft              Pervasive Attack                   July 2014
               www.theguardian.com/world/2013/sep/05/
               nsa-gchq-encryption-codes-security>.
 
-   [TOR]      The Tor Project, "TOR", 2013,
+   [TOR]      The Tor Project, "Tor", 2013,
               <https://www.torproject.org/>.
 
    [TOR1]     Schneier, B., "How the NSA Attacks Tor/Firefox Users With
