@@ -2,7 +2,7 @@
 title: "Confidentiality in the Face of Pervasive Surveillance: A Threat Model and Problem Statement"
 abbrev: Confidentiality Threat Model
 docname: draft-iab-privsec-confidentiality-threat-01
-date: 2014-11-14
+date: 2014-12-12
 category: info
 ipr: trust200902
 
@@ -174,7 +174,7 @@ informative:
 
 --- abstract
 
-Documents published in 2013 revealed several classes of pervasive surveillance attack on Internet communications.  In this document we develop a threat model that describes these pervasive attacks. We start by assuming a completely passive adversary with an interest in indiscriminate eavesdropping that can observe network traffic, then expand the threat model with a set of verified attacks that have been published. Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to increase the protocols robustness to pervasive surveillance.
+Documents published in 2013 revealed several classes of pervasive surveillance attack on Internet communications.  In this document we develop a threat model that describes these pervasive attacks. We start by assuming a completely passive attacker with an interest in undetected, indiscriminate eavesdropping, then expand the threat model with a set of verified attacks that have been published. Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to increase the protocols robustness to pervasive surveillance.
 
 --- middle
 
@@ -184,7 +184,7 @@ Starting in June 2013, documents released to the press by Edward Snowden have re
 
 To ensure that the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks {{RFC7258}}.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
 
-The remainder of this document is structured as follows. In {{adversary}}, we describe an idealized passive adversary, one which could completely undetectably compromise communications at Internet scale. In {{reported}}, we provide a brief summary of some attacks that have been disclosed, and use these to expand the assumed capabilities of our idealized adversary.  {{model}} describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.  {{response}} provides some high-level guidance on how Internet protocols can defend against the threats described here.
+The remainder of this document is structured as follows. In {{adversary}}, we describe an idealized passive attacket, one which could completely undetectably compromise communications at Internet scale. In {{reported}}, we provide a brief summary of some attacks that have been disclosed, and use these to expand the assumed capabilities of our idealized attacker.  {{model}} describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.
 
 # Terminology {#terminology}
 
@@ -212,37 +212,37 @@ Key Exfiltration:
 Content Exfiltration:
 : The transmission of the content of a communication from a collaborator to an attacker
 
-# An Idealized Pervasive Passive Adversary {#adversary}
+# An Idealized Pervasive Passive Attacker {#adversary}
 
-To build a thread model, we first assume a pervasive passive adversary, an indiscriminate eavesdropper on an Internet-attached computer network that
+To build a thread model, we first assume a pervasive passive attacker, an indiscriminate eavesdropper on an Internet-attached computer network that
 
 - can observe every packet of all communications at any or every hop in any network path between an initiator and a recipient; and 
 - can observe data at rest in intermediate systems between the endpoints controlled by the initiator and recipient; but 
 - takes no other action with respect to these communications (i.e., blocking, modification, injection, etc.).
 
-This adversary is less capable than those which we know to have compromised the Internet from press reports, elaborated in {{reported}}, but represents the threat to communications privacy by a single eavesdropper interested in remaining undetectable.
+This attacker is less capable than those which we know to have compromised the Internet from press reports, elaborated in {{reported}}, but represents the threat to communications privacy by a single eavesdropper interested in remaining undetectable.
 
-The techniques available to our ideal adversary are direct observation and inference. Direct observation involves taking information directly from eavesdropped communications - e.g., URLs identifying content or email addresses identifying individuals from application-layer headers. Inference, on the other hand, involves analyzing eavesdropped information to derive new information from it; e.g., searching for application or behavioral fingerprints in observed traffic to derive information about the observed individual from them, in absence of directly-observed sources of the same information. The use of encryption to protect confidentiality is generally enough to prevent direct observation, assuming uncompromised encryption implementations and key material, but provides less complete protection against inference, especially inference based only on unprotected portions of communications (e.g. IP and TCP headers for TLS {{RFC5246}}).
+The techniques available to our ideal attacker are direct observation and inference. Direct observation involves taking information directly from eavesdropped communications - e.g., URLs identifying content or email addresses identifying individuals from application-layer headers. Inference, on the other hand, involves analyzing eavesdropped information to derive new information from it; e.g., searching for application or behavioral fingerprints in observed traffic to derive information about the observed individual from them, in absence of directly-observed sources of the same information. The use of encryption to protect confidentiality is generally enough to prevent direct observation, assuming uncompromised encryption implementations and key material, but provides less complete protection against inference, especially inference based only on unprotected portions of communications (e.g. IP and TCP headers for TLS {{RFC5246}}).
 
 ## Information subject to direct observation
 
-Protocols which do not encrypt their payload make the entire content of the communication available to the adversary along their path. Following the advice in {{RFC3365}}, most such protocols have a secure variant which encrypts payload for confidentiality, and these secure variants are seeing ever-wider deployment. A noteworthy exception is DNS {{RFC1035}}, as DNSSEC {{RFC4033}} does not have confidentiality as a requirement. This implies that all DNS queries and answers generated by the activities of any protocol are available to a the adversary.
+Protocols which do not encrypt their payload make the entire content of the communication available to the idealized attacker along their path. Following the advice in {{RFC3365}}, most such protocols have a secure variant which encrypts payload for confidentiality, and these secure variants are seeing ever-wider deployment. A noteworthy exception is DNS {{RFC1035}}, as DNSSEC {{RFC4033}} does not have confidentiality as a requirement. This implies that all DNS queries and answers generated by the activities of any protocol are available to the attacker.
 
-Protocols which imply the storage of some data at rest in intermediaries (e.g. SMTP {{RFC5321}}) leave this data subject to observation by an adversary that has compromised these intermediaries, unless the data is encrypted end-to-end by the application layer protocol, or the implementation uses an encrypted store for this data.
+Protocols which imply the storage of some data at rest in intermediaries (e.g. SMTP {{RFC5321}}) leave this data subject to observation by an attacker that has compromised these intermediaries, unless the data is encrypted end-to-end by the application layer protocol, or the implementation uses an encrypted store for this data.
 
 ## Information useful for inference
 
-Inference is information extracted from later analysis of an observed or eavesdropped communication, and/or correlation of observed or eavesdropped information with information available from other sources. Indeed, most useful inference performed by a our ideal adversary falls under the rubric of correlation. The simplest example of this is the observation of DNS queries and answers from and to a source and correlating those with IP addresses with which that source communicates. This can give access to information otherwise not available from encrypted application payloads (e.g., the Host: HTTP/1.1 request header when HTTP is used with TLS).
+Inference is information extracted from later analysis of an observed or eavesdropped communication, and/or correlation of observed or eavesdropped information with information available from other sources. Indeed, most useful inference performed by the attacker falls under the rubric of correlation. The simplest example of this is the observation of DNS queries and answers from and to a source and correlating those with IP addresses with which that source communicates. This can give access to information otherwise not available from encrypted application payloads (e.g., the Host: HTTP/1.1 request header when HTTP is used with TLS).
 
-Protocols which encrypt their payload using an application- or transport-layer encryption scheme (e.g. TLS) still expose all the information in their network and transport layer headers to the adversary, including source and destination addresses and ports. IPsec ESP{{RFC4303}} further encrypts the transport-layer headers, but still leaves IP address information unencrypted; in tunnel mode, these addresses correspond to the tunnel endpoints. Features of the cryptographic protocols themselves, e.g. the TLS session identifier, may leak information that can be used for correlation and inference. While this information is much less semantically rich than the application payload, it can still be useful for the inferring an individual's activities.
+Protocols which encrypt their payload using an application- or transport-layer encryption scheme (e.g. TLS) still expose all the information in their network and transport layer headers to the attacker, including source and destination addresses and ports. IPsec ESP{{RFC4303}} further encrypts the transport-layer headers, but still leaves IP address information unencrypted; in tunnel mode, these addresses correspond to the tunnel endpoints. Features of the cryptographic protocols themselves, e.g. the TLS session identifier, may leak information that can be used for correlation and inference. While this information is much less semantically rich than the application payload, it can still be useful for the inferring an individual's activities.
 
 Inference can also leverage information obtained from sources other than direct traffic observation. Geolocation databases, for example, have been developed map IP addresses to a location, in order to provide location-aware services such as targeted advertising. This location information is often of sufficient resolution that it can be used to draw further inferences toward identifying or profiling an individual.
 
-Social media provide another source of more or less publicly accessible information. This information can be extremely semantically rich, including information about an individual's location, associations with other individuals and groups, and activities. Further, this information is generally contributed and curated voluntarily by the individuals themselves: it represents information which the individuals are not necessarily interested in protecting for privascy reasons. However, correlation of this social networking data with information available from direct observation of network traffic allows the creation of a much richer picture of an individual's activities than either alone. We note with some alarm that there is little that can be done at protocol design time to limit such correlation by the adversary, and that the existence of such data sources in many cases greatly complicates the problem of protecting privacy by hardening protocols alone.
+Social media provide another source of more or less publicly accessible information. This information can be extremely semantically rich, including information about an individual's location, associations with other individuals and groups, and activities. Further, this information is generally contributed and curated voluntarily by the individuals themselves: it represents information which the individuals are not necessarily interested in protecting for privascy reasons. However, correlation of this social networking data with information available from direct observation of network traffic allows the creation of a much richer picture of an individual's activities than either alone. We note with some alarm that there is little that can be done at protocol design time to limit such correlation by the attacker, and that the existence of such data sources in many cases greatly complicates the problem of protecting privacy by hardening protocols alone.
 
 ## An illustration of an ideal passive attack
 
-To illustrate how capable even this limited adversary is, we explore the non-anonymity of even encrypted IP traffic by examining in detail some inference techniques for associating a set of addresses with an individual, in order to illustrate the difficulty of defending communications against our idealized adversary. Here, the basic problem is that information radiated even from protocols which have no obvious connection with personal data can be correlated with other information which can paint a very rich behavioral picture, that only takes one unprotected link in the chain to associate with an identity.
+To illustrate how capable the attacker is even given its limitations, we explore the non-anonymity of even encrypted IP traffic by examining in detail some inference techniques for associating a set of addresses with an individual, in order to illustrate the difficulty of defending communications against our idealized attacker. Here, the basic problem is that information radiated even from protocols which have no obvious connection with personal data can be correlated with other information which can paint a very rich behavioral picture, that only takes one unprotected link in the chain to associate with an identity.
 
 ### Analysis of IP headers
 
@@ -254,11 +254,11 @@ Let's assume for a moment that IP addresses can be correlated to specific servic
 
 ### Correlation of IP addresses to user identities
 
-The correlation of IP addresses with specific users can be done in various ways. For example, tools like reverse DNS lookup can be used to retrieve the DNS names of servers. Since the addresses of servers tend to be quite stable and since servers are relatively less numerous than users, an adversary could easily maintain its own copy of the DNS for well-known or popular servers, to accelerate such lookups.
+The correlation of IP addresses with specific users can be done in various ways. For example, tools like reverse DNS lookup can be used to retrieve the DNS names of servers. Since the addresses of servers tend to be quite stable and since servers are relatively less numerous than users, an attacker could easily maintain its own copy of the DNS for well-known or popular servers, to accelerate such lookups.
 
 On the other hand, the reverse lookup of IP addresses of users is generally less informative. For example, a lookup of the address currently used by one author's home network returns a name of the form "c-192-000-002-033.hsd1.wa.comcast.net". This particular type of reverse DNS lookup generally reveals only coarse-grained location or provider information.
 
-In many jurisdictions, Internet Service Providers (ISPs) are required to provide identification on a case by case basis of the "owner" of a specific IP address for law enforcement purposes. This is a reasonably expedient process for targeted investigations, but pervasive surveillance requires something more efficient. This provides an incentive for the adversary to secure the cooperation of the ISP in order to automate this correlation.
+In many jurisdictions, Internet Service Providers (ISPs) are required to provide identification on a case by case basis of the "owner" of a specific IP address for law enforcement purposes. This is a reasonably expedient process for targeted investigations, but pervasive surveillance requires something more efficient. This provides an incentive for the attacker to secure the cooperation of the ISP in order to automate this correlation.
 
 ### Monitoring messaging clients for IP address correlation
 
@@ -279,36 +279,36 @@ SMTP {{RFC5321}} requires that each successive SMTP relay adds a "Received" head
    From: Some One <some.one@example.org>
 ```
 
-This is the first "Received" header attached to the message by the first SMTP relay; for privacy reasons, the field values have been anonymized. We learn here that the message was submitted by "Some One" on October 27, from a host behind a NAT (192.168.1.100) {{RFC1918}} that used the IP address 192.0.2.44. The information remained in the message, and is accessible by all recipients of the "perpass" mailing list, or indeed by any PPA that sees at least one copy of the message. 
+This is the first "Received" header attached to the message by the first SMTP relay; for privacy reasons, the field values have been anonymized. We learn here that the message was submitted by "Some One" on October 27, from a host behind a NAT (192.168.1.100) {{RFC1918}} that used the IP address 192.0.2.44. The information remained in the message, and is accessible by all recipients of the "perpass" mailing list, or indeed by any attacker that sees at least one copy of the message. 
 
-An idealized adversary that can observe sufficient email traffic can regularly update the mapping between public IP addresses and individual email identities. Even if the SMTP traffic was encrypted on submission and relaying, the adversary can still receive a copy of public mailing lists like "perpass".
+An attacker that can observe sufficient email traffic can regularly update the mapping between public IP addresses and individual email identities. Even if the SMTP traffic was encrypted on submission and relaying, the attacker can still receive a copy of public mailing lists like "perpass".
 
 ### Tracking address usage with web cookies
 
 Many web sites only encrypt a small fraction of their transactions. A popular pattern is to use HTTPS for the login information, and then use a "cookie" to associate following clear-text transactions with the user's identity. Cookies are also used by various advertisement services to quickly identify the users and serve them with "personalized" advertisements. Such cookies are particularly useful if the advertisement services want to keep tracking the user across multiple sessions that may use different IP addresses.
 
-As cookies are sent in clear text, a PPA can build a database that associates cookies to IP addresses for non-HTTPS traffic. If the IP address is already identified, the cookie  can be linked to the user identify. After that, if the same cookie appears on a new IP address, the new IP address can be immediately associated with the pre-determined identity.
+As cookies are sent in clear text, an attacker can build a database that associates cookies to IP addresses for non-HTTPS traffic. If the IP address is already identified, the cookie  can be linked to the user identify. After that, if the same cookie appears on a new IP address, the new IP address can be immediately associated with the pre-determined identity.
 
 ### Graph-based approaches to address correlation
 
-An adversary can track traffic from an IP address not yet associated with an individual to various public services (e.g. websites, mail servers, game servers), and exploit patterns in the observed traffic to correlate this address with other addresses that show similar patterns. For example, any two addresses that show connections to the same IMAP or webmail services, the same set of favorite websites, and game servers at similar times of day may be associated with the same individual. Correlated addresses can then be tied to an individual through one of the techniques above, walking the "network graph" to expand the set of attributable traffic.
+An attacker can track traffic from an IP address not yet associated with an individual to various public services (e.g. websites, mail servers, game servers), and exploit patterns in the observed traffic to correlate this address with other addresses that show similar patterns. For example, any two addresses that show connections to the same IMAP or webmail services, the same set of favorite websites, and game servers at similar times of day may be associated with the same individual. Correlated addresses can then be tied to an individual through one of the techniques above, walking the "network graph" to expand the set of attributable traffic.
 
 ### Tracking of MAC Addresses
 
-Moving back down the stack, technologies like Ethernet or Wi-Fi use MAC Addresses to identify link-level destinations. MAC Addresses assigned according to IEEE-802 standards are unique to the device. If the link is publicly accessible, an adversary can track it. For example, the adversary can track the wireless traffic at public Wi-Fi networks. Simple devices can monitor the traffic, and reveal which MAC Addresses are present. If the network does not use some form of Wi-Fi encryption, or if the adversary can access the decrypted traffic, the analysis will also provide the correlation between MAC Addresses and IP addresses. Additional monitoring using techniques exposed in the previous sections will reveal the correlation between MAC Addresses, IP Addresses, and user identity. The adversary can conceivably build a database linking MAC Addresses and device or user identities, and use it to track the movement of devices and of their owners.
+Moving back down the stack, technologies like Ethernet or Wi-Fi use MAC Addresses to identify link-level destinations. MAC Addresses assigned according to IEEE-802 standards are unique to the device. If the link is publicly accessible, an attacker can track it. For example, the attacker can track the wireless traffic at public Wi-Fi networks. Simple devices can monitor the traffic, and reveal which MAC Addresses are present. If the network does not use some form of Wi-Fi encryption, or if the attacker can access the decrypted traffic, the analysis will also provide the correlation between MAC Addresses and IP addresses. Additional monitoring using techniques exposed in the previous sections will reveal the correlation between MAC Addresses, IP Addresses, and user identity. The attacker can conceivably build a database linking MAC Addresses and device or user identities, and use it to track the movement of devices and of their owners.
 
 
 # Reported Instances of Large-Scale Attacks {#reported}
 
-The situation in reality is more bleak than that suggested by an analysis of our idealized adversary. Through revelations of sensitive documents in several media outlets, the Internet community has been made aware of several intelligence activities conducted by US and UK national intelligence agencies, particularly the US National Security Agency (NSA) and the UK Government Communications Headquarters (GCHQ). These documents have revealed methods that these agencies use to attack Internet applications and obtain sensitive user information. 
+The situation in reality is more bleak than that suggested by an analysis of our idealized attacker. Through revelations of sensitive documents in several media outlets, the Internet community has been made aware of several intelligence activities conducted by US and UK national intelligence agencies, particularly the US National Security Agency (NSA) and the UK Government Communications Headquarters (GCHQ). These documents have revealed methods that these agencies use to attack Internet applications and obtain sensitive user information. 
 
-First, they have confirmed that these agencies have capabilities in line with those of our idealized adversary, thorugh the large-scale passive collection of Internet traffic {{pass1}}{{pass2}}{{pass3}}{{pass4}}. For example:
+First, they have confirmed that these agencies have capabilities in line with those of our idealized attacker, thorugh the large-scale passive collection of Internet traffic {{pass1}}{{pass2}}{{pass3}}{{pass4}}. For example:
     - The NSA XKEYSCORE system accesses data from multiple access points and searches for "selectors" such as email addresses, at the scale of tens of terabytes of data per day.
     - The GCHQ Tempora system appears to have access to around 1,500 major cables passing through the UK. 
     - The NSA MUSCULAR program tapped cables between data centers belonging to major service providers.
     - Several programs appear to perform wide-scale collection of cookies in web traffic and location data from location-aware portable devices such as smartphones.
 
-However, the capabilities described go beyond those available to our idealized adversary, including: 
+However, the capabilities described go beyond those available to our idealized attacker, including: 
 
 * Decryption of TLS-protected Internet sessions {{dec1}}{{dec2}}{{dec3}}.  For example, the NSA BULLRUN project appears to have had a budget of around $250M per year to undermine encryption through multiple approaches. 
 
@@ -323,7 +323,7 @@ However, the capabilities described go beyond those available to our idealized a
 
 We use the term "pervasive attack" {{RFC7258}} to collectively describe these operations.  The term "pervasive" is used because the attacks are designed to indiscriminately gather as much data as possible and to apply selective analysis on targets after the fact.  This means that all, or nearly all, Internet communications are targets for these attacks.  To achieve this scale, the attacks are physically pervasive; they affect a large number of Internet communications. They are pervasive in content, consuming and exploiting any information revealed by the protocol. And they are pervasive in technology, exploiting many different vulnerabilities in many different protocols.
 
-It's important to note that although the attacks mentioned above were executed by NSA and GCHQ, there are many other organizations that can mount pervasive attacks. Because of the resources required to achieve pervasive scale, pervasive attacks are most commonly undertaken by nation-state actors.  For example, the Chinese Internet filtering system known as the "Great Firewall of China" uses several techniques that are similar to the QUANTUM program, and which have a high degree of pervasiveness with regard to the Internet in China. 
+It's important to note that although the attacks mentioned above were executed by NSA and GCHQ, there are many other organizations that can mount pervasive surveillance attacks. Because of the resources required to achieve pervasive scale, these attacks are most commonly undertaken by nation-state actors.  For example, the Chinese Internet filtering system known as the "Great Firewall of China" uses several techniques that are similar to the QUANTUM program, and which have a high degree of pervasiveness with regard to the Internet in China. 
 
 # Threat Model {#model}
 
@@ -346,13 +346,13 @@ The attacks listed above highlight new avenues both for access to traffic and fo
 
 Security analyses of Internet protocols commonly consider two classes of attacker: Passive attackers, who can simply listen in on communications as they transit the network, and active attackers, who can modify or delete packets in addition to simply collecting them.
 
-In the context of pervasive attack, these attacks take on an even greater significance.  In the past, these attackers were often assumed to operate near the edge of the network, where attacks can be simpler. For example, in some LANs, it is simple for any node to engage in passive listening to other nodes' traffic or inject packets to accomplish active attacks.  In the pervasive attack case, however, both passive and active attacks are undertaken closer to the core of the network, greatly expanding the scope and capability of the attacker.
+In the context of pervasive passive surveillance, these attacks take on an even greater significance.  In the past, these attackers were often assumed to operate near the edge of the network, where attacks can be simpler. For example, in some LANs, it is simple for any node to engage in passive listening to other nodes' traffic or inject packets to accomplish active attacks. However, as we now know, both passive and active attacks are undertaken by pervasive attackers closer to the core of the network, greatly expanding the scope and capability of the attacker.
 
 Eavesdropping and observation at a larger scale make passive inference attacks easier to carry out: a passive attacker with access to a large portion of the Internet can analyze collected traffic to create a much more detailed view of individual behavior than an attacker that collects at a single point. Even the usual claim that encryption defeats passive attackers is weakened, since a pervasive passive attacker can infer relationships from correlations over large numbers of sessions, e.g., pairing encrypted sessions with unencrypted sessions from the same host, or performing traffic fingerprinting between known and unknown encrypted sessions.  Reports on the NSA XKEYSCORE system would indicate it is an example of such an attacker.
 
 A pervasive active attacker likewise has capabilities beyond those of a localized active attacker.  Active attacks are often limited by network topology, for example by a requirement that the attacker be able to see a targeted session as well as inject packets into it.  A pervasive active attacker with access at multiple points within the core of the Internet is able to overcome these topological limitations and perform attacks over a much broader scope.  Being positioned in the core of the network rather than the edge can also enable a pervasive active attacker to reroute targeted traffic, amplifying the ability to perform both eavesdropping and traffic injection.  Pervasive active attackers can also benefit from pervasive passive collection to identify vulnerable hosts.
 
-While not directly related to pervasiveness, attackers that are in a position to mount a pervasive active attack are also often in a position to subvert authentication, a traditional protection against such attacks.  Authentication in the Internet is often achieved via trusted third party authorities such as the Certificate Authorities (CAs) that provide web sites with authentication credentials. An attacker with sufficient resources for pervasive attack may also be able to induce an authority to grant credentials for an identity of the attacker’s choosing.  If the parties to a communication will trust multiple authorities to certify a specific identity, this attack may be mounted by suborning any one of the authorities (the proverbial "weakest link").  Subversion of authorities in this way can allow an active attack to succeed in spite of an authentication check. 
+While not directly related to pervasiveness, attackers that are in a position to mount a pervasive active attack are also often in a position to subvert authentication, a traditional protection against such attacks.  Authentication in the Internet is often achieved via trusted third party authorities such as the Certificate Authorities (CAs) that provide web sites with authentication credentials. An attacker with sufficient resources may also be able to induce an authority to grant credentials for an identity of the attacker’s choosing.  If the parties to a communication will trust multiple authorities to certify a specific identity, this attack may be mounted by suborning any one of the authorities (the proverbial "weakest link").  Subversion of authorities in this way can allow an active attack to succeed in spite of an authentication check. 
 
 Beyond these three classes (observation, inference, and active), reports on the BULLRUN effort to defeat encryption and the PRISM effort to obtain data from service providers suggest three more classes of attack:
 
@@ -392,7 +392,6 @@ A passive attack is the simplest to mount in some ways.  The base requirement is
 In many ways, the costs and risks for an active attack are similar to those for a passive attack, with a few additions.  An active attacker requires more robust network access than a passive attacker, since for example they will often need to transmit data as well as receiving it.  In the wireless example above, the attacker would need to act as an transmitter as well as receiver, greatly increasing the probability the attacker will be discovered (e.g., using direction-finding technology).  Active attacks are also much more observable at higher layers of the network.  For example, an active attacker that attempts to use a mis-issued certificate could be detected via Certificate Transparency {{RFC6962}}.
 
 In terms of raw implementation complexity, passive attacks require only enough processing to extract information from the network and store it.  Active attacks, by contrast, often depend on winning race conditions to inject pakets into active connections.  So active attacks in the core of the network require processing hardware to that can operate at line speed (roughly 100Gbps to 1Tbps in the core) to identify opportunities for attack and insert attack traffic in a high-volume traffic.  
-
 Key exfiltration attacks rely on passive attack for access to encrypted data, with the collaborator providing keys to decrypt the data.  So the attacker undertakes the cost and risk of a passive attack, as well as additional risk of discovery via the interactions that the attacker has with the collaborator.
 
 In this sense, static exfiltration has a lower risk profile than dynamic.  In the static case, the attacker need only interact with the collaborator a small number of times, possibly only once, say to exchange a private key.  In the dynamic case, the attacker must have continuing interactions with the collaborator.  As noted above these interactions may real, such as in-person meetings, or virtual, such as software modifications that render keys available to the attacker.  Both of these types of interactions introduce a risk that they will be discovered, e.g., by employees of the collaborator organization noticing suspicious meetings or suspicious code changes.
@@ -405,7 +404,7 @@ As noted above, the collaborator in an exfiltration attack can be unwitting; the
 
 # Security Considerations
 
-TODO
+This document describes a threat model for pervasive surveillance attacks. Mitigations are to be given in a future document.
 
 # IANA Considerations
 
@@ -413,15 +412,4 @@ This document has no actions for IANA.
 
 # Acknowledgements
 
-* Thaler for list of attacks and taxonomy
-* Security ADs for starting and managing the perpass discussion
-* Evangelos Halepilidis for review and comments
-* See PPA acks as well
-
-# TODO
-
-* Ensure all bases are covered WRT threats to confidentiality
-* Look at better alignment with draft-farrell-perpass-attack
-* Better coverage of traffic analysis -- PPA helped somewhat here but the problem is hard
-* Terminology alignment (after the program agrees the structure is good) -- attacker or adversary?
-
+Thanks to Dave Thaler for the list of attacks and taxonomy; to Security Area Directors Stephen Farrell, Sean Turner, and Kathleen Moriarty for starting and managing the IETF's discussion on pervasive attack; and to Stephan Neuhaus, Mark Townsley, Chris Inacio, and Evangelos Halepilidis, and to the membership of the IAB Privacy and Security Program for their input.
