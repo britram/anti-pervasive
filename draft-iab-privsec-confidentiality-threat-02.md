@@ -184,7 +184,7 @@ Starting in June 2013, documents released to the press by Edward Snowden have re
 
 To ensure that the Internet can be trusted by users, it is necessary for the Internet technical community to address the vulnerabilities exploited in these attacks {{RFC7258}}.  The goal of this document is to describe more precisely the threats posed by these pervasive attacks, and based on those threats, lay out the problems that need to be solved in order to secure the Internet in the face of those threats.
 
-The remainder of this document is structured as follows. In {{adversary}}, we describe an idealized passive attacket, one which could completely undetectably compromise communications at Internet scale. In {{reported}}, we provide a brief summary of some attacks that have been disclosed, and use these to expand the assumed capabilities of our idealized attacker.  {{model}} describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.
+The remainder of this document is structured as follows. In {{adversary}}, we describe an idealized passive attacker, one which could completely undetectably compromise communications at Internet scale. In {{reported}}, we provide a brief summary of some attacks that have been disclosed, and use these to expand the assumed capabilities of our idealized attacker.  {{model}} describes a threat model based on these attacks, focusing on classes of attack that have not been a focus of Internet engineering to date.
 
 # Terminology {#terminology}
 
@@ -201,10 +201,10 @@ Inference:
 inference.
 
 Collaborator:
-: An entity that is a legitimate participant in a communication, but who provides information about that interaction (keys or data) to an attacker.
+: An entity that is a legitimate participant in a communication, but who deliberately provides information about that interaction to an attacker.
 
 Unwitting Collaborator:
-: A collaborator that provides information to the attacker not deliberately, but because the attacker has exploited some technology used by the collaborator.
+: An entity that is a legitimate participant in a communication, and who is the source of information obtained by the attacker without the entity's consent or intention, because the attacker has exploited some technology used by the entity.
 
 Key Exfiltration:
 : The transmission of keying material for an encrypted communication from a collaborator to an attacker
@@ -214,15 +214,16 @@ Content Exfiltration:
 
 # An Idealized Pervasive Passive Attacker {#adversary}
 
-To build a thread model, we first assume a pervasive passive attacker, an indiscriminate eavesdropper on an Internet-attached computer network that
+In considering the threat posed by pervasive surveillance, we begin by defining an idealized pervasive passive attacker. While this attacker is less capable than those which we now know to have compromised the Internet from press reports, as elaborated in {{reported}}, it does set a lower bound on the capabilities of an attacker interested in indiscriminate passive surveillance while interested in remaining undetectable. 
 
-- can observe every packet of all communications at any or every hop in any network path between an initiator and a recipient; and 
-- can observe data at rest in intermediate systems between the endpoints controlled by the initiator and recipient; but 
+More specifically, our idealized attacker is an indiscriminate eavesdropper on an Internet-attached computer network that:
+
+- can observe every packet of all communications at any hop in any network path between an initiator and a recipient; 
+- can observe data at rest in any intermediate system between the endpoints controlled by the initiator and recipient; and
+- can share information with other such attackers; but
 - takes no other action with respect to these communications (i.e., blocking, modification, injection, etc.).
 
-This attacker is less capable than those which we know to have compromised the Internet from press reports, elaborated in {{reported}}, but represents the threat to communications privacy by a single eavesdropper interested in remaining undetectable.
-
-The techniques available to our ideal attacker are direct observation and inference. Direct observation involves taking information directly from eavesdropped communications - e.g., URLs identifying content or email addresses identifying individuals from application-layer headers. Inference, on the other hand, involves analyzing eavesdropped information to derive new information from it; e.g., searching for application or behavioral fingerprints in observed traffic to derive information about the observed individual from them, in absence of directly-observed sources of the same information. The use of encryption to protect confidentiality is generally enough to prevent direct observation, assuming uncompromised encryption implementations and key material, but provides less complete protection against inference, especially inference based only on unprotected portions of communications (e.g. IP and TCP headers for TLS {{RFC5246}}).
+The techniques available to our ideal attacker are direct observation and inference. Direct observation involves taking information directly from eavesdropped communications - e.g., URLs identifying content or email addresses identifying individuals from application-layer headers. Inference, on the other hand, involves analyzing eavesdropped information to derive new information from it; e.g., searching for application or behavioral fingerprints in observed traffic to derive information about the observed individual from them, in absence of directly-observed sources of the same information. The use of encryption to protect confidentiality is generally enough to prevent direct observation of unencrypted content, assuming uncompromised encryption implementations and key material. However, it provides less complete protection against inference, especially inference based only on unprotected portions of communications (e.g. IP and TCP headers for TLS {{RFC5246}}).
 
 ## Information subject to direct observation
 
@@ -238,7 +239,7 @@ Protocols which encrypt their payload using an application- or transport-layer e
 
 Inference can also leverage information obtained from sources other than direct traffic observation. Geolocation databases, for example, have been developed map IP addresses to a location, in order to provide location-aware services such as targeted advertising. This location information is often of sufficient resolution that it can be used to draw further inferences toward identifying or profiling an individual.
 
-Social media provide another source of more or less publicly accessible information. This information can be extremely semantically rich, including information about an individual's location, associations with other individuals and groups, and activities. Further, this information is generally contributed and curated voluntarily by the individuals themselves: it represents information which the individuals are not necessarily interested in protecting for privascy reasons. However, correlation of this social networking data with information available from direct observation of network traffic allows the creation of a much richer picture of an individual's activities than either alone. We note with some alarm that there is little that can be done at protocol design time to limit such correlation by the attacker, and that the existence of such data sources in many cases greatly complicates the problem of protecting privacy by hardening protocols alone.
+Social media provide another source of more or less publicly accessible information. This information can be extremely semantically rich, including information about an individual's location, associations with other individuals and groups, and activities. Further, this information is generally contributed and curated voluntarily by the individuals themselves: it represents information which the individuals are not necessarily interested in protecting for privacy reasons. However, correlation of this social networking data with information available from direct observation of network traffic allows the creation of a much richer picture of an individual's activities than either alone. We note with some alarm that there is little that can be done at protocol design time to limit such correlation by the attacker, and that the existence of such data sources in many cases greatly complicates the problem of protecting privacy by hardening protocols alone.
 
 ## An illustration of an ideal passive attack
 
