@@ -21,7 +21,7 @@ Expires: August 10, 2015
 
  Confidentiality in the Face of Pervasive Surveillance: A Threat Model
                          and Problem Statement
-              draft-iab-privsec-confidentiality-threat-01
+              draft-iab-privsec-confidentiality-threat-02
 
 Abstract
 
