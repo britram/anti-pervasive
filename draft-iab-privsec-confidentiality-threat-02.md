@@ -2,7 +2,7 @@
 title: "Confidentiality in the Face of Pervasive Surveillance: A Threat Model and Problem Statement"
 abbrev: Confidentiality Threat Model
 docname: draft-iab-privsec-confidentiality-threat-01
-date: 2014-12-12
+date: 2015-02-06
 category: info
 ipr: trust200902
 
@@ -190,6 +190,12 @@ The remainder of this document is structured as follows. In {{adversary}}, we de
 
 This document makes extensive use of standard security and privacy terminology; see {{RFC4949}} and {{RFC6973}}. Terms used from {{RFC6973}} include Eavesdropper, Observer, Initiator, Intermediary, Recipient, Attack (in a privacy context), Correlation, Fingerprint, Traffic Analysis, and Identifiability (and related terms). In addition, we use a few terms that are specific to the attacks discussed here:
 
+Passive Attack:
+: In this document, the term passive attack is used with respect to the traffic stream: a passive attack does not modify the packets in the traffic stream between two endpoints, modify the treatment of packets in the traffic stream (e.g. delay, routing), or add or remove packets in the traffic stream. Passive attacks are undetectable from the endpoints.
+
+Active Attack:
+: In constrast to a passive attack, and active attack may modify a traffic stream, at the cost of possible detection at the endpoints.
+
 Pervasive Attack:
 : An attack on Internet communications that makes use of access at a large number of points in the network, or otherwise provides the attacker with access to a large amount of Internet traffic; see {{RFC7258}}
 
@@ -214,9 +220,9 @@ Content Exfiltration:
 
 # An Idealized Pervasive Passive Attacker {#adversary}
 
-In considering the threat posed by pervasive surveillance, we begin by defining an idealized pervasive passive attacker. While this attacker is less capable than those which we now know to have compromised the Internet from press reports, as elaborated in {{reported}}, it does set a lower bound on the capabilities of an attacker interested in indiscriminate passive surveillance while interested in remaining undetectable. 
+In considering the threat posed by pervasive surveillance, we begin by defining an idealized pervasive passive attacker. While this attacker is less capable than those which we now know to have compromised the Internet from press reports, as elaborated in {{reported}}, it does set a lower bound on the capabilities of an attacker interested in indiscriminate passive surveillance while interested in remaining undetectable. We note that, prior to the Snowden revelations in 2013, the assumptions of attacker capability presented here would be considered on the border of paranoia outside the network security community.
 
-More specifically, our idealized attacker is an indiscriminate eavesdropper on an Internet-attached computer network that:
+Our idealized attacker is an indiscriminate eavesdropper on an Internet-attached computer network that:
 
 - can observe every packet of all communications at any hop in any network path between an initiator and a recipient; 
 - can observe data at rest in any intermediate system between the endpoints controlled by the initiator and recipient; and
@@ -364,7 +370,7 @@ Beyond these three classes (observation, inference, and active), reports on the 
 * Dynamic key exfiltration
 * Content exfiltration
 
-These attacks all rely on a collaborator providing the attacker with some information, either keys or data.  These attacks have not traditionally been considered in security analyses of protocols, since they happen outside of the protocol.
+These attacks all rely on a collaborator providing the attacker with some information, either keys or data.  These attacks have not traditionally been considered in scope for the Security Considerations sections of IETF protocols, as they occur outside the protocol.
 
 The term "key exfiltration" refers to the transfer of keying material for an encrypted communication from the collaborator to the attacker.  By "static", we mean that the transfer of keys happens once, or rarely, typically of a long-lived key.  For example, this case would cover a web site operator that provides the private key corresponding to its HTTPS certificate to an intelligence agency.  
 
