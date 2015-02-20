@@ -154,31 +154,6 @@ informative:
       ins: C Stocker
       name: Christian Stocker
      date: 2013-12-30
-  spiegel2:
-    target: http://www.spiegel.de/international/germany/inside-the-nsa-s-war-on-internet-security-a-1010361.html
-    title: "Prying Eyes: Inside the NSA's War on Internet Security"
-    author:
-      ins: J Appelbaum
-      name: Jacob Appelbaum
-    author:
-      ins: A Gibson
-      name: Aaron Gibson
-    author:
-      ins: C Grothoff
-      name: Christian Grothoff
-    author:
-      ins: A Muller-Maguhn
-      name:  Andy Muller-Maguhn
-    author:
-      ins: L Poitras
-      name: Laura Poitras
-    author:
-      ins: M Sontheimer
-      name: Michael Sontheimer 
-    author:
-      ins: C Stocker
-      name: Christian Stocker
-    date: 2014-12-28
   spiegel3:
     target: http://www.spiegel.de/international/world/new-snowden-docs-indicate-scope-of-nsa-preparations-for-cyber-battle-a-1013409.html
     title:  "The Digital Arms Race: NSA Preps America for Future Battle"
