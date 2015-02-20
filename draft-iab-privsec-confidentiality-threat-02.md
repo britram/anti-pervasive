@@ -174,7 +174,7 @@ informative:
 
 --- abstract
 
-Documents published in 2013 revealed several classes of pervasive surveillance attack on Internet communications.  In this document we develop a threat model that describes these pervasive attacks. We start by assuming a completely passive attacker with an interest in undetected, indiscriminate eavesdropping, then expand the threat model with a set of verified attacks that have been published. Based on this threat model, we discuss the techniques that can be employed in Internet protocol design to increase the protocols robustness to pervasive surveillance.
+Documents published in 2013 revealed several classes of pervasive surveillance attack on Internet communications.  In this document we develop a threat model that describes these pervasive attacks. We start by assuming a completely passive attacker with an interest in undetected, indiscriminate eavesdropping, then expand the threat model with a set of verified attacks that have been published.
 
 --- middle
 

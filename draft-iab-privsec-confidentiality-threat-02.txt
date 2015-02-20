@@ -30,10 +30,7 @@ Abstract
    develop a threat model that describes these pervasive attacks.  We
    start by assuming a completely passive attacker with an interest in
    undetected, indiscriminate eavesdropping, then expand the threat
-   model with a set of verified attacks that have been published.  Based
-   on this threat model, we discuss the techniques that can be employed
-   in Internet protocol design to increase the protocols robustness to
-   pervasive surveillance.
+   model with a set of verified attacks that have been published.
 
 Status of This Memo
 
@@ -50,6 +47,9 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
+   This Internet-Draft will expire on August 10, 2015.
+
+
 
 
 
@@ -57,8 +57,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 1]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   This Internet-Draft will expire on August 10, 2015.
 
 Copyright Notice
 
@@ -103,9 +101,11 @@ Copyright Notice
    these attacks, focusing on classes of attack that have not been a
    focus of Internet engineering to date.
 
+2.  Terminology
 
-
-
+   This document makes extensive use of standard security and privacy
+   terminology; see [RFC4949] and [RFC6973].  Terms used from [RFC6973]
+   include Eavesdropper, Observer, Initiator, Intermediary, Recipient,
 
 
 
@@ -114,11 +114,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 2]
 Internet-Draft        Confidentiality Threat Model         February 2015
 
 
-2.  Terminology
-
-   This document makes extensive use of standard security and privacy
-   terminology; see [RFC4949] and [RFC6973].  Terms used from [RFC6973]
-   include Eavesdropper, Observer, Initiator, Intermediary, Recipient,
    Attack (in a privacy context), Correlation, Fingerprint, Traffic
    Analysis, and Identifiability (and related terms).  In addition, we
    use a few terms that are specific to the attacks discussed here:
@@ -162,6 +157,11 @@ Internet-Draft        Confidentiality Threat Model         February 2015
       by the attacker without the entity's consent or intention, because
       the attacker has exploited some technology used by the entity.
 
+   Key Exfiltration:  The transmission of keying material for an
+      encrypted communication from a collaborator, deliberately or
+      unwittingly, to an attacker
+
+
 
 
 
@@ -169,10 +169,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 3]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   Key Exfiltration:  The transmission of keying material for an
-      encrypted communication from a collaborator, deliberately or
-      unwittingly, to an attacker
 
    Content Exfiltration:  The transmission of the content of a
       communication from a collaborator, deliberately or unwittingly, to
@@ -218,6 +214,10 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    generally enough to prevent direct observation of unencrypted
    content, assuming uncompromised encryption implementations and key
    material.  However, it provides less complete protection against
+   inference, especially inference based only on unprotected portions of
+   communications (e.g.  IP and TCP headers for TLS [RFC5246]).
+
+
 
 
 
@@ -225,9 +225,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 4]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   inference, especially inference based only on unprotected portions of
-   communications (e.g.  IP and TCP headers for TLS [RFC5246]).
 
 3.1.  Information subject to direct observation
 
@@ -275,6 +272,9 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    application payload, it can still be useful for the inferring an
    individual's activities.
 
+   Inference can also leverage information obtained from sources other
+   than direct traffic observation.  Geolocation databases, for example,
+
 
 
 Barnes, et al.           Expires August 10, 2015                [Page 5]
@@ -282,8 +282,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 5]
 Internet-Draft        Confidentiality Threat Model         February 2015
 
 
-   Inference can also leverage information obtained from sources other
-   than direct traffic observation.  Geolocation databases, for example,
    have been developed map IP addresses to a location, in order to
    provide location-aware services such as targeted advertising.  This
    location information is often of sufficient resolution that it can be
@@ -330,6 +328,8 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    capacity links or a set of routers placed at strategic locations
    provides access to a good sampling of Internet traffic.
 
+   Tools like IPFIX [RFC7011] allow administrators to acquire statistics
+   about sequences of packets with some common properties that pass
 
 
 
@@ -338,8 +338,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 6]
 Internet-Draft        Confidentiality Threat Model         February 2015
 
 
-   Tools like IPFIX [RFC7011] allow administrators to acquire statistics
-   about sequences of packets with some common properties that pass
    through a network device.  The most common set of properties used in
    flow measurement is the "five-tuple"of source and destination
    addresses, protocol type, and source and destination ports.  These
@@ -386,6 +384,8 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    obtained via inference.  POP3 [RFC1939] and IMAP [RFC3501] are used
    to retrieve mail from mail servers, while a variant of SMTP is used
    to submit messages through mail servers.  IMAP connections originate
+   from the client, and typically start with an authentication exchange
+   in which the client proves its identity by answering a password
 
 
 
@@ -394,8 +394,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 7]
 Internet-Draft        Confidentiality Threat Model         February 2015
 
 
-   from the client, and typically start with an authentication exchange
-   in which the client proves its identity by answering a password
    challenge.  The same holds for the SIP protocol [RFC3261] and many
    instant messaging services operating over the Internet using
    proprietary protocols.
@@ -442,6 +440,8 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    the user's identity.  Cookies are also used by various advertisement
    services to quickly identify the users and serve them with
    "personalized" advertisements.  Such cookies are particularly useful
+   if the advertisement services want to keep tracking the user across
+   multiple sessions that may use different IP addresses.
 
 
 
@@ -449,9 +449,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 8]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   if the advertisement services want to keep tracking the user across
-   multiple sessions that may use different IP addresses.
 
    As cookies are sent in clear text, an attacker can build a database
    that associates cookies to IP addresses for non-HTTPS traffic.  If
@@ -494,10 +491,13 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    Addresses and device or user identities, and use it to track the
    movement of devices and of their owners.
 
+4.  Reported Instances of Large-Scale Attacks
 
-
-
-
+   The situation in reality is more bleak than that suggested by an
+   analysis of our idealized attacker.  Through revelations of sensitive
+   documents in several media outlets, the Internet community has been
+   made aware of several intelligence activities conducted by US and UK
+   national intelligence agencies, particularly the US National Security
 
 
 
@@ -506,13 +506,6 @@ Barnes, et al.           Expires August 10, 2015                [Page 9]
 Internet-Draft        Confidentiality Threat Model         February 2015
 
 
-4.  Reported Instances of Large-Scale Attacks
-
-   The situation in reality is more bleak than that suggested by an
-   analysis of our idealized attacker.  Through revelations of sensitive
-   documents in several media outlets, the Internet community has been
-   made aware of several intelligence activities conducted by US and UK
-   national intelligence agencies, particularly the US National Security
    Agency (NSA) and the UK Government Communications Headquarters
    (GCHQ).  These documents have revealed methods that these agencies
    use to attack Internet applications and obtain sensitive user
@@ -553,15 +546,6 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    o  Use of implants (covert modifications or malware) to undermine
       security and anonymity features [dec2][TOR1][TOR2].  For example:
 
-
-
-
-
-Barnes, et al.           Expires August 10, 2015               [Page 10]
-
-Internet-Draft        Confidentiality Threat Model         February 2015
-
-
       *  NSA appears to use the QUANTUM man-in-the-middle system to
          direct users to a FOXACID server, which delivers an implant to
          compromise the browser of a user of the Tor anonymous
@@ -570,6 +554,13 @@ Internet-Draft        Confidentiality Threat Model         February 2015
       *  The BULLRUN program mentioned above includes the addition of
          covert modifications to software as one means to undermine
          encryption.
+
+
+
+Barnes, et al.           Expires August 10, 2015               [Page 10]
+
+Internet-Draft        Confidentiality Threat Model         February 2015
+
 
       *  There is also some suspicion that NSA modifications to the
          DUAL_EC_DRBG random number generator were made to ensure that
@@ -610,14 +601,6 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    communications.  his analysis sometimes benefits from decryption of
    encrypted communications and deanonymization of anonymized
    communications.  As a result, these attackers desire both access to
-
-
-
-Barnes, et al.           Expires August 10, 2015               [Page 11]
-
-Internet-Draft        Confidentiality Threat Model         February 2015
-
-
    the bulk of Internet traffic and to the keying material required to
    decrypt any traffic that has been encrypted.  Even if keys are not
    available, note that the presence of a communication and the fact
@@ -627,6 +610,14 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    The attacks listed above highlight new avenues both for access to
    traffic and for access to relevant encryption keys.  They further
    indicate that the scale of surveillance is sufficient to provide a
+
+
+
+Barnes, et al.           Expires August 10, 2015               [Page 11]
+
+Internet-Draft        Confidentiality Threat Model         February 2015
+
+
    general capability to cross-correlate communications, a threat not
    previously thought to be relevant at the scale of the Internet.
 
@@ -666,14 +657,6 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    Eavesdropping and observation at a larger scale make passive
    inference attacks easier to carry out: a passive attacker with access
    to a large portion of the Internet can analyze collected traffic to
-
-
-
-Barnes, et al.           Expires August 10, 2015               [Page 12]
-
-Internet-Draft        Confidentiality Threat Model         February 2015
-
-
    create a much more detailed view of individual behavior than an
    attacker that collects at a single point.  Even the usual claim that
    encryption defeats passive attackers is weakened, since a pervasive
@@ -683,6 +666,13 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    fingerprinting between known and unknown encrypted sessions.  Reports
    on the NSA XKEYSCORE system would indicate it is an example of such
    an attacker.
+
+
+
+Barnes, et al.           Expires August 10, 2015               [Page 12]
+
+Internet-Draft        Confidentiality Threat Model         February 2015
+
 
    A pervasive active attacker likewise has capabilities beyond those of
    a localized active attacker.  Active attacks are often limited by
@@ -722,14 +712,6 @@ Internet-Draft        Confidentiality Threat Model         February 2015
 
    o  Content exfiltration
 
-
-
-
-Barnes, et al.           Expires August 10, 2015               [Page 13]
-
-Internet-Draft        Confidentiality Threat Model         February 2015
-
-
    These attacks all rely on a collaborator providing the attacker with
    some information, either keys or data.  These attacks have not
    traditionally been considered in scope for the Security
@@ -740,6 +722,14 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    for an encrypted communication from the collaborator to the attacker.
    By "static", we mean that the transfer of keys happens once, or
    rarely, typically of a long-lived key.  For example, this case would
+
+
+
+Barnes, et al.           Expires August 10, 2015               [Page 13]
+
+Internet-Draft        Confidentiality Threat Model         February 2015
+
+
    cover a web site operator that provides the private key corresponding
    to its HTTPS certificate to an intelligence agency.
 
@@ -778,6 +768,16 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    describing the NSA PRISM program claim that NSA is able to access
    user data directly from servers, where it is stored unencrypted.  In
    these cases, the operator of the server would be a collaborator, if
+   an unwitting one.  By contrast, in the NSA MUSCULAR program, a set of
+   collaborators enabled attackers to access the cables connecting data
+   centers used by service providers such as Google and Yahoo.  Because
+   communications among these data centers were not encrypted, the
+   collaboration by an intermediate entity allowed NSA to collect
+   unencrypted user data.
+
+
+
+
 
 
 
@@ -785,13 +785,6 @@ Barnes, et al.           Expires August 10, 2015               [Page 14]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   an unwitting one.  By contrast, in the NSA MUSCULAR program, a set of
-   collaborators enabled attackers to access the cables connecting data
-   centers used by service providers such as Google and Yahoo.  Because
-   communications among these data centers were not encrypted, the
-   collaboration by an intermediate entity allowed NSA to collect
-   unencrypted user data.
 
 5.2.  Attacker Costs
 
@@ -835,6 +828,13 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    risk that the attacker's interactions with the network operator will
    be exposed.
 
+   In many ways, the costs and risks for an active attack are similar to
+   those for a passive attack, with a few additions.  An active attacker
+   requires more robust network access than a passive attacker, since
+   for example they will often need to transmit data as well as
+   receiving it.  In the wireless example above, the attacker would need
+   to act as an transmitter as well as receiver, greatly increasing the
+
 
 
 Barnes, et al.           Expires August 10, 2015               [Page 15]
@@ -842,12 +842,6 @@ Barnes, et al.           Expires August 10, 2015               [Page 15]
 Internet-Draft        Confidentiality Threat Model         February 2015
 
 
-   In many ways, the costs and risks for an active attack are similar to
-   those for a passive attack, with a few additions.  An active attacker
-   requires more robust network access than a passive attacker, since
-   for example they will often need to transmit data as well as
-   receiving it.  In the wireless example above, the attacker would need
-   to act as an transmitter as well as receiver, greatly increasing the
    probability the attacker will be discovered (e.g., using direction-
    finding technology).  Active attacks are also much more observable at
    higher layers of the network.  For example, an active attacker that
@@ -891,6 +885,12 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    corresponding increase in the risk that this high-bandwidth channel
    will be discovered.
 
+   It should also be noted that in these latter three exfiltration
+   cases, the collaborator also undertakes a risk that his collaboration
+   with the attacker will be discovered.  Thus the attacker may have to
+   incur additional cost in order to convince the collaborator to
+   participate in the attack.  Likewise, the scope of these attacks is
+
 
 
 Barnes, et al.           Expires August 10, 2015               [Page 16]
@@ -898,11 +898,6 @@ Barnes, et al.           Expires August 10, 2015               [Page 16]
 Internet-Draft        Confidentiality Threat Model         February 2015
 
 
-   It should also be noted that in these latter three exfiltration
-   cases, the collaborator also undertakes a risk that his collaboration
-   with the attacker will be discovered.  Thus the attacker may have to
-   incur additional cost in order to convince the collaborator to
-   participate in the attack.  Likewise, the scope of these attacks is
    limited to case where the attacker can convince a collaborator to
    participate.  If the attacker is a national government, for example,
    it may be able to compel participation within its borders, but have a
@@ -945,7 +940,12 @@ Internet-Draft        Confidentiality Threat Model         February 2015
               Considerations for Internet Protocols", RFC 6973, July
               2013.
 
+9.2.  Informative References
 
+   [pass1]    The Guardian, "How the NSA is still harvesting your online
+              data", 2013,
+              <http://www.theguardian.com/world/2013/jun/27/
+              nsa-online-metadata-collection>.
 
 
 
@@ -953,13 +953,6 @@ Barnes, et al.           Expires August 10, 2015               [Page 17]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-9.2.  Informative References
-
-   [pass1]    The Guardian, "How the NSA is still harvesting your online
-              data", 2013,
-              <http://www.theguardian.com/world/2013/jun/27/
-              nsa-online-metadata-collection>.
 
    [pass2]    The Guardian, "NSA's Prism surveillance program: how it
               works and what it can do", 2013,
@@ -1003,17 +996,19 @@ Internet-Draft        Confidentiality Threat Model         February 2015
               <http://www.theguardian.com/world/interactive/2013/oct/04/
               tor-stinks-nsa-presentation-document>.
 
+   [dir1]     The Guardian, "NSA collecting phone records of millions of
+              Verizon customers daily", 2013,
+              <http://www.theguardian.com/world/2013/jun/06/
+              nsa-phone-records-verizon-court-order>.
+
+
+
 
 
 Barnes, et al.           Expires August 10, 2015               [Page 18]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   [dir1]     The Guardian, "NSA collecting phone records of millions of
-              Verizon customers daily", 2013,
-              <http://www.theguardian.com/world/2013/jun/06/
-              nsa-phone-records-verizon-court-order>.
 
    [dir2]     The Guardian, "NSA Prism program taps in to user data of
               Apple, Google and others", 2013,
@@ -1057,6 +1052,11 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    [RFC2821]  Klensin, J., "Simple Mail Transfer Protocol", RFC 2821,
               April 2001.
 
+   [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+              A., Peterson, J., Sparks, R., Handley, M., and E.
+              Schooler, "SIP: Session Initiation Protocol", RFC 3261,
+              June 2002.
+
 
 
 
@@ -1065,11 +1065,6 @@ Barnes, et al.           Expires August 10, 2015               [Page 19]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
-              A., Peterson, J., Sparks, R., Handley, M., and E.
-              Schooler, "SIP: Session Initiation Protocol", RFC 3261,
-              June 2002.
 
    [RFC3365]  Schiller, J., "Strong Security Requirements for Internet
               Engineering Task Force Standard Protocols", BCP 61, RFC
@@ -1115,15 +1110,17 @@ Internet-Draft        Confidentiality Threat Model         February 2015
    [RFC6120]  Saint-Andre, P., "Extensible Messaging and Presence
               Protocol (XMPP): Core", RFC 6120, March 2011.
 
+   [RFC6962]  Laurie, B., Langley, A., and E. Kasper, "Certificate
+              Transparency", RFC 6962, June 2013.
+
+
+
 
 
 Barnes, et al.           Expires August 10, 2015               [Page 20]
 
 Internet-Draft        Confidentiality Threat Model         February 2015
 
-
-   [RFC6962]  Laurie, B., Langley, A., and E. Kasper, "Certificate
-              Transparency", RFC 6962, June 2013.
 
    [RFC6698]  Hoffman, P. and J. Schlyter, "The DNS-Based Authentication
               of Named Entities (DANE) Transport Layer Security (TLS)
@@ -1169,15 +1166,6 @@ Authors' Addresses
    Email: huitema@huitema.net
 
 
-
-
-
-
-Barnes, et al.           Expires August 10, 2015               [Page 21]
-
-Internet-Draft        Confidentiality Threat Model         February 2015
-
-
    Daniel Borkmann
 
    Email: dborkman@redhat.com
@@ -1185,48 +1173,4 @@ Internet-Draft        Confidentiality Threat Model         February 2015
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Barnes, et al.           Expires August 10, 2015               [Page 22]
+Barnes, et al.           Expires August 10, 2015               [Page 21]
