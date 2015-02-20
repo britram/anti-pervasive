@@ -227,12 +227,13 @@ informative:
 
 --- abstract
 
-Documents published in 2013-2015 revealed several classes of pervasive
-surveillance attack on Internet communications.  In this document we
-develop a threat model that describes these pervasive attacks. We
-start by assuming an attacker with an interest in undetected,
-indiscriminate eavesdropping, then expand the threat model with a set
-of verified attacks that have been published.
+Documents published since initial revelations in 2013 have revealed
+several classes of pervasive surveillance attack on Internet
+communications.  In this document we develop a threat model that
+describes these pervasive attacks. We start by assuming an attacker
+with an interest in undetected, indiscriminate eavesdropping, then
+expand the threat model with a set of verified attacks that have been
+published.
 
 --- middle
 
@@ -276,17 +277,21 @@ Traffic Analysis, and Identifiability (and related terms). In
 addition, we use a few terms that are specific to the attacks
 discussed here:
 
-Flow Access Attack: 
-: In this document, the term flow access attack is used
-with respect to the traffic stream: a flow access attack does not modify
-the packets in the traffic stream between two endpoints, modify the
-treatment of packets in the traffic stream (e.g. delay, routing), or
-add or remove packets in the traffic stream. flow access attacks are
-undetectable from the endpoints.
+Flow Access Attack:  
+: An eavesdropping attack in which the packets
+in a traffic stream between two endpoints are eavesdropped upon, but
+in which the attacker does not modify the packets in the traffic
+stream between two endpoints, modify the treatment of packets in the
+traffic stream (e.g. delay, routing), or add or remove packets in the
+traffic stream. Flow access attacks are undetectable from the
+endpoints.
 
 Flow Modification Attack: 
-: In constrast to a flow access attack, a flow modification attack
-may modify a traffic stream, at the cost of possible detection at the
+: An attack which includes both eavesdropping (as in a
+flow access attack) as well as modification, addition, or removal of
+packets in a traffic stream, or modification of treatment of packets
+in the traffic stream. Flow modification attacks provide more
+capabilities to the attacker at the cost of possible detection at the 
 endpoints.
 
 Pervasive Attack: 
@@ -642,8 +647,8 @@ However, the capabilities described go beyond those available to our idealized a
 
 * Use of implants (covert modifications or malware) to undermine security and anonymity features {{dec2}}{{TOR1}}{{TOR2}}.  For example:
     * NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant to compromise the browser of a user of the Tor anonymous communications network.
-    * Implants are apparently available for Cisco, Juniper, Huawei, Dell, and HP provided by the NSA Advanced Network Technology group {{spiegel1}} 
-    * Compromised hosts numbering at botnet scale, using tools by the NSA's Remote Operations Center {{spiegel3}}
+    * Implants are apparently available for Cisco, Juniper, Huawei, Dell, and HP network elements, provided by the NSA Advanced Network Technology group {{spiegel1}} 
+    * Compromised hosts at botnet scale, using tools by the NSA's Remote Operations Center {{spiegel3}}
     * The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  
     * There is also some suspicion that NSA modifications to the DUAL\_EC\_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.  These suspicions have been reinforced by reports that RSA Security was paid roughly $10M to make DUAL\_EC\_DRBG the default in their products.
 
