@@ -180,9 +180,8 @@ informative:
       name: Christian Stocker
     date: 2014-12-28
   spiegel3:
-     target: http://www.spiegel.de/international/world/new-snowden-docs-indicate-scope-of-nsa-preparations-for-cyber-battle-a-1013409.html
-     title:  "The Digital Arms Race: NSA Preps America for Future Battle"
-
+    target: http://www.spiegel.de/international/world/new-snowden-docs-indicate-scope-of-nsa-preparations-for-cyber-battle-a-1013409.html
+    title:  "The Digital Arms Race: NSA Preps America for Future Battle"
     author:
       ins: J Appelbaum
       name: Jacob Appelbaum
@@ -201,16 +200,16 @@ informative:
     author:
       ins: L Poitras
       name: Laura Poitras
-     author:
+    author:
       ins: M Rosenbach
       name: Marcel Rosenbach
-     author:
-         ins: L Ryge
-         name: Leif Ryge, 
-     author:
-         ins: H Schmundt
-         name: Hilmar Schmundt 
-     date: 2014-01-17
+    author:
+      ins: L Ryge
+      name: Leif Ryge 
+    author:
+      ins: H Schmundt
+      name: Hilmar Schmundt 
+    date: 2014-01-17
   key-recovery:
     target: http://crypto.stanford.edu/~pgolle/papers/escrow.pdf
     title: The Design and Implementation of Protocol-Based Hidden Key Recovery
