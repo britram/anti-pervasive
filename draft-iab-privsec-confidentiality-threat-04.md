@@ -2,7 +2,7 @@
 title: "Confidentiality in the Face of Pervasive Surveillance: A Threat Model and Problem Statement"
 abbrev: Confidentiality Threat Model
 docname: draft-iab-privsec-confidentiality-threat-03
-date: 2015-02-27
+date: 2015-03-05
 category: info
 ipr: trust200902
 
@@ -11,11 +11,11 @@ author:
     ins: R. Barnes
     name: Richard Barnes
     email: rlb@ipv.sx
- - 
+ -
     ins: B. Schneier
     name: Bruce Schneier
     email: schneier@schneier.com
- - 
+ -
     ins: C. Jennings
     name: Cullen Jennings
     email: fluffy@cisco.com
@@ -27,7 +27,7 @@ author:
     ins: B. Trammell
     name: Brian Trammell
     email: ietf@trammell.ch
- - 
+ -
     ins: C. Huitema
     name: Christian Huitema
     email: huitema@huitema.net
@@ -46,13 +46,13 @@ informative:
     author:
       organization: The Guardian
     date: 2013
-  pass2:    
+  pass2:
     target: http://www.theguardian.com/world/2013/jun/08/nsa-prism-server-collection-facebook-google
     title:  "NSA's Prism surveillance program: how it works and what it can do"
     author:
       organization: The Guardian
     date: 2013
-  pass3:    
+  pass3:
     target: http://www.theguardian.com/world/2013/jul/31/nsa-top-secret-program-online-data
     title:  "XKeyscore: NSA tool collects 'nearly everything a user does on the internet'"
     author:
@@ -63,19 +63,19 @@ informative:
     title: "How does GCHQ's internet surveillance work?"
     author:
       organization: The Guardian
-  dec1:     
+  dec1:
     target: http://www.nytimes.com/2013/09/06/us/nsa-foils-much-internet-encryption.html
     title:  "N.S.A. Able to Foil Basic Safeguards of Privacy on Web"
     author:
       organization: The New York Times
     date: 2013
-  dec2:     
+  dec2:
     target: http://www.theguardian.com/world/interactive/2013/sep/05/nsa-project-bullrun-classification-guide
     title:  "Project Bullrun – classification guide to the NSA's decryption program"
     author:
       organization: The Guardian
     date: 2013
-  dec3:     
+  dec3:
     target: http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security
     title:  "Revealed: how US and UK spy agencies defeat internet privacy and security"
     author:
@@ -87,38 +87,38 @@ informative:
     author:
       organization: The Tor Project
     date: 2013
-  TOR1:     
+  TOR1:
     target: https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html
     title:  "How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID"
     author:
       name: Bruce Schneier
       ins: B. Schneier
     date: 2013
-  TOR2:     
+  TOR2:
     target: http://www.theguardian.com/world/interactive/2013/oct/04/tor-stinks-nsa-presentation-document
     title:  "'Tor Stinks' presentation – read the full document"
     author:
       organization: The Guardian
     date: 2013
-  dir1:     
+  dir1:
     target: http://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order
     title:  "NSA collecting phone records of millions of Verizon customers daily"
     author:
       organization: The Guardian
     date: 2013
-  dir2:     
+  dir2:
     target: http://www.theguardian.com/world/2013/jun/06/us-tech-giants-nsa-data
     title:  "NSA Prism program taps in to user data of Apple, Google and others"
     author:
       organization: The Guardian
     date: 2013
-  dir3:      
+  dir3:
     target: http://www.theguardian.com/world/interactive/2013/sep/05/sigint-nsa-collaborates-technology-companies
     title:  "Sigint – how the NSA collaborates with technology companies"
     author:
       organization: The Guardian
     date: 2013
-  secure:   
+  secure:
     target: http://www.theguardian.com/world/2013/sep/05/nsa-how-to-remain-secure-surveillance
     title:  "NSA surveillance: A guide to staying secure"
     author:
@@ -132,7 +132,7 @@ informative:
     author:
       organization: Technology Review
     date: 2013
-  spiegel1: 
+  spiegel1:
      target: http://www.spiegel.de/international/world/nsa-secret-toolbox-ant-unit-offers-spy-gadgets-for-every-need-a-941006.html
      title: "NSA's Secret Toolbox: Unit Offers Spy Gadgets for Every Need"
      author:
@@ -171,7 +171,7 @@ informative:
       name:  Andy Muller-Maguhn
     author:
       ins: M Sontheimer
-      name: Michael Sontheimer 
+      name: Michael Sontheimer
     author:
       ins: L Poitras
       name: Laura Poitras
@@ -180,10 +180,10 @@ informative:
       name: Marcel Rosenbach
     author:
       ins: L Ryge
-      name: Leif Ryge 
+      name: Leif Ryge
     author:
       ins: H Schmundt
-      name: Hilmar Schmundt 
+      name: Hilmar Schmundt
     date: 2014-01-17
   key-recovery:
     target: http://crypto.stanford.edu/~pgolle/papers/escrow.pdf
@@ -191,7 +191,7 @@ informative:
     author:
       ins: E.-J. Goh
       name: Eu-Jin Goh
-    author: 
+    author:
       ins: D. Boneh
       name: Dan Boneh
     author:
@@ -224,6 +224,7 @@ informative:
   RFC6698:
   RFC7011:
   RFC7258:
+  I-D.ietf-dprive-problem-statement:
 
 --- abstract
 
@@ -284,17 +285,20 @@ in which the attacker does not modify the packets in the traffic
 stream between two endpoints, modify the treatment of packets in the
 traffic stream (e.g. delay, routing), or add or remove packets in the
 traffic stream. Flow access attacks are undetectable from the
-endpoints.
+endpoints.  Equivalent to passive wiretapping as defined in {{RFC4949}};
+we use an alternate term here since the methods employed are wider
+than those implied by the word "wiretapping", including the active
+compromise of intermediate systems.
 
-Flow Modification Attack: 
+Flow Modification Attack:
 : An attack which includes both eavesdropping (as in a
 flow access attack) as well as modification, addition, or removal of
 packets in a traffic stream, or modification of treatment of packets
 in the traffic stream. Flow modification attacks provide more
-capabilities to the attacker at the cost of possible detection at the 
-endpoints.
+capabilities to the attacker at the cost of possible detection at the
+endpoints. Equivalent to active wiretapping as defined in {{RFC4949}}.
 
-Pervasive Attack: 
+Pervasive Attack:
 : An attack on Internet communications that makes
 use of access at a large number of points in the network, or otherwise
 provides the attacker with access to a large amount of Internet
@@ -348,7 +352,7 @@ community.
 
 Our idealized attacker is an indiscriminate eavesdropper on an Internet-attached computer network that:
 
-- can observe every packet of all communications at any hop in any network path between an initiator and a recipient; 
+- can observe every packet of all communications at any hop in any network path between an initiator and a recipient;
 - can observe data at rest in any intermediate system between the endpoints controlled by the initiator and recipient; and
 - can share information with other such attackers; but
 - takes no other action with respect to these communications (i.e., blocking, modification, injection, etc.).
@@ -377,9 +381,12 @@ path. Following the advice in {{RFC3365}}, most such protocols have a
 secure variant which encrypts payload for confidentiality, and these
 secure variants are seeing ever-wider deployment. A noteworthy
 exception is DNS {{RFC1035}}, as DNSSEC {{RFC4033}} does not have
-confidentiality as a requirement. This implies that, in the absence of
-changes to the protocol as presently under development in the DPRIVE
-working group, all DNS queries and answers generated by the activities
+confidentiality as a requirement.
+
+This implies that, in the absence of
+changes to the protocol as presently under development in the IETF's
+DNS Private Exchange (DPRIVE)
+working group {{I-D.ietf-dprive-problem-statement}}, all DNS queries and answers generated by the activities
 of any protocol are available to the attacker.
 
 Protocols which imply the storage of some data at rest in
@@ -514,7 +521,7 @@ which the client proves its identity by answering a password
 challenge. The same holds for the SIP protocol {{RFC3261}} and many
 instant messaging services operating over the Internet using
 proprietary protocols.
-        
+
 The username is directly observable if any of these protocols operate
 in cleartext; the username can then be directly associated with the
 source address.
@@ -627,7 +634,7 @@ providers.  - Several programs appear to perform wide-scale collection
 of cookies in web traffic and location data from location-aware
 portable devices such as smartphones.
 
-However, the capabilities described go beyond those available to our idealized attacker, including: 
+However, the capabilities described go beyond those available to our idealized attacker, including:
 
 * Decryption of TLS-protected Internet sessions
   {{dec1}}{{dec2}}{{dec3}}.  For example, the NSA BULLRUN project
@@ -647,10 +654,10 @@ However, the capabilities described go beyond those available to our idealized a
 
 * Use of implants (covert modifications or malware) to undermine security and anonymity features {{dec2}}{{TOR1}}{{TOR2}}.  For example:
     * NSA appears to use the QUANTUM man-in-the-middle system to direct users to a FOXACID server, which delivers an implant to compromise the browser of a user of the Tor anonymous communications network.
-    * Implants are apparently available for Cisco, Juniper, Huawei, Dell, and HP network elements, provided by the NSA Advanced Network Technology group {{spiegel1}} 
+    * Implants are apparently available for Cisco, Juniper, Huawei, Dell, and HP network elements, provided by the NSA Advanced Network Technology group {{spiegel1}}
     * Compromised hosts at botnet scale, using tools by the NSA's Remote Operations Center {{spiegel3}}
     * The BULLRUN program mentioned above includes the addition of covert modifications to software as one means to undermine encryption.  
-    * There is also some suspicion that NSA modifications to the DUAL\_EC\_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.  These suspicions have been reinforced by reports that RSA Security was paid roughly $10M to make DUAL\_EC\_DRBG the default in their products.
+    * There is suspicion that NSA modifications to the DUAL\_EC\_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA. This RNG was made part of NIST's SP 800-90A, for which NIST acknowledges NSA's assistance. There have also been reports that the NSA attempted to increase the use of this curve by encouraging RSA Security to make this curve the default in their BSAFE product line.
 
 We use the term "pervasive attack" {{RFC7258}} to collectively
 describe these operations.  The term "pervasive" is used because the
@@ -946,6 +953,5 @@ Thanks to Dave Thaler for the list of attacks and taxonomy; to
 Security Area Directors Stephen Farrell, Sean Turner, and Kathleen
 Moriarty for starting and managing the IETF's discussion on pervasive
 attack; and to Stephan Neuhaus, Mark Townsley, Chris Inacio, Evangelos
-Halepilidis, Bjoern Hoehrmann, Aziz Mohaisen, as well as the IAB
-Privacy and Security Program [Note: expand this?] for their input.
-
+Halepilidis, Bjoern Hoehrmann, Aziz Mohaisen, Russ Housley, and the IAB
+Privacy and Security Program for their input.
