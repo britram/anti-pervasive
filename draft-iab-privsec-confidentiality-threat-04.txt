@@ -5,7 +5,7 @@
 Network Working Group                                          R. Barnes
 Internet-Draft
 Intended status: Informational                               B. Schneier
-Expires: September 6, 2015
+Expires: September 12, 2015
                                                              C. Jennings
 
                                                                T. Hardie
@@ -15,12 +15,12 @@ Expires: September 6, 2015
                                                               C. Huitema
 
                                                              D. Borkmann
-                                                          March 05, 2015
+                                                          March 11, 2015
 
 
  Confidentiality in the Face of Pervasive Surveillance: A Threat Model
                          and Problem Statement
-              draft-iab-privsec-confidentiality-threat-03
+              draft-iab-privsec-confidentiality-threat-04
 
 Abstract
 
@@ -47,13 +47,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 6, 2015.
+   This Internet-Draft will expire on September 12, 2015.
 
 
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 1]
+Barnes, et al.         Expires September 12, 2015               [Page 1]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -93,15 +93,15 @@ Copyright Notice
    threats.
 
    The remainder of this document is structured as follows.  In
-   Section 3, we describe an idealized flow access attacker, one which
-   could completely undetectably compromise communications at Internet
-   scale.  In Section 4, we provide a brief summary of some attacks that
-   have been disclosed, and use these to expand the assumed capabilities
-   of our idealized attacker.  Note that we do not attempt to describe
-   all possible attacks, but focus on those which result in undetected
-   eavesdropping.  Section 5 describes a threat model based on these
-   attacks, focusing on classes of attack that have not been a focus of
-   Internet engineering to date.
+   Section 3, we describe an idealized passive pervasive attacker, one
+   which could completely undetectably compromise communications at
+   Internet scale.  In Section 4, we provide a brief summary of some
+   attacks that have been disclosed, and use these to expand the assumed
+   capabilities of our idealized attacker.  Note that we do not attempt
+   to describe all possible attacks, but focus on those which result in
+   undetected eavesdropping.  Section 5 describes a threat model based
+   on these attacks, focusing on classes of attack that have not been a
+   focus of Internet engineering to date.
 
 
 
@@ -109,7 +109,7 @@ Copyright Notice
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 2]
+Barnes, et al.         Expires September 12, 2015               [Page 2]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -123,29 +123,31 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    Analysis, and Identifiability (and related terms).  In addition, we
    use a few terms that are specific to the attacks discussed here:
 
-   Flow Access Attack:  An eavesdropping attack in which the packets in
-      a traffic stream between two endpoints are eavesdropped upon, but
-      in which the attacker does not modify the packets in the traffic
-      stream between two endpoints, modify the treatment of packets in
-      the traffic stream (e.g. delay, routing), or add or remove packets
-      in the traffic stream.  Flow access attacks are undetectable from
+   Pervasive Attack:  An attack on Internet communications that makes
+      use of access at a large number of points in the network, or
+      otherwise provides the attacker with access to a large amount of
+      Internet traffic; see [RFC7258]
+
+   Passive Pervasive Attack:  An eavesdropping attack undertaken by a
+      pervasive attacker, in which the packets in a traffic stream
+      between two endpoints are eavesdropped upon, but in which the
+      attacker does not modify the packets in the traffic stream between
+      two endpoints, modify the treatment of packets in the traffic
+      stream (e.g. delay, routing), or add or remove packets in the
+      traffic stream.  Passive pervasive attacks are undetectable from
       the endpoints.  Equivalent to passive wiretapping as defined in
       [RFC4949]; we use an alternate term here since the methods
       employed are wider than those implied by the word "wiretapping",
       including the active compromise of intermediate systems.
 
-   Flow Modification Attack:  An attack which includes both
-      eavesdropping (as in a flow access attack) as well as
-      modification, addition, or removal of packets in a traffic stream,
-      or modification of treatment of packets in the traffic stream.
-      Flow modification attacks provide more capabilities to the
-      attacker at the cost of possible detection at the endpoints.
-      Equivalent to active wiretapping as defined in [RFC4949].
-
-   Pervasive Attack:  An attack on Internet communications that makes
-      use of access at a large number of points in the network, or
-      otherwise provides the attacker with access to a large amount of
-      Internet traffic; see [RFC7258]
+   Active Pervasive Attack:  An attack undertaken by a pervasive
+      attacker, which in addition to the elements of a passive pervasive
+      attack, also includes modification, addition, or removal of
+      packets in a traffic stream, or modification of treatment of
+      packets in the traffic stream.  Active pervasive attacks provide
+      more capabilities to the attacker at the cost of possible
+      detection at the endpoints.  Equivalent to active wiretapping as
+      defined in [RFC4949].
 
    Observation:  Information collected directly from communications by
       an eavesdropper or observer.  For example, the knowledge that
@@ -163,9 +165,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-
-
-Barnes, et al.          Expires September 6, 2015               [Page 3]
+Barnes, et al.         Expires September 12, 2015               [Page 3]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -187,10 +187,10 @@ Internet-Draft        Confidentiality Threat Model            March 2015
       communication from a collaborator, deliberately or unwittingly, to
       an attacker
 
-3.  An Idealized Pervasive Flow Access Attacker
+3.  An Idealized Passive Pervasive Attacker
 
    In considering the threat posed by pervasive surveillance, we begin
-   by defining an idealized pervasive flow access attacker.  While this
+   by defining an idealized passive pervasive attacker.  While this
    attacker is less capable than those which we now know to have
    compromised the Internet from press reports, as elaborated in
    Section 4, it does set a lower bound on the capabilities of an
@@ -221,7 +221,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 4]
+Barnes, et al.         Expires September 12, 2015               [Page 4]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -277,7 +277,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 5]
+Barnes, et al.         Expires September 12, 2015               [Page 5]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -321,7 +321,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    complicates the problem of protecting privacy by hardening protocols
    alone.
 
-3.3.  An illustration of an ideal flow access attack
+3.3.  An illustration of an ideal passive pervasive attack
 
    To illustrate how capable the idealized attacker is even given its
    limitations, we explore the non-anonymity of encrypted IP traffic in
@@ -333,7 +333,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 6]
+Barnes, et al.         Expires September 12, 2015               [Page 6]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -389,7 +389,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 7]
+Barnes, et al.         Expires September 12, 2015               [Page 7]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -445,7 +445,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 8]
+Barnes, et al.         Expires September 12, 2015               [Page 8]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -501,7 +501,7 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-Barnes, et al.          Expires September 6, 2015               [Page 9]
+Barnes, et al.         Expires September 12, 2015               [Page 9]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
@@ -526,74 +526,81 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    Agency (NSA) and the UK Government Communications Headquarters
    (GCHQ).  These documents have revealed methods that these agencies
    use to attack Internet applications and obtain sensitive user
-   information.
+   information.  We note that these reports are primarily useful as an
+   illustration of the types of capabilities fielded by pervasive
+   attackers as of the date of the Snowden leaks in 2013.
 
-   First, they have confirmed that these agencies have capabilities in
-   line with those of our idealized attacker, thorugh the large-scale
-   passive collection of Internet traffic [pass1][pass2][pass3][pass4].
-   For example: - The NSA XKEYSCORE system accesses data from multiple
-   access points and searches for "selectors" such as email addresses,
-   at the scale of tens of terabytes of data per day.  - The GCHQ
-   Tempora system appears to have access to around 1,500 major cables
-   passing through the UK.  - The NSA MUSCULAR program tapped cables
-   between data centers belonging to major service providers.  - Several
-   programs appear to perform wide-scale collection of cookies in web
-   traffic and location data from location-aware portable devices such
-   as smartphones.
+   First, they confirm the deployment of large-scale passive collection
+   of Internet traffic, which confirms the existence of pervasive
+   passive attackers with at least the capabilities of our idealized
+   attacker.  For example [pass1][pass2][pass3][pass4]:
 
-   However, the capabilities described go beyond those available to our
-   idealized attacker, including:
+   o  NSA's XKEYSCORE system accesses data from multiple access points
+      and searches for "selectors" such as email addresses, at the scale
+      of tens of terabytes of data per day.
 
-   o  Decryption of TLS-protected Internet sessions [dec1][dec2][dec3].
-      For example, the NSA BULLRUN project appears to have had a budget
-      of around $250M per year to undermine encryption through multiple
-      approaches.
+   o  GCHQ's Tempora system appears to have access to around 1,500 major
+      cables passing through the UK.
 
-   o  Insertion of NSA devices as a man-in-the-middle of Internet
-      transactions [TOR1][TOR2].  For example, the NSA QUANTUM system
-      appears to use several different techniques to hijack HTTP
-      connections, ranging from DNS response injection to HTTP 302
-      redirects.
+   o  NSA's MUSCULAR program has tapped cables between data centers
+      belonging to major service providers.
+
+   o  Several programs appear to perform wide-scale collection of
+      cookies in web traffic and location data from location-aware
+      portable devices such as smartphones.
+
+   However, the capabilities described by these reports go beyond those
+   of our idealized attacker.  They include the compromise of
+   cryptographic protocols, including decryption of TLS-protected
+   Internet sessions [dec1][dec2][dec3].  For example, the NSA BULLRUN
+   project worked to undermine encryption through multiple approaches,
 
 
 
-Barnes, et al.          Expires September 6, 2015              [Page 10]
+Barnes, et al.         Expires September 12, 2015              [Page 10]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
 
-   o  Direct acquisition of bulk data and metadata from service
-      providers [dir1][dir2][dir3].  For example, the NSA PRISM program
-      provides the agency with access to many types of user data (e.g.,
-      email, chat, VoIP).
+   including covert modifications to cryptographic software on end
+   systems.
 
-   o  Use of implants (covert modifications or malware) to undermine
-      security and anonymity features [dec2][TOR1][TOR2].  For example:
+   They also include the direct compromise of intermediate systems and
+   arrangements with service providers for bulk data and metadata access
+   [dir1][dir2][dir3], bypassing the need to capture traffic on the
+   wire.  For example, the NSA PRISM program provides the agency with
+   access to many types of user data (e.g., email, chat, VoIP).
 
-      *  NSA appears to use the QUANTUM man-in-the-middle system to
-         direct users to a FOXACID server, which delivers an implant to
-         compromise the browser of a user of the Tor anonymous
-         communications network.
+   The reported capabilities also include elements of active pervasive
+   attack, including:
 
-      *  Implants are apparently available for Cisco, Juniper, Huawei,
-         Dell, and HP network elements, provided by the NSA Advanced
-         Network Technology group [spiegel1]
+   o  Insertion of devices as a man-in-the-middle of Internet
+      transactions [TOR1][TOR2].  For example, NSA's QUANTUM system
+      appears to use several different techniques to hijack HTTP
+      connections, ranging from DNS response injection to HTTP 302
+      redirects.
 
-      *  Compromised hosts at botnet scale, using tools by the NSA's
-         Remote Operations Center [spiegel3]
+   o  Use of implants on end systems to undermine security and anonymity
+      features [dec2][TOR1][TOR2].  For example, QUANTUM is used to
+      direct users to a FOXACID server, which in turn delivers an
+      implant to compromise browsers of Tor users.
 
-      *  The BULLRUN program mentioned above includes the addition of
-         covert modifications to software as one means to undermine
-         encryption.
+   o  Use of implants on network elements from many major equipment
+      providers, including Cisco, Juniper, Huawei, Dell, and HP, as
+      provided by the NSA's Advanced Network Technology group.
+      [spiegel1]
 
-      *  There is suspicion that NSA modifications to the DUAL_EC_DRBG
-         random number generator were made to ensure that keys generated
-         using that generator could be predicted by NSA.  This RNG was
-         made part of NIST's SP 800-90A, for which NIST acknowledges
-         NSA's assistance.  There have also been reports that the NSA
-         attempted to increase the use of this curve by encouraging RSA
-         Security to make this curve the default in their BSAFE product
-         line.
+   o  Use of botnet-scale collections of compromised hosts [spiegel3].
+
+   The scale of the compromise extends beyond the network to include
+   subversion of the technical standards process itself.  For example,
+   there is also suspicion that NSA modifications to the DUAL_EC_DRBG
+   random number generator were made to ensure that keys generated using
+   that generator could be predicted by NSA.  This RNG was made part of
+   NIST's SP 800-90A, for which NIST acknowledges NSA's assistance.
+   There have also been reports that the NSA paid RSA Security for a
+   related contract with the result that the curve became the default in
+   the RSA BSAFE product line.
 
    We use the term "pervasive attack" [RFC7258] to collectively describe
    these operations.  The term "pervasive" is used because the attacks
@@ -603,6 +610,14 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    these attacks.  To achieve this scale, the attacks are physically
    pervasive; they affect a large number of Internet communications.
    They are pervasive in content, consuming and exploiting any
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 11]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    information revealed by the protocol.  And they are pervasive in
    technology, exploiting many different vulnerabilities in many
    different protocols.
@@ -610,14 +625,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    It's important to note that although the attacks mentioned above were
    executed by NSA and GCHQ, there are many other organizations that can
    mount pervasive surveillance attacks.  Because of the resources
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 11]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
-
    required to achieve pervasive scale, these attacks are most commonly
    undertaken by nation-state actors.  For example, the Chinese Internet
    filtering system known as the "Great Firewall of China" uses several
@@ -649,6 +656,24 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 5.1.  Attacker Capabilities
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 12]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
     +--------------------------+-------------------------------------+
     | Attack Class             | Capability                          |
     +--------------------------+-------------------------------------+
@@ -665,18 +690,9 @@ Internet-Draft        Confidentiality Threat Model            March 2015
     | Content exfiltration     | Access data at rest                 |
     +--------------------------+-------------------------------------+
 
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 12]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
-
    Security analyses of Internet protocols commonly consider two classes
-   of attacker: flow access attackers, who can simply listen in on
-   communications as they transit the network, and flow modification
+   of attacker: Passive pervasive attackers, who can simply listen in on
+   communications as they transit the network, and active pervasive
    attackers, who can modify or delete packets in addition to simply
    collecting them.
 
@@ -685,60 +701,58 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    often assumed to operate near the edge of the network, where attacks
    can be simpler.  For example, in some LANs, it is simple for any node
    to engage in passive listening to other nodes' traffic or inject
-   packets to accomplish flow modification attacks.  However, as we now
-   know, both passive and flow modification attacks are undertaken by
+   packets to accomplish active pervasive attacks.  However, as we now
+   know, both passive and active pervasive attacks are undertaken by
    pervasive attackers closer to the core of the network, greatly
    expanding the scope and capability of the attacker.
 
    Eavesdropping and observation at a larger scale make passive
-   inference attacks easier to carry out: a flow access attacker with
-   access to a large portion of the Internet can analyze collected
+   inference attacks easier to carry out: a passive pervasive attacker
+   with access to a large portion of the Internet can analyze collected
    traffic to create a much more detailed view of individual behavior
    than an attacker that collects at a single point.  Even the usual
-   claim that encryption defeats flow access attackers is weakened,
-   since a pervasive flow access attacker can infer relationships from
-   correlations over large numbers of sessions, e.g., pairing encrypted
-   sessions with unencrypted sessions from the same host, or performing
-   traffic fingerprinting between known and unknown encrypted sessions.
-   Reports on the NSA XKEYSCORE system would indicate it is an example
-   of such an attacker.
+   claim that encryption defeats passive pervasive attackers is
+   weakened, since a pervasive flow access attacker can infer
+   relationships from correlations over large numbers of sessions, e.g.,
+   pairing encrypted sessions with unencrypted sessions from the same
+   host, or performing traffic fingerprinting between known and unknown
+   encrypted sessions.  Reports on the NSA XKEYSCORE system would
+   indicate it is an example of such an attacker.
 
-   A pervasive flow modification attacker likewise has capabilities
-   beyond those of a localized flow modification attacker.  flow
-   modification attacks are often limited by network topology, for
-   example by a requirement that the attacker be able to see a targeted
-   session as well as inject packets into it.  A pervasive flow
-   modification attacker with access at multiple points within the core
-   of the Internet is able to overcome these topological limitations and
-   perform attacks over a much broader scope.  Being positioned in the
-   core of the network rather than the edge can also enable a pervasive
-   flow modification attacker to reroute targeted traffic, amplifying
-   the ability to perform both eavesdropping and traffic injection.
-   Pervasive flow modification attackers can also benefit from pervasive
-   passive collection to identify vulnerable hosts.
-
-   While not directly related to pervasiveness, attackers that are in a
-   position to mount a pervasive flow modification attack are also often
-   in a position to subvert authentication, a traditional protection
-   against such attacks.  Authentication in the Internet is often
-   achieved via trusted third party authorities such as the Certificate
+   An active pervasive attacker likewise has capabilities beyond those
+   of a localized active attacker.  flow modification attacks are often
+   limited by network topology, for example by a requirement that the
 
 
 
-Barnes, et al.          Expires September 6, 2015              [Page 13]
+Barnes, et al.         Expires September 12, 2015              [Page 13]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
 
-   Authorities (CAs) that provide web sites with authentication
-   credentials.  An attacker with sufficient resources may also be able
-   to induce an authority to grant credentials for an identity of the
-   attacker's choosing.  If the parties to a communication will trust
-   multiple authorities to certify a specific identity, this attack may
-   be mounted by suborning any one of the authorities (the proverbial
+   attacker be able to see a targeted session as well as inject packets
+   into it.  A pervasive flow modification attacker with access at
+   multiple points within the core of the Internet is able to overcome
+   these topological limitations and perform attacks over a much broader
+   scope.  Being positioned in the core of the network rather than the
+   edge can also enable an active pervasive attacker to reroute targeted
+   traffic, amplifying the ability to perform both eavesdropping and
+   traffic injection.  Active pervasive attackers can also benefit from
+   passive pervasive collection to identify vulnerable hosts.
+
+   While not directly related to pervasiveness, attackers that are in a
+   position to mount a active pervasive attack are also often in a
+   position to subvert authentication, a traditional protection against
+   such attacks.  Authentication in the Internet is often achieved via
+   trusted third party authorities such as the Certificate Authorities
+   (CAs) that provide web sites with authentication credentials.  An
+   attacker with sufficient resources may also be able to induce an
+   authority to grant credentials for an identity of the attacker's
+   choosing.  If the parties to a communication will trust multiple
+   authorities to certify a specific identity, this attack may be
+   mounted by suborning any one of the authorities (the proverbial
    "weakest link").  Subversion of authorities in this way can allow an
-   flow modification attack to succeed in spite of an authentication
-   check.
+   active attack to succeed in spite of an authentication check.
 
    Beyond these three classes (observation, inference, and active),
    reports on the BULLRUN effort to defeat encryption and the PRISM
@@ -764,6 +778,14 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    cover a web site operator that provides the private key corresponding
    to its HTTPS certificate to an intelligence agency.
 
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 14]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    "Dynamic" key exfiltration, by contrast, refers to attacks in which
    the collaborator delivers keying material to the attacker frequently,
    e.g., on a per-session basis.  This does not necessarily imply
@@ -778,14 +800,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    Unlike the key exfiltration cases, this attack does not require the
    attacker to capture the desired data as it flows through the network.
    The risk is to data at rest as opposed to data in transit.  This
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 14]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
-
    increases the scope of data that the attacker can obtain, since the
    attacker can access historical data - the attacker does not have to
    be listening at the time the communication happens.
@@ -816,6 +830,18 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 5.2.  Attacker Costs
 
+
+
+
+
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 15]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
      +--------------------------+-----------------------------------+
      | Attack Class             | Cost / Risk to Attacker           |
      +--------------------------+-----------------------------------+
@@ -832,16 +858,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
      | Content exfiltration     | Ongoing, bulk interaction         |
      +--------------------------+-----------------------------------+
 
-
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 15]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
-
    Each of the attack types discussed in the previous section entails
    certain costs and risks.  These costs differ by attack, and can be
    helpful in guiding response to pervasive attack.
@@ -852,8 +868,8 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    the attacker must first be discovered and identified.  So the primary
    risk we focus on here is the risk of discovery and attribution.
 
-   A flow access attack is the simplest to mount in some ways.  The base
-   requirement is that the attacker obtain physical access to a
+   A passive pervasive attack is the simplest to mount in some ways.
+   The base requirement is that the attacker obtain physical access to a
    communications medium and extract communications from it.  For
    example, the attacker might tap a fiber-optic cable, acquire a mirror
    port on a switch, or listen to a wireless signal.  The need for these
@@ -861,45 +877,45 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    attacker to the risk that the taps will be discovered.  For example,
    a fiber tap or mirror port might be discovered by network operators
    noticing increased attenuation in the fiber or a change in switch
-   configuration.  Of course, flow access attacks may be accomplished
-   with the cooperation of the network operator, in which case there is
-   a risk that the attacker's interactions with the network operator
-   will be exposed.
+   configuration.  Of course, passive pervasive attacks may be
+   accomplished with the cooperation of the network operator, in which
+   case there is a risk that the attacker's interactions with the
+   network operator will be exposed.
 
-   In many ways, the costs and risks for an flow modification attack are
-   similar to those for a flow access attack, with a few additions.  An
-   flow modification attacker requires more robust network access than a
-   flow access attacker, since for example they will often need to
+   In many ways, the costs and risks for an active pervasive attack are
+   similar to those for a passive pervasive attack, with a few
+   additions.  An active attacker requires more robust network access
+   than a passive attacker, since for example they will often need to
    transmit data as well as receiving it.  In the wireless example
    above, the attacker would need to act as an transmitter as well as
    receiver, greatly increasing the probability the attacker will be
-   discovered (e.g., using direction-finding technology).  flow
-   modification attacks are also much more observable at higher layers
-   of the network.  For example, an flow modification attacker that
-   attempts to use a mis-issued certificate could be detected via
-   Certificate Transparency [RFC6962].
-
-   In terms of raw implementation complexity, flow access attacks
-   require only enough processing to extract information from the
-   network and store it.  flow modification attacks, by contrast, often
-   depend on winning race conditions to inject pakets into active
-   connections.  So flow modification attacks in the core of the network
-   require processing hardware to that can operate at line speed
-   (roughly 100Gbps to 1Tbps in the core) to identify opportunities for
-   attack and insert attack traffic in a high-volume traffic.  Key
-   exfiltration attacks rely on flow access attack for access to
-   encrypted data, with the collaborator providing keys to decrypt the
-   data.  So the attacker undertakes the cost and risk of a flow access
+   discovered (e.g., using direction-finding technology).  Active
 
 
 
-Barnes, et al.          Expires September 6, 2015              [Page 16]
+Barnes, et al.         Expires September 12, 2015              [Page 16]
 
 Internet-Draft        Confidentiality Threat Model            March 2015
 
 
-   attack, as well as additional risk of discovery via the interactions
-   that the attacker has with the collaborator.
+   attacks are also much more observable at higher layers of the
+   network.  For example, an active attacker that attempts to use a mis-
+   issued certificate could be detected via Certificate Transparency
+   [RFC6962].
+
+   In terms of raw implementation complexity, passive pervasive attacks
+   require only enough processing to extract information from the
+   network and store it.  Active pervasive attacks, by contrast, often
+   depend on winning race conditions to inject pakets into active
+   connections.  So active pervasive attacks in the core of the network
+   require processing hardware to that can operate at line speed
+   (roughly 100Gbps to 1Tbps in the core) to identify opportunities for
+   attack and insert attack traffic in a high-volume traffic.  Key
+   exfiltration attacks rely on passive pervasive attack for access to
+   encrypted data, with the collaborator providing keys to decrypt the
+   data.  So the attacker undertakes the cost and risk of a passive
+   pervasive attack, as well as additional risk of discovery via the
+   interactions that the attacker has with the collaborator.
 
    In this sense, static exfiltration has a lower risk profile than
    dynamic.  In the static case, the attacker need only interact with
@@ -914,8 +930,8 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
    Content exfiltration has a similar risk profile to dynamic key
    exfiltration.  In a content exfiltration attack, the attacker saves
-   the cost and risk of conducting a flow access attack.  The risk of
-   discovery through interactions with the collaborator, however, is
+   the cost and risk of conducting a passive pervasive attack.  The risk
+   of discovery through interactions with the collaborator, however, is
    still present, and may be higher.  The content of a communication is
    obviously larger than the key used to encrypt it, often by several
    orders of magnitude.  So in the content exfiltration case, the
@@ -930,6 +946,14 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    incur additional cost in order to convince the collaborator to
    participate in the attack.  Likewise, the scope of these attacks is
    limited to case where the attacker can convince a collaborator to
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 17]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    participate.  If the attacker is a national government, for example,
    it may be able to compel participation within its borders, but have a
    much more difficult time recruiting foreign collaborators.
@@ -943,16 +967,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    systems.  The main difference is that the risk in this case is of
    automated discovery (e.g., by intrusion detection systems) rather
    than discovery by humans.
-
-
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 17]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
 
 6.  Security Considerations
 
@@ -988,6 +1002,14 @@ Internet-Draft        Confidentiality Threat Model            March 2015
               <http://www.theguardian.com/world/2013/jun/27/
               nsa-online-metadata-collection>.
 
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 18]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    [pass2]    The Guardian, "NSA's Prism surveillance program: how it
               works and what it can do", 2013,
               <http://www.theguardian.com/world/2013/jun/08/
@@ -1001,14 +1023,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    [pass4]    The Guardian, "How does GCHQ's internet surveillance
               work?", n.d., <http://www.theguardian.com/uk/2013/jun/21/
               how-does-gchq-internet-surveillance-work>.
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 18]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
 
    [dec1]     The New York Times, "N.S.A. Able to Foil Basic Safeguards
               of Privacy on Web", 2013,
@@ -1043,6 +1057,15 @@ Internet-Draft        Confidentiality Threat Model            March 2015
               <http://www.theguardian.com/world/2013/jun/06/
               nsa-phone-records-verizon-court-order>.
 
+
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 19]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    [dir2]     The Guardian, "NSA Prism program taps in to user data of
               Apple, Google and others", 2013,
               <http://www.theguardian.com/world/2013/jun/06/
@@ -1057,14 +1080,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
               secure", 2013,
               <http://www.theguardian.com/world/2013/sep/05/
               nsa-how-to-remain-secure-surveillance>.
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 19]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
 
    [snowden]  Technology Review, "NSA Leak Leaves Crypto-Math Intact but
               Highlights Known Workarounds", 2013,
@@ -1098,6 +1113,15 @@ Internet-Draft        Confidentiality Threat Model            March 2015
               E. Lear, "Address Allocation for Private Internets", BCP
               5, RFC 1918, February 1996.
 
+
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 20]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    [RFC1939]  Myers, J. and M. Rose, "Post Office Protocol - Version 3",
               STD 53, RFC 1939, May 1996.
 
@@ -1111,16 +1135,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
               A., Peterson, J., Sparks, R., Handley, M., and E.
               Schooler, "SIP: Session Initiation Protocol", RFC 3261,
               June 2002.
-
-
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 20]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
 
    [RFC3365]  Schiller, J., "Strong Security Requirements for Internet
               Engineering Task Force Standard Protocols", BCP 61, RFC
@@ -1155,6 +1169,15 @@ Internet-Draft        Confidentiality Threat Model            March 2015
    [RFC5321]  Klensin, J., "Simple Mail Transfer Protocol", RFC 5321,
               October 2008.
 
+
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 21]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    [RFC5655]  Trammell, B., Boschi, E., Mark, L., Zseby, T., and A.
               Wagner, "Specification of the IP Flow Information Export
               (IPFIX) File Format", RFC 5655, October 2009.
@@ -1168,15 +1191,6 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
    [RFC6962]  Laurie, B., Langley, A., and E. Kasper, "Certificate
               Transparency", RFC 6962, June 2013.
-
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 21]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
-
 
    [RFC6698]  Hoffman, P. and J. Schlyter, "The DNS-Based Authentication
               of Named Entities (DANE) Transport Layer Security (TLS)
@@ -1212,6 +1226,14 @@ Authors' Addresses
    Email: fluffy@cisco.com
 
 
+
+
+
+Barnes, et al.         Expires September 12, 2015              [Page 22]
+
+Internet-Draft        Confidentiality Threat Model            March 2015
+
+
    Ted Hardie
 
    Email: ted.ietf@gmail.com
@@ -1225,13 +1247,6 @@ Authors' Addresses
    Christian Huitema
 
    Email: huitema@huitema.net
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 22]
-
-Internet-Draft        Confidentiality Threat Model            March 2015
 
 
    Daniel Borkmann
@@ -1270,19 +1285,4 @@ Internet-Draft        Confidentiality Threat Model            March 2015
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Barnes, et al.          Expires September 6, 2015              [Page 23]
+Barnes, et al.         Expires September 12, 2015              [Page 23]
