@@ -276,7 +276,12 @@ terminology; see {{RFC4949}} and {{RFC6973}}. Terms used from
 Recipient, Attack (in a privacy context), Correlation, Fingerprint,
 Traffic Analysis, and Identifiability (and related terms). In
 addition, we use a few terms that are specific to the attacks
-discussed here:
+discussed in this document. Note especially that "passive" and "active" below
+do not refer to the effort used to mount the attack; a "passive attack"
+is any attack that accesses a flow but does not modify it, while an
+"active attack" is any attack that modifies a flow.  Some passive attacks
+involve active interception and modifications of devices, rather than simple
+access to the medium.  The introduced terms are:
 
 Pervasive Attack:
 : An attack on Internet communications that makes
@@ -677,7 +682,7 @@ including:
 
 * Use of botnet-scale collections of compromised hosts {{spiegel3}}.
 
-The scale of the compromise extends beyond the network to include subversion of the technical standards process itself. For example, there is also suspicion that NSA modifications to the DUAL_EC_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.  This RNG was made part of NIST's SP 800-90A, for which NIST acknowledges NSA's assistance. There have also been reports that the NSA paid RSA Security for a related contract with the result that the curve became the default in the RSA BSAFE product line.
+The scale of the compromise extends beyond the network to include subversion of the technical standards process itself. For example, there is suspicion that NSA modifications to the DUAL_EC_DRBG random number generator were made to ensure that keys generated using that generator could be predicted by NSA.  This RNG was made part of NIST's SP 800-90A, for which NIST acknowledges NSA's assistance. There have also been reports that the NSA paid RSA Security for a related contract with the result that the curve became the default in the RSA BSAFE product line.
 
 We use the term "pervasive attack" {{RFC7258}} to collectively
 describe these operations.  The term "pervasive" is used because the
