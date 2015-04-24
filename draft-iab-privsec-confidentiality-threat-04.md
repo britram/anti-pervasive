@@ -201,6 +201,40 @@ informative:
       ins: P. Golle
       name: Phillippe Golle
     date: 2003
+  great-cannon:
+    target: https://citizenlab.org/2015/04/chinas-great-cannon/
+    title:  "China's Great Cannon"
+    author:
+      name: Bill Marczak
+      ins: B. Marczak
+    author: 
+      name: Nicholas Weaver
+      ins: N. Weaver
+    author:
+      name: Jakub Dalek
+      ins: J. Dalek
+    author:
+      name: Roya Ensafi
+      ins: R. Ensafi
+    author:
+      name: David Fifield
+      ins: D. Fifield
+    author:
+      name: Sarah McKune
+      ins: S. McKune
+    author:
+      name: Arn Rey
+      ins: A. Rey
+    author:
+      name: John Scott-Railton
+      ins: J. Scott-Railton
+    author:
+      name: Ronald Deibert
+      ins: R. Deibert
+    author:
+      name: Vern Paxson
+      ins: V. Paxson
+    date: 2015
   RFC1035:
   RFC1918:
   RFC1939:
@@ -920,12 +954,35 @@ undertakes the cost and risk of a passive pervasive attack, as well as
 additional risk of discovery via the interactions that the attacker
 has with the collaborator.
 
+Some active attacks are more expensive than others. For example,
+active man-in-the-middle (MITM) attacks require access to the entire
+network session and path in order to intercept and potentially modify,
+as well as drop, legitimate packets in favor of the attacker's
+packets. A similar but weaker form of attack, called an active
+man-on-the-side (MOTS), does not require access to the entire session
+and only part of the path. In an active MOTS attack, the attacker need
+only be able to inject or modify traffic on the network element the
+attacker has access to. While this may not allow for full control of a
+communication session (as in an MITM attack), the attacker can perform
+a number of powerful attacks, including but not limited to: injecting
+packets that could terminate the session (e.g., TCP RST packets),
+sending a fake DNS reply to redirect ensuing TCP connections to an
+address of the attacker's choice (i.e., winning a "DNS response
+race"), and mounting an HTTP Redirect attack by observing a TCP/HTTP
+connection to a target address and injecting a TCP data packet
+containing an HTTP redirect. For example, the system dubbed by
+researchers as China's "Great Cannon" {{great-cannon}} can operate in
+ful MITM mode to accomplish very complex attacks that can modify
+content in transit while the well-known Great Firewall of China is a
+MOTS system that focuses on blocking access to certain kinds of
+traffic and destinations via TCP RST packet injection.
+
 In this sense, static exfiltration has a lower risk profile than
 dynamic.  In the static case, the attacker need only interact with the
 collaborator a small number of times, possibly only once, say to
 exchange a private key.  In the dynamic case, the attacker must have
 continuing interactions with the collaborator.  As noted above these
-interactions may real, such as in-person meetings, or virtual, such as
+interactions may be real, such as in-person meetings, or virtual, such as
 software modifications that render keys available to the attacker.
 Both of these types of interactions introduce a risk that they will be
 discovered, e.g., by employees of the collaborator organization
