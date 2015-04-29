@@ -1297,7 +1297,7 @@ Internet-Draft        Confidentiality Threat Model            April 2015
 
    Daniel Borkmann
 
-   Email: dborkman@redhat.com
+   Email: dborkman@iogearbox.net
 
 
 

@@ -34,7 +34,7 @@ author:
  -
     ins: D. Borkmann
     name: Daniel Borkmann
-    email: dborkman@redhat.com
+    email: dborkman@iogearbox.net
 
 normative:
   RFC6973:
