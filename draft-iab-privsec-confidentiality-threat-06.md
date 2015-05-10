@@ -1,8 +1,8 @@
 ---
 title: "Confidentiality in the Face of Pervasive Surveillance: A Threat Model and Problem Statement"
 abbrev: Confidentiality Threat Model
-docname: draft-iab-privsec-confidentiality-threat-05
-date: 2015-04-29
+docname: draft-iab-privsec-confidentiality-threat-06
+date: 2015-05-11
 category: info
 ipr: trust200902
 

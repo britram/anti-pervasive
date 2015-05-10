@@ -31,7 +31,7 @@
 ]>
 
 
-<rfc ipr="trust200902" docName="draft-iab-privsec-confidentiality-threat-05" category="info">
+<rfc ipr="trust200902" docName="draft-iab-privsec-confidentiality-threat-06" category="info">
 
   <front>
     <title abbrev="Confidentiality Threat Model">Confidentiality in the Face of Pervasive Surveillance: A Threat Model and Problem Statement</title>
@@ -79,7 +79,7 @@
       </address>
     </author>
 
-    <date year="2015" month="April" day="29"/>
+    <date year="2015" month="May" day="11"/>
 
     
     
