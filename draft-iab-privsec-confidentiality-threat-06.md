@@ -941,27 +941,26 @@ undertakes the cost and risk of a passive pervasive attack, as well as
 additional risk of discovery via the interactions that the attacker
 has with the collaborator.
 
-Some active attacks are more expensive than others.
-
-For example, active man-in-the-middle (MITM) attacks require access to one or
-more points on a communication's network path that allow  visibility of the
-entire session and the ability to modify or drop  legitimate packets in favor of
-the attacker's packets. A similar but  weaker form of attack, called an active
+Some active attacks are more expensive than others. For example, active
+man-in-the-middle (MITM) attacks require access to one or more points on a
+communication's network path that allow  visibility of the entire session and
+the ability to modify or drop  legitimate packets in favor of the attacker's
+packets. A similar but  weaker form of attack, called an active
 man-on-the-side (MOTS),  requires access to only part of the session. In an
 active MOTS attack, the attacker need only be able to inject or modify traffic
-on the network element the attacker has access to. While this may not allow for
-full control of a communication session (as in an MITM attack), the attacker can
-perform a number of powerful attacks, including but not limited to: injecting
-packets that could terminate the session (e.g., TCP RST packets), sending a fake
-DNS reply to redirect ensuing TCP connections to an address of the attacker's
-choice (i.e., winning a "DNS response race"), and mounting an HTTP Redirect
-attack by observing a TCP/HTTP connection to a target address and injecting a
-TCP data packet containing an HTTP redirect. For example, the system dubbed by
-researchers as China's "Great Cannon" {{great-cannon}} can operate in ful MITM
-mode to accomplish very complex attacks that can modify content in transit while
-the well-known Great Firewall of China is a MOTS system that focuses on blocking
-access to certain kinds of traffic and destinations via TCP RST packet
-injection.
+on the network element the attacker has access to. While this may not allow
+for full control of a communication session (as in an MITM attack), the
+attacker can perform a number of powerful attacks, including but not limited
+to: injecting packets that could terminate the session (e.g., TCP RST
+packets), sending a fake DNS reply to redirect ensuing TCP connections to an
+address of the attacker's choice (i.e., winning a "DNS response race"), and
+mounting an HTTP Redirect attack by observing a TCP/HTTP connection to a
+target address and injecting a TCP data packet containing an HTTP redirect.
+For example, the system dubbed by researchers as China's "Great Cannon"
+{{great-cannon}} can operate in ful MITM mode to accomplish very complex
+attacks that can modify content in transit while the well-known Great Firewall
+of China is a MOTS system that focuses on blocking access to certain kinds of
+traffic and destinations via TCP RST packet injection.
 
 In this sense, static exfiltration has a lower risk profile than
 dynamic.  In the static case, the attacker need only interact with the

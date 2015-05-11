@@ -15,7 +15,6 @@ Expires: November 12, 2015
                                                               C. Huitema
 
                                                              D. Borkmann
-
                                                             May 11, 2015
 
 
@@ -49,6 +48,7 @@ Status of This Memo
    material or to cite them other than as "work in progress."
 
    This Internet-Draft will expire on November 12, 2015.
+
 
 
 
@@ -134,7 +134,7 @@ Internet-Draft        Confidentiality Threat Model              May 2015
       otherwise provides the attacker with access to a large amount of
       Internet traffic; see [RFC7258].
 
-   Passive Pervasive Attack:    An eavesdropping attack undertaken by a
+   Passive Pervasive Attack:  An eavesdropping attack undertaken by a
       pervasive attacker, in which the packets in a traffic stream
       between two endpoints are intercepted, but in which the attacker
       does not modify the packets in the traffic stream between two
@@ -932,20 +932,20 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    pervasive attack, as well as additional risk of discovery via the
    interactions that the attacker has with the collaborator.
 
-   Some active attacks are more expensive than others.
-
-   For example, active man-in-the-middle (MITM) attacks require access
-   to one or more points on a communication's network path that allow
-   visibility of the entire session and the ability to modify or drop
-   legitimate packets in favor of the attacker's packets.  A similar but
-   weaker form of attack, called an active man-on-the-side (MOTS),
-   requires access to only part of the session.  In an active MOTS
-   attack, the attacker need only be able to inject or modify traffic on
-   the network element the attacker has access to.  While this may not
-   allow for full control of a communication session (as in an MITM
-   attack), the attacker can perform a number of powerful attacks,
-   including but not limited to: injecting packets that could terminate
-   the session (e.g., TCP RST packets), sending a fake DNS reply to
+   Some active attacks are more expensive than others.  For example,
+   active man-in-the-middle (MITM) attacks require access to one or more
+   points on a communication's network path that allow visibility of the
+   entire session and the ability to modify or drop legitimate packets
+   in favor of the attacker's packets.  A similar but weaker form of
+   attack, called an active man-on-the-side (MOTS), requires access to
+   only part of the session.  In an active MOTS attack, the attacker
+   need only be able to inject or modify traffic on the network element
+   the attacker has access to.  While this may not allow for full
+   control of a communication session (as in an MITM attack), the
+   attacker can perform a number of powerful attacks, including but not
+   limited to: injecting packets that could terminate the session (e.g.,
+   TCP RST packets), sending a fake DNS reply to redirect ensuing TCP
+   connections to an address of the attacker's choice (i.e., winning a
 
 
 
@@ -954,16 +954,14 @@ Barnes, et al.          Expires November 12, 2015              [Page 17]
 Internet-Draft        Confidentiality Threat Model              May 2015
 
 
-   redirect ensuing TCP connections to an address of the attacker's
-   choice (i.e., winning a "DNS response race"), and mounting an HTTP
-   Redirect attack by observing a TCP/HTTP connection to a target
-   address and injecting a TCP data packet containing an HTTP redirect.
-   For example, the system dubbed by researchers as China's "Great
-   Cannon" [great-cannon] can operate in ful MITM mode to accomplish
-   very complex attacks that can modify content in transit while the
-   well-known Great Firewall of China is a MOTS system that focuses on
-   blocking access to certain kinds of traffic and destinations via TCP
-   RST packet injection.
+   "DNS response race"), and mounting an HTTP Redirect attack by
+   observing a TCP/HTTP connection to a target address and injecting a
+   TCP data packet containing an HTTP redirect.  For example, the system
+   dubbed by researchers as China's "Great Cannon" [great-cannon] can
+   operate in ful MITM mode to accomplish very complex attacks that can
+   modify content in transit while the well-known Great Firewall of
+   China is a MOTS system that focuses on blocking access to certain
+   kinds of traffic and destinations via TCP RST packet injection.
 
    In this sense, static exfiltration has a lower risk profile than
    dynamic.  In the static case, the attacker need only interact with
@@ -1002,6 +1000,8 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    unwitting; the attacker can steal keys or data to enable the attack.
    In some ways, the risks of this approach are similar to the case of
    an active collaborator.  In the static case, the attacker needs to
+   steal information from the collaborator once; in the dynamic case,
+   the attacker needs to continued presence inside the collaborators
 
 
 
@@ -1010,8 +1010,6 @@ Barnes, et al.          Expires November 12, 2015              [Page 18]
 Internet-Draft        Confidentiality Threat Model              May 2015
 
 
-   steal information from the collaborator once; in the dynamic case,
-   the attacker needs to continued presence inside the collaborators
    systems.  The main difference is that the risk in this case is of
    automated discovery (e.g., by intrusion detection systems) rather
    than discovery by humans.
@@ -1055,8 +1053,10 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               <http://www.theguardian.com/world/2013/jun/08/
               nsa-prism-server-collection-facebook-google>.
 
-
-
+   [pass3]    The Guardian, "XKeyscore: NSA tool collects 'nearly
+              everything a user does on the internet'", 2013,
+              <http://www.theguardian.com/world/2013/jul/31/
+              nsa-top-secret-program-online-data>.
 
 
 
@@ -1065,11 +1065,6 @@ Barnes, et al.          Expires November 12, 2015              [Page 19]
 
 Internet-Draft        Confidentiality Threat Model              May 2015
 
-
-   [pass3]    The Guardian, "XKeyscore: NSA tool collects 'nearly
-              everything a user does on the internet'", 2013,
-              <http://www.theguardian.com/world/2013/jul/31/
-              nsa-top-secret-program-online-data>.
 
    [pass4]    The Guardian, "How does GCHQ's internet surveillance
               work?", n.d., <http://www.theguardian.com/uk/2013/jun/21/
@@ -1113,6 +1108,11 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               <http://www.theguardian.com/world/2013/jun/06/
               us-tech-giants-nsa-data>.
 
+   [dir3]     The Guardian, "Sigint - how the NSA collaborates with
+              technology companies", 2013,
+              <http://www.theguardian.com/world/interactive/2013/sep/05/
+              sigint-nsa-collaborates-technology-companies>.
+
 
 
 
@@ -1121,11 +1121,6 @@ Barnes, et al.          Expires November 12, 2015              [Page 20]
 
 Internet-Draft        Confidentiality Threat Model              May 2015
 
-
-   [dir3]     The Guardian, "Sigint - how the NSA collaborates with
-              technology companies", 2013,
-              <http://www.theguardian.com/world/interactive/2013/sep/05/
-              sigint-nsa-collaborates-technology-companies>.
 
    [secure]   Schneier, B., "NSA surveillance: A guide to staying
               secure", 2013,
@@ -1171,15 +1166,17 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    [RFC1939]  Myers, J. and M. Rose, "Post Office Protocol - Version 3",
               STD 53, RFC 1939, May 1996.
 
+   [RFC2015]  Elkins, M., "MIME Security with Pretty Good Privacy
+              (PGP)", RFC 2015, October 1996.
+
+
+
 
 
 Barnes, et al.          Expires November 12, 2015              [Page 21]
 
 Internet-Draft        Confidentiality Threat Model              May 2015
 
-
-   [RFC2015]  Elkins, M., "MIME Security with Pretty Good Privacy
-              (PGP)", RFC 2015, October 1996.
 
    [RFC2821]  Klensin, J., "Simple Mail Transfer Protocol", RFC 2821,
               April 2001.
@@ -1226,6 +1223,9 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               Wagner, "Specification of the IP Flow Information Export
               (IPFIX) File Format", RFC 5655, October 2009.
 
+   [RFC5750]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
+              Mail Extensions (S/MIME) Version 3.2 Certificate
+              Handling", RFC 5750, January 2010.
 
 
 
@@ -1233,10 +1233,6 @@ Barnes, et al.          Expires November 12, 2015              [Page 22]
 
 Internet-Draft        Confidentiality Threat Model              May 2015
 
-
-   [RFC5750]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
-              Mail Extensions (S/MIME) Version 3.2 Certificate
-              Handling", RFC 5750, January 2010.
 
    [RFC6120]  Saint-Andre, P., "Extensible Messaging and Presence
               Protocol (XMPP): Core", RFC 6120, March 2011.
@@ -1258,7 +1254,7 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 
    [I-D.ietf-dprive-problem-statement]
               Bortzmeyer, S., "DNS privacy considerations", draft-ietf-
-              dprive-problem-statement-03 (work in progress), March
+              dprive-problem-statement-02 (work in progress), February
               2015.
 
 Authors' Addresses
@@ -1283,16 +1279,15 @@ Authors' Addresses
    Email: ted.ietf@gmail.com
 
 
+   Brian Trammell
+
+   Email: ietf@trammell.ch
+
 
 
 Barnes, et al.          Expires November 12, 2015              [Page 23]
 
 Internet-Draft        Confidentiality Threat Model              May 2015
-
-
-   Brian Trammell
-
-   Email: ietf@trammell.ch
 
 
    Christian Huitema
@@ -1303,6 +1298,11 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    Daniel Borkmann
 
    Email: dborkman@iogearbox.net
+
+
+
+
+
 
 
 
