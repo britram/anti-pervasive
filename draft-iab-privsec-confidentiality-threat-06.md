@@ -453,7 +453,7 @@ Protocols which encrypt their payload using an application- or
 transport-layer encryption scheme (e.g. TLS) still expose all the
 information in their network and transport layer headers to the
 attacker, including source and destination addresses and ports. IPsec
-ESP{{RFC4303}} further encrypts the transport-layer headers, but still
+ESP {{RFC4303}} further encrypts the transport-layer headers, but still
 leaves IP address information unencrypted; in tunnel mode, these
 addresses correspond to the tunnel endpoints. Features of the
 security protocols themselves, e.g. the TLS session identifier,
@@ -513,7 +513,7 @@ access to a good sampling of Internet traffic.
 Tools like IPFIX {{RFC7011}} allow administrators to acquire
 statistics about sequences of packets with some common properties that
 pass through a network device. The most common set of properties used
-in flow measurement is the "five-tuple"of source and destination
+in flow measurement is the "five-tuple" of source and destination
 addresses, protocol type, and source and destination ports. These
 statistics are commonly used for network engineering, but could
 certainly be used for other purposes.
@@ -918,7 +918,7 @@ In many ways, the costs and risks for an active pervasive attack are
 similar to those for a passive pervasive attack, with a few additions.  An
 active attacker requires more robust network access than a
 passive attacker, since for example they will often need to
-transmit data as well as receiving it.  In the wireless example above,
+transmit data as well as receive it.  In the wireless example above,
 the attacker would need to act as an transmitter as well as receiver,
 greatly increasing the probability the attacker will be discovered
 (e.g., using direction-finding technology).  Active attacks
