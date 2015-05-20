@@ -361,7 +361,7 @@ records to fingerprints derived from known sizes of linked resources
 on the web servers involved, would be an inference.
 
 Collaborator:
-: An entity that is a legitimate participant in a communication, and provides information about that communication to an attacker. Collaborators may either deliberately or unwittingly cooperate with the attacker, in the latter case because the attacker has exploited some technology used by the collaborator.
+: An entity that is a legitimate participant in a communication, and provides information about that communication to an attacker. Collaborators may either deliberately or unwittingly cooperate with the attacker, in the latter case because the attacker has subverted the collaborator through technical, social, or other means.
 
 Key Exfiltration:
 : The transmission of cryptographic keying material for an encrypted communication
