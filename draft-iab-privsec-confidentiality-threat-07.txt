@@ -73,6 +73,47 @@ Copyright Notice
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
 
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  An Idealized Passive Pervasive Attacker . . . . . . . . . . .   5
+     3.1.  Information subject to direct observation . . . . . . . .   6
+     3.2.  Information useful for inference  . . . . . . . . . . . .   6
+     3.3.  An illustration of an ideal passive pervasive attack  . .   7
+       3.3.1.  Analysis of IP headers  . . . . . . . . . . . . . . .   7
+       3.3.2.  Correlation of IP addresses to user identities  . . .   8
+       3.3.3.  Monitoring messaging clients for IP address
+               correlation . . . . . . . . . . . . . . . . . . . . .   8
+       3.3.4.  Retrieving IP addresses from mail headers . . . . . .   9
+       3.3.5.  Tracking address usage with web cookies . . . . . . .   9
+       3.3.6.  Graph-based approaches to address correlation . . . .  10
+       3.3.7.  Tracking of Link Layer Identifiers  . . . . . . . . .  10
+   4.  Reported Instances of Large-Scale Attacks . . . . . . . . . .  11
+   5.  Threat Model  . . . . . . . . . . . . . . . . . . . . . . . .  13
+     5.1.  Attacker Capabilities . . . . . . . . . . . . . . . . . .  14
+     5.2.  Attacker Costs  . . . . . . . . . . . . . . . . . . . . .  17
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  19
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  19
+   8.  IAB Members at the Time of Approval . . . . . . . . . . . . .  20
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  20
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  20
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  20
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  20
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  23
+
+
+
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 2]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
 1.  Introduction
 
    Starting in June 2013, documents released to the press by Edward
@@ -103,17 +144,6 @@ Copyright Notice
    on these attacks, focusing on classes of attack that have not been a
    focus of Internet engineering to date.
 
-
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 2]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
 2.  Terminology
 
    This document makes extensive use of standard security and privacy
@@ -131,6 +161,15 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 
    Pervasive Attack:  An attack on Internet communications that makes
       use of access at a large number of points in the network, or
+
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 3]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
       otherwise provides the attacker with access to a large amount of
       Internet traffic; see [RFC7258].
 
@@ -161,15 +200,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
       taken from the headers of an observed SMTP message would be an
       observation.
 
-
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 3]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    Inference:  Information derived from analysis of information
       collected directly from communications by an eavesdropper or
       observer.  For example, the knowledge that a given web page was
@@ -188,6 +218,13 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    Key Exfiltration:  The transmission of cryptographic keying material
       for an encrypted communication from a collaborator, deliberately
       or unwittingly, to an attacker.
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 4]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
    Content Exfiltration:  The transmission of the content of a
       communication from a collaborator, deliberately or unwittingly, to
@@ -217,15 +254,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 
    o  can share information with other such attackers; but
 
-
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 4]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    o  takes no other action with respect to these communications (i.e.,
       blocking, modification, injection, etc.).
 
@@ -245,6 +273,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
       inference, especially inferences based only on plaintext portions
       of communications, such as IP and TCP headers for TLS-protected
       traffic [RFC5246]).
+
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 5]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
 3.1.  Information subject to direct observation
 
@@ -274,14 +310,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    or eavesdropped communication, and/or correlation of observed or
    eavesdropped information with information available from other
    sources.  Indeed, most useful inference performed by the attacker
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 5]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    falls under the rubric of correlation.  The simplest example of this
    is the observation of DNS queries and answers from and to a source
    and correlating those with IP addresses with which that source
@@ -301,6 +329,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    While this information is much less semantically rich than the
    application payload, it can still be useful for the inferring an
    individual's activities.
+
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 6]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
    Inference can also leverage information obtained from sources other
    than direct traffic observation.  Geolocation databases, for example,
@@ -328,16 +364,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    complicates the problem of protecting privacy by hardening protocols
    alone.
 
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 6]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
 3.3.  An illustration of an ideal passive pervasive attack
 
    To illustrate how capable the idealized attacker is even given its
@@ -359,6 +385,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    global Internet traffic.  However, monitoring a number of high
    capacity links or a set of routers placed at strategic locations
    provides access to a good sampling of Internet traffic.
+
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 7]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
    Tools like IPFIX [RFC7011] allow administrators to acquire statistics
    about sequences of packets with some common properties that pass
@@ -386,14 +420,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    of the DNS for well-known or popular servers, to accelerate such
    lookups.
 
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 7]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    On the other hand, the reverse lookup of IP addresses of users is
    generally less informative.  For example, a lookup of the address
    currently used by one author's home network returns a name of the
@@ -416,6 +442,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    obtained via inference.  POP3 [RFC1939] and IMAP [RFC3501] are used
    to retrieve mail from mail servers, while a variant of SMTP is used
    to submit messages through mail servers.  IMAP connections originate
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 8]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    from the client, and typically start with an authentication exchange
    in which the client proves its identity by answering a password
    challenge.  The same holds for the SIP protocol [RFC3261] and many
@@ -441,15 +475,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    Sun, 27 Oct 2013 20:47:14 +0000 From: Some One <some.one@example.org>
    "
 
-
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 8]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    This is the first "Received" header attached to the message by the
    first SMTP relay; for privacy reasons, the field values have been
    anonymized.  We learn here that the message was submitted by "Some
@@ -473,6 +498,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    the user's identity.  Cookies are also used by various advertisement
    services to quickly identify the users and serve them with
    "personalized" advertisements.  Such cookies are particularly useful
+
+
+
+Barnes, et al.          Expires November 29, 2015               [Page 9]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    if the advertisement services want to keep tracking the user across
    multiple sessions that may use different IP addresses.
 
@@ -495,16 +528,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    same individual.  Correlated addresses can then be tied to an
    individual through one of the techniques above, walking the "network
    graph" to expand the set of attributable traffic.
-
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015               [Page 9]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
 
 3.3.7.  Tracking of Link Layer Identifiers
 
@@ -531,6 +554,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    for geolocation purposes have been known to exist for some time, the
    attacker could easily build a database linking link-layer
    identifiers, time and device or user identities, and use it to track
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 10]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    the movement of devices and of their owners.  On the other hand, if
    the network does not use some form of Wi-Fi encryption, or if the
    attacker can access the decrypted traffic, the analysis will also
@@ -554,14 +585,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    use to attack Internet applications and obtain sensitive user
    information.  There is little reason to suppose that only the US or
    UK governments are involved in these sorts of activities; the
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 10]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    examples are just ones that were disclosed.  We note that these
    reports are primarily useful as an illustration of the types of
    capabilities fielded by pervasive attackers as of the date of the
@@ -585,6 +608,15 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    o  Several programs appear to perform wide-scale collection of
       cookies in web traffic and location data from location-aware
       portable devices such as smartphones.
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 11]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
    However, the capabilities described by these reports go beyond those
    of our idealized attacker.  They include the compromise of
@@ -610,14 +642,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
       connections, ranging from DNS response injection to HTTP 302
       redirects.
 
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 11]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    o  Use of implants on end systems to undermine security and anonymity
       features [dec2][TOR1][TOR2].  For example, QUANTUM is used to
       direct users to a FOXACID server, which in turn delivers an
@@ -642,6 +666,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 
    We use the term "pervasive attack" [RFC7258] to collectively describe
    these operations.  The term "pervasive" is used because the attacks
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 12]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    are designed to indiscriminately gather as much data as possible and
    to apply selective analysis on targets after the fact.  This means
    that all, or nearly all, Internet communications are targets for
@@ -663,16 +695,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    the Internet in China.  Therefore, legal restrictions in any one
    jurisdiction on pervasive monitoring activities cannot eliminate the
    risk of pervasive attack to the Internet as a whole.
-
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 12]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
 
 5.  Threat Model
 
@@ -696,6 +718,17 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    indicate that the scale of surveillance is sufficient to provide a
    general capability to cross-correlate communications, a threat not
    previously thought to be relevant at the scale of the Internet.
+
+
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 13]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
 5.1.  Attacker Capabilities
 
@@ -721,15 +754,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    attackers, who can modify or delete packets in addition to simply
    collecting them.
 
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 13]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    In the context of pervasive passive surveillance, these attacks take
    on an even greater significance.  In the past, these attackers were
    often assumed to operate near the edge of the network, where attacks
@@ -752,6 +776,15 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    host, or performing traffic fingerprinting between known and unknown
    encrypted sessions.  Reports on the NSA XKEYSCORE system would
    indicate it is an example of such an attacker.
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 14]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
    An active pervasive attacker likewise has capabilities beyond those
    of a localized active attacker.  Flow modification attacks are often
@@ -777,15 +810,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    choosing.  If the parties to a communication will trust multiple
    authorities to certify a specific identity, this attack may be
    mounted by suborning any one of the authorities (the proverbial
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 14]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    "weakest link").  Subversion of authorities in this way can allow an
    active attack to succeed in spite of an authentication check.
 
@@ -810,6 +834,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    for an encrypted communication from the collaborator to the attacker.
    By "static", we mean that the transfer of keys happens once, or
    rarely, typically of a long-lived key.  For example, this case would
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 15]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    cover a web site operator that provides the private key corresponding
    to its HTTPS certificate to an intelligence agency.
 
@@ -834,14 +866,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    Exfiltration attacks can be accomplished via attacks against one of
    the parties to a communication, i.e., by the attacker stealing the
    keys or content rather than the party providing them willingly.  In
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 15]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    these cases, the party may not be aware that they are collaborating,
    at least at a human level.  Rather, the subverted technical assets
    are "collaborating" with the attacker (by providing keys/content)
@@ -862,6 +886,17 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    communications among these data centers were not encrypted, the
    collaboration by an intermediate entity allowed NSA to collect
    unencrypted user data.
+
+
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 16]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
 5.2.  Attacker Costs
 
@@ -891,13 +926,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    the attacker must first be discovered and identified.  So the primary
    risk we focus on here is the risk of discovery and attribution.
 
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 16]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    A passive pervasive attack is the simplest to mount in some ways.
    The base requirement is that the attacker obtain physical access to a
    communications medium and extract communications from it.  For
@@ -918,6 +946,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    than a passive attacker, since for example they will often need to
    transmit data as well as receive it.  In the wireless example above,
    the attacker would need to act as an transmitter as well as receiver,
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 17]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    greatly increasing the probability the attacker will be discovered
    (e.g., using direction-finding technology).  Active attacks are also
    much more observable at higher layers of the network.  For example,
@@ -946,14 +982,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    attack, called an active man-on-the-side (MOTS), requires access to
    only part of the session.  In an active MOTS attack, the attacker
    need only be able to inject or modify traffic on the network element
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 17]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    the attacker has access to.  While this may not allow for full
    control of a communication session (as in an MITM attack), the
    attacker can perform a number of powerful attacks, including but not
@@ -974,6 +1002,14 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    the collaborator a small number of times, possibly only once, say to
    exchange a private key.  In the dynamic case, the attacker must have
    continuing interactions with the collaborator.  As noted above these
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 18]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    interactions may be real, such as in-person meetings, or virtual,
    such as software modifications that render keys available to the
    attacker.  Both of these types of interactions introduce a risk that
@@ -1002,14 +1038,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    it may be able to compel participation within its borders, but have a
    much more difficult time recruiting foreign collaborators.
 
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 18]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    As noted above, the collaborator in an exfiltration attack can be
    unwitting; the attacker can steal keys or data to enable the attack.
    In some ways, the risks of this approach are similar to the case of
@@ -1028,6 +1056,15 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 7.  IANA Considerations
 
    This document has no actions for IANA.
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 19]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
 8.  IAB Members at the Time of Approval
 
@@ -1055,17 +1092,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    Joe Hall, Andrew Sullivan, the IEEE 802 Privacy Executive Committee
    SG, and the IAB Privacy and Security Program for their input.
 
-
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 19]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
 10.  References
 
 10.1.  Normative References
@@ -1086,6 +1112,15 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               works and what it can do", 2013,
               <http://www.theguardian.com/world/2013/jun/08/
               nsa-prism-server-collection-facebook-google>.
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 20]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
 
    [pass3]    The Guardian, "XKeyscore: NSA tool collects 'nearly
               everything a user does on the internet'", 2013,
@@ -1110,17 +1145,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               internet privacy and security", 2013,
               <http://www.theguardian.com/world/2013/sep/05/
               nsa-gchq-encryption-codes-security>.
-
-
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 20]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
 
    [TOR1]     Schneier, B., "How the NSA Attacks Tor/Firefox Users With
               QUANTUM and FOXACID", 2013,
@@ -1147,6 +1171,13 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               <http://www.theguardian.com/world/interactive/2013/sep/05/
               sigint-nsa-collaborates-technology-companies>.
 
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 21]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    [spiegel1]
               C Stocker, ., "NSA's Secret Toolbox: Unit Offers Spy
               Gadgets for Every Need", December 2013,
@@ -1167,16 +1198,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 
    [RFC1035]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, RFC 1035, November 1987.
-
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 21]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
 
    [RFC1918]  Rekhter, Y., Moskowitz, R., Karrenberg, D., Groot, G., and
               E. Lear, "Address Allocation for Private Internets", BCP
@@ -1204,6 +1225,15 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    [RFC4303]  Kent, S., "IP Encapsulating Security Payload (ESP)", RFC
               4303, December 2005.
 
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 22]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2", RFC
               4949, August 2007.
 
@@ -1223,16 +1253,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 
    [RFC7258]  Farrell, S. and H. Tschofenig, "Pervasive Monitoring Is an
               Attack", BCP 188, RFC 7258, May 2014.
-
-
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 22]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
 
    [I-D.ietf-dprive-problem-statement]
               Bortzmeyer, S., "DNS privacy considerations", draft-ietf-
@@ -1260,6 +1280,16 @@ Authors' Addresses
    Email: ted.ietf@gmail.com
 
 
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 23]
+
+Internet-Draft        Confidentiality Threat Model              May 2015
+
+
    Brian Trammell
 
    Email: ietf@trammell.ch
@@ -1285,4 +1315,30 @@ Authors' Addresses
 
 
 
-Barnes, et al.          Expires November 29, 2015              [Page 23]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 24]

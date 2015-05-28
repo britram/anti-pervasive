@@ -5,7 +5,9 @@ docname: draft-iab-privsec-confidentiality-threat-07
 date: 2015-05-28
 category: info
 ipr: trust200902
-
+pi:
+  toc: yes
+  
 author:
  -
     ins: R. Barnes
