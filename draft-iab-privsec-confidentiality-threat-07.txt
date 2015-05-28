@@ -15,6 +15,7 @@ Expires: November 29, 2015
                                                               C. Huitema
 
                                                              D. Borkmann
+
                                                             May 28, 2015
 
 
@@ -48,7 +49,6 @@ Status of This Memo
    material or to cite them other than as "work in progress."
 
    This Internet-Draft will expire on November 29, 2015.
-
 
 
 
@@ -134,7 +134,7 @@ Internet-Draft        Confidentiality Threat Model              May 2015
       otherwise provides the attacker with access to a large amount of
       Internet traffic; see [RFC7258].
 
-   Passive Pervasive Attack:  An eavesdropping attack undertaken by a
+   Passive Pervasive Attack:    An eavesdropping attack undertaken by a
       pervasive attacker, in which the packets in a traffic stream
       between two endpoints are intercepted, but in which the attacker
       does not modify the packets in the traffic stream between two
@@ -1111,8 +1111,8 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               <http://www.theguardian.com/world/2013/sep/05/
               nsa-gchq-encryption-codes-security>.
 
-   [TOR]      The Tor Project, "Tor", 2013,
-              <https://www.torproject.org/>.
+
+
 
 
 
@@ -1147,17 +1147,6 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               <http://www.theguardian.com/world/interactive/2013/sep/05/
               sigint-nsa-collaborates-technology-companies>.
 
-   [secure]   Schneier, B., "NSA surveillance: A guide to staying
-              secure", 2013,
-              <http://www.theguardian.com/world/2013/sep/05/
-              nsa-how-to-remain-secure-surveillance>.
-
-   [snowden]  Technology Review, "NSA Leak Leaves Crypto-Math Intact but
-              Highlights Known Workarounds", 2013,
-              <http://www.technologyreview.com/news/519171/nsa-leak-
-              leaves-crypto-math-intact-but-highlights-known-
-              workarounds/>.
-
    [spiegel1]
               C Stocker, ., "NSA's Secret Toolbox: Unit Offers Spy
               Gadgets for Every Need", December 2013,
@@ -1165,8 +1154,19 @@ Internet-Draft        Confidentiality Threat Model              May 2015
               toolbox-ant-unit-offers-spy-gadgets-for-every-need-
               a-941006.html>.
 
+   [spiegel3]
+              H Schmundt, ., "The Digital Arms Race: NSA Preps America
+              for Future Battle", January 2014,
+              <http://www.spiegel.de/international/world/new-snowden-
+              docs-indicate-scope-of-nsa-preparations-for-cyber-battle-
+              a-1013409.html>.
 
+   [great-cannon]
+              Paxson, V., "China's Great Cannon", 2015,
+              <https://citizenlab.org/2015/04/chinas-great-cannon/>.
 
+   [RFC1035]  Mockapetris, P., "Domain names - implementation and
+              specification", STD 13, RFC 1035, November 1987.
 
 
 
@@ -1178,37 +1178,12 @@ Barnes, et al.          Expires November 29, 2015              [Page 21]
 Internet-Draft        Confidentiality Threat Model              May 2015
 
 
-   [spiegel3]
-              H Schmundt, ., "The Digital Arms Race: NSA Preps America
-              for Future Battle", January 2014,
-              <http://www.spiegel.de/international/world/new-snowden-
-              docs-indicate-scope-of-nsa-preparations-for-cyber-battle-
-              a-1013409.html>.
-
-   [key-recovery]
-              Golle, P., "The Design and Implementation of Protocol-
-              Based Hidden Key Recovery", 2003,
-              <http://crypto.stanford.edu/~pgolle/papers/escrow.pdf>.
-
-   [great-cannon]
-              Paxson, V., "China's Great Cannon", 2015,
-              <https://citizenlab.org/2015/04/chinas-great-cannon/>.
-
-   [RFC1035]  Mockapetris, P., "Domain names - implementation and
-              specification", STD 13, RFC 1035, November 1987.
-
    [RFC1918]  Rekhter, Y., Moskowitz, R., Karrenberg, D., Groot, G., and
               E. Lear, "Address Allocation for Private Internets", BCP
               5, RFC 1918, February 1996.
 
    [RFC1939]  Myers, J. and M. Rose, "Post Office Protocol - Version 3",
               STD 53, RFC 1939, May 1996.
-
-   [RFC2015]  Elkins, M., "MIME Security with Pretty Good Privacy
-              (PGP)", RFC 2015, October 1996.
-
-   [RFC2821]  Klensin, J., "Simple Mail Transfer Protocol", RFC 2821,
-              April 2001.
 
    [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
@@ -1222,30 +1197,12 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    [RFC3501]  Crispin, M., "INTERNET MESSAGE ACCESS PROTOCOL - VERSION
               4rev1", RFC 3501, March 2003.
 
-   [RFC3851]  Ramsdell, B., "Secure/Multipurpose Internet Mail
-              Extensions (S/MIME) Version 3.1 Message Specification",
-              RFC 3851, July 2004.
-
-
-
-
-Barnes, et al.          Expires November 29, 2015              [Page 22]
-
-Internet-Draft        Confidentiality Threat Model              May 2015
-
-
    [RFC4033]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements", RFC
               4033, March 2005.
 
-   [RFC4301]  Kent, S. and K. Seo, "Security Architecture for the
-              Internet Protocol", RFC 4301, December 2005.
-
    [RFC4303]  Kent, S., "IP Encapsulating Security Payload (ESP)", RFC
               4303, December 2005.
-
-   [RFC4306]  Kaufman, C., "Internet Key Exchange (IKEv2) Protocol", RFC
-              4306, December 2005.
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2", RFC
               4949, August 2007.
@@ -1256,23 +1213,8 @@ Internet-Draft        Confidentiality Threat Model              May 2015
    [RFC5321]  Klensin, J., "Simple Mail Transfer Protocol", RFC 5321,
               October 2008.
 
-   [RFC5655]  Trammell, B., Boschi, E., Mark, L., Zseby, T., and A.
-              Wagner, "Specification of the IP Flow Information Export
-              (IPFIX) File Format", RFC 5655, October 2009.
-
-   [RFC5750]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
-              Mail Extensions (S/MIME) Version 3.2 Certificate
-              Handling", RFC 5750, January 2010.
-
-   [RFC6120]  Saint-Andre, P., "Extensible Messaging and Presence
-              Protocol (XMPP): Core", RFC 6120, March 2011.
-
    [RFC6962]  Laurie, B., Langley, A., and E. Kasper, "Certificate
               Transparency", RFC 6962, June 2013.
-
-   [RFC6698]  Hoffman, P. and J. Schlyter, "The DNS-Based Authentication
-              of Named Entities (DANE) Transport Layer Security (TLS)
-              Protocol: TLSA", RFC 6698, August 2012.
 
    [RFC7011]  Claise, B., Trammell, B., and P. Aitken, "Specification of
               the IP Flow Information Export (IPFIX) Protocol for the
@@ -1285,15 +1227,16 @@ Internet-Draft        Confidentiality Threat Model              May 2015
 
 
 
-Barnes, et al.          Expires November 29, 2015              [Page 23]
+
+
+Barnes, et al.          Expires November 29, 2015              [Page 22]
 
 Internet-Draft        Confidentiality Threat Model              May 2015
 
 
    [I-D.ietf-dprive-problem-statement]
               Bortzmeyer, S., "DNS privacy considerations", draft-ietf-
-              dprive-problem-statement-02 (work in progress), February
-              2015.
+              dprive-problem-statement-05 (work in progress), May 2015.
 
 Authors' Addresses
 
@@ -1341,4 +1284,5 @@ Authors' Addresses
 
 
 
-Barnes, et al.          Expires November 29, 2015              [Page 24]
+
+Barnes, et al.          Expires November 29, 2015              [Page 23]

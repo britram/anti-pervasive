@@ -81,12 +81,6 @@ informative:
     author:
       organization: The Guardian
     date: 2013
-  TOR:
-    target: https://www.torproject.org/
-    title: "Tor"
-    author:
-      organization: The Tor Project
-    date: 2013
   TOR1:
     target: https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html
     title:  "How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID"
@@ -117,20 +111,6 @@ informative:
     title:  "Sigint – how the NSA collaborates with technology companies"
     author:
       organization: The Guardian
-    date: 2013
-  secure:
-    target: http://www.theguardian.com/world/2013/sep/05/nsa-how-to-remain-secure-surveillance
-    title:  "NSA surveillance: A guide to staying secure"
-    author:
-      name: Bruce Schneier
-      ins: B. Schneier
-      organization: The Guardian
-    date: 2013
-  snowden:
-    target: http://www.technologyreview.com/news/519171/nsa-leak-leaves-crypto-math-intact-but-highlights-known-workarounds/
-    title:  "NSA Leak Leaves Crypto-Math Intact but Highlights Known Workarounds"
-    author:
-      organization: Technology Review
     date: 2013
   spiegel1:
      target: http://www.spiegel.de/international/world/nsa-secret-toolbox-ant-unit-offers-spy-gadgets-for-every-need-a-941006.html
@@ -185,22 +165,6 @@ informative:
       ins: H Schmundt
       name: Hilmar Schmundt
     date: 2014-01-17
-  key-recovery:
-    target: http://crypto.stanford.edu/~pgolle/papers/escrow.pdf
-    title: The Design and Implementation of Protocol-Based Hidden Key Recovery
-    author:
-      ins: E.-J. Goh
-      name: Eu-Jin Goh
-    author:
-      ins: D. Boneh
-      name: Dan Boneh
-    author:
-      ins: B. Pinkas
-      name: Benny Pinkas
-    author:
-      ins: P. Golle
-      name: Phillippe Golle
-    date: 2003
   great-cannon:
     target: https://citizenlab.org/2015/04/chinas-great-cannon/
     title:  "China's Great Cannon"
@@ -238,24 +202,15 @@ informative:
   RFC1035:
   RFC1918:
   RFC1939:
-  RFC2015:
-  RFC2821:
   RFC3261:
   RFC3365:
   RFC3501:
-  RFC3851:
   RFC4033:
-  RFC4301:
   RFC4303:
-  RFC4306:
   RFC4949:
   RFC5246:
   RFC5321:
-  RFC5655:
-  RFC5750:
-  RFC6120:
   RFC6962:
-  RFC6698:
   RFC7011:
   RFC7258:
   I-D.ietf-dprive-problem-statement:
